@@ -1,0 +1,5 @@
+/vendor
+/test/vtlib/HTML
+/.idea
+config.csrf-secret.php
+/test/templates_c
