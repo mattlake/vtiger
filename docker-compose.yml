@@ -1,3 +1,5 @@
+version: '3.1'
+
 services:
   web:
     image: nginx:latest
@@ -6,8 +8,43 @@ services:
     volumes:
       - ./:/var/www/html
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - vtiger
 
   php:
-    image: php:7.4-fpm
+    build:
+      context: ./docker/php7.4
+      dockerfile: Dockerfile
     volumes:
       - ./:/var/www/html
+    networks:
+      - vtiger
+
+  mysql:
+    image: mysql:5.7
+    restart: 'unless-stopped'
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 's3cur3P455w0rd!'
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: 'vtiger'
+      MYSQL_USER: 'vtiger'
+      MYSQL_PASSWORD: 's3cur3P455w0rd!'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - 'vtiger-mysql:/var/lib/mysql'
+    networks:
+      - vtiger
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "'s3cur3P455w0rd!'" ]
+      retries: 3
+      timeout: 5s
+
+networks:
+  vtiger:
+    driver: bridge
+
+volumes:
+  vtiger-mysql:
+    driver: local
