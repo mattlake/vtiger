@@ -23,6 +23,7 @@ services:
   mysql:
     image: mysql:5.7
     restart: 'unless-stopped'
+    command: 'mysqld --sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"  --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --init-connect="SET NAMES UTF8;"'
     ports:
       - '3306:3306'
     environment:
@@ -40,6 +41,14 @@ services:
       test: [ "CMD", "mysqladmin", "ping", "'s3cur3P455w0rd!'" ]
       retries: 3
       timeout: 5s
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    networks:
+      - vtiger
 
 networks:
   vtiger:
