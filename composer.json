@@ -1,6 +1,7 @@
 {
   "autoload": {
     "psr-4": {
+      "Application\\": "Application/",
       "Infrastructure\\": "Infrastructure/"
     }
   },
@@ -14,5 +15,8 @@
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.4"
   }
 }
