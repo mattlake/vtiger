@@ -50,14 +50,6 @@ services:
     networks:
       - vtiger
 
-  composer:
-    image: composer:latest
-    command: ['composer','install']
-    volumes:
-      - ./:/app
-    networks:
-      - vtiger
-
 networks:
   vtiger:
     driver: bridge

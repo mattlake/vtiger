@@ -1,5 +1,18 @@
 {
+  "autoload": {
+    "psr-4": {
+      "Infrastructure\\": "Infrastructure/"
+    }
+  },
   "require-dev": {
     "pestphp/pest": "^1.21"
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    },
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   }
 }
