@@ -1,11 +1,14 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+use Application\Core\Application;
+use Http\Request;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Let's bootstrap the application
  */
-$app = \Application\Core\Application::boot();
+$app = Application::boot();
 
 /*+**********************************************************************************
  * The contents of this file are subject to the vtiger CRM Public License Version 1.1
@@ -25,4 +28,4 @@ include_once 'vtlib/Vtiger/Module.php';
 include_once 'includes/main/WebUI.php';
 
 $webUI = new Vtiger_WebUI();
-$webUI->process(new Vtiger_Request($_REQUEST, $_REQUEST));
+$webUI->process(new Request($_REQUEST, $_REQUEST));

@@ -3,6 +3,7 @@
     "psr-4": {
       "Application\\": "Application/",
       "Config\\": "Config/",
+      "Http\\": "Http/",
       "Infrastructure\\": "Infrastructure/"
     }
   },
