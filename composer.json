@@ -20,6 +20,7 @@
   },
   "require": {
     "vlucas/phpdotenv": "^5.4",
-    "php-di/php-di": "^6.4"
+    "php-di/php-di": "^6.4",
+    "ext-mysqli": "*"
   }
 }
