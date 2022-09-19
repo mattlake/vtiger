@@ -8,7 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class MailManager_Request extends Vtiger_Request {
+class MailManager_Request extends \Http\Request {
 
 	public function get($key, $defvalue = '') {
 		$value = parent::get($key, $defvalue);

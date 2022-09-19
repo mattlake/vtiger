@@ -20,7 +20,7 @@ class PBXManager_IncomingCallPoll_Action extends Vtiger_Action_Controller{
             $this->exposeMethod('checkPermissionForPolling');
    	}
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -28,7 +28,7 @@ class PBXManager_IncomingCallPoll_Action extends Vtiger_Action_Controller{
 		}
 	}
     
-    public function checkPermission(Vtiger_Request $request) {
+    public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -39,7 +39,7 @@ class PBXManager_IncomingCallPoll_Action extends Vtiger_Action_Controller{
 		}
 	}
     
-    public function checkModuleViewPermission(Vtiger_Request $request){
+    public function checkModuleViewPermission(\Http\Request $request){
         $response = new Vtiger_Response();
         $modules = array('Contacts','Leads');
         $view = $request->get('view');
@@ -55,7 +55,7 @@ class PBXManager_IncomingCallPoll_Action extends Vtiger_Action_Controller{
         $response->emit();
     }
     
-    public function searchIncomingCalls(Vtiger_Request $request){
+    public function searchIncomingCalls(\Http\Request $request){
         $recordModel = PBXManager_Record_Model::getCleanInstance();
         $response = new Vtiger_Response();
         $user = Users_Record_Model::getCurrentUserModel();
@@ -97,7 +97,7 @@ class PBXManager_IncomingCallPoll_Action extends Vtiger_Action_Controller{
         $response->emit();
     }
     
-   public function createRecord(Vtiger_Request $request){
+   public function createRecord(\Http\Request $request){
             $user = Users_Record_Model::getCurrentUserModel();
             $moduleName = $request->get('modulename');
             $name = explode("@",$request->get('email'));
@@ -146,7 +146,7 @@ class PBXManager_IncomingCallPoll_Action extends Vtiger_Action_Controller{
         $response->emit();
     }
     
-    function checkPermissionForPolling(Vtiger_Request $request) {
+    function checkPermissionForPolling(\Http\Request $request) {
         Users_Privileges_Model::getCurrentUserPrivilegesModel();
         $callPermission = Users_Privileges_Model::isPermitted('PBXManager', 'ReceiveIncomingCalls');
         

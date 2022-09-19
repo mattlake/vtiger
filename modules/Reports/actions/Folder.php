@@ -16,13 +16,13 @@ class Reports_Folder_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('delete');
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -32,9 +32,9 @@ class Reports_Folder_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function that saves/updates the Folder
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function save(Vtiger_Request $request) {
+	function save(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$folderModel = Reports_Folder_Model::getInstance();
 		$folderId = $request->get('folderid');
@@ -61,9 +61,9 @@ class Reports_Folder_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function that deletes the Folder
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function delete(Vtiger_Request $request) {
+	function delete(\Http\Request $request) {
 		$folderId = $request->get('folderid');
 		$moduleName = $request->getModule();
 		if ($folderId) {
@@ -88,7 +88,7 @@ class Reports_Folder_Action extends Vtiger_Action_Controller {
 		}
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         return true;
     }
 }

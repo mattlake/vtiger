@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_AnnouncementSaveAjax_Action extends Settings_Vtiger_Basic_Action {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $currentUser = Users_Record_Model::getCurrentUserModel();
         $annoucementModel = Settings_Vtiger_Announcement_Model::getInstanceByCreator($currentUser);
         $annoucementModel->set('announcement',$request->get('announcement'));
@@ -21,7 +21,7 @@ class Settings_Vtiger_AnnouncementSaveAjax_Action extends Settings_Vtiger_Basic_
         $responce->emit();
     }
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

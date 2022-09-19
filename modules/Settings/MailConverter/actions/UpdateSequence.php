@@ -10,7 +10,7 @@
 
 class Settings_MailConverter_UpdateSequence_Action extends Settings_Vtiger_Index_Action {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$scannerId = $request->get('scannerId');
 
@@ -19,7 +19,7 @@ class Settings_MailConverter_UpdateSequence_Action extends Settings_Vtiger_Index
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$scannerId = $request->get('scannerId');
 		$sequencesList = $request->get('sequencesList');
@@ -37,7 +37,7 @@ class Settings_MailConverter_UpdateSequence_Action extends Settings_Vtiger_Index
 		$response->emit();
 	}
         
-        public function validateRequest(Vtiger_Request $request) { 
+        public function validateRequest(\Http\Request $request) {
             $request->validateWriteAccess(); 
         } 
 }

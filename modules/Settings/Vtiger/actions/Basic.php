@@ -14,7 +14,7 @@ class Settings_Vtiger_Basic_Action extends Settings_Vtiger_IndexAjax_View {
 		$this->exposeMethod('updateFieldPinnedStatus');
 	}
     
-    function process(Vtiger_Request $request) {
+    function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -22,7 +22,7 @@ class Settings_Vtiger_Basic_Action extends Settings_Vtiger_IndexAjax_View {
 		}
 	}
     
-    public function updateFieldPinnedStatus(Vtiger_Request $request) {
+    public function updateFieldPinnedStatus(\Http\Request $request) {
         $fieldId = $request->get('fieldid');
         $menuItemModel = Settings_Vtiger_MenuItem_Model::getInstanceById($fieldId);
         
@@ -38,7 +38,7 @@ class Settings_Vtiger_Basic_Action extends Settings_Vtiger_IndexAjax_View {
 	$response->emit();
     }
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

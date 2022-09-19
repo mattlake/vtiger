@@ -16,11 +16,11 @@ class Users_IndexAjax_Action extends Vtiger_BasicAjax_Action {
 		$this->exposeMethod('toggleLeftPanel');
 	}
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    function process(Vtiger_Request $request) {
+    function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -28,7 +28,7 @@ class Users_IndexAjax_Action extends Vtiger_BasicAjax_Action {
 		}
 	}
     
-    public function toggleLeftPanel (Vtiger_Request $request) {
+    public function toggleLeftPanel (\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$recordModel = Vtiger_Record_Model::getInstanceById($currentUser->getId(), 'Users');
         $recordModel->set('leftpanelhide',$request->get('showPanel'));

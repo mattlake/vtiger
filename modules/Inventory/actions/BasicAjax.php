@@ -10,7 +10,7 @@
 
 class Inventory_BasicAjax_Action extends Vtiger_BasicAjax_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$searchValue = $request->get('search_value');
 		$searchModule = $request->get('search_module');
 

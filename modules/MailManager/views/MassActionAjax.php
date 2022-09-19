@@ -10,11 +10,11 @@
 
 class MailManager_MassActionAjax_View extends Vtiger_MassActionAjax_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    protected function getEmailFieldsInfo(Vtiger_Request $request) {
+    protected function getEmailFieldsInfo(\Http\Request $request) {
 		$sourceModules = Array();
 		$linkToModule = $request->get('linktomodule');
 		if (!empty($linkToModule)) {
@@ -103,7 +103,7 @@ class MailManager_MassActionAjax_View extends Vtiger_MassActionAjax_View {
 		return $emailFieldsInfo;
 	}
 
-	function showComposeEmailForm(Vtiger_Request $request) {
+	function showComposeEmailForm(\Http\Request $request) {
 		$moduleName = 'MailManager';
 		$sourceModule = $request->getModule();
 		$cvId = $request->get('viewname');

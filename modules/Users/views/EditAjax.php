@@ -17,7 +17,7 @@ Class Users_EditAjax_View extends Vtiger_IndexAjax_View {
 		$this->exposeMethod('changeUsername');
 	}
 
-	public function checkPermission(Vtiger_Request $request){
+	public function checkPermission(\Http\Request $request){
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$userId = $request->get('recordId');
 		if($currentUserModel->getId() != $userId && !$currentUserModel->isAdminUser()) {
@@ -25,7 +25,7 @@ Class Users_EditAjax_View extends Vtiger_IndexAjax_View {
 		}
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -33,7 +33,7 @@ Class Users_EditAjax_View extends Vtiger_IndexAjax_View {
 		}
 	}
 
-	public function changePassword(Vtiger_Request $request) {
+	public function changePassword(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->get('module');
 		$userId = $request->get('recordId');
@@ -44,7 +44,7 @@ Class Users_EditAjax_View extends Vtiger_IndexAjax_View {
 		$viewer->view('ChangePassword.tpl', $moduleName);
 	}
 
-	public function changeUsername(Vtiger_Request $request) {
+	public function changeUsername(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$userId = $request->get('record');

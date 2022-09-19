@@ -17,7 +17,7 @@ class Documents_EditAjax_View extends Vtiger_QuickCreateAjax_View {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$recordModel = Vtiger_Record_Model::getCleanInstance($moduleName);
@@ -81,7 +81,7 @@ class Documents_EditAjax_View extends Vtiger_QuickCreateAjax_View {
 	}
 
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.$moduleName.resources.Edit"

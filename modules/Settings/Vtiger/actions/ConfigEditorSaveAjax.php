@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_ConfigEditorSaveAjax_Action extends Settings_Vtiger_Basic_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		$qualifiedModuleName = $request->getModule(false);
 		$updatedFields = $request->get('updatedFields');
@@ -32,7 +32,7 @@ class Settings_Vtiger_ConfigEditorSaveAjax_Action extends Settings_Vtiger_Basic_
 		$response->emit();
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

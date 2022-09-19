@@ -14,7 +14,7 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
 		parent::__construct();
 	}
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
         parent::checkPermission($request);
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUserModel->isAdminUser()) {
@@ -23,12 +23,12 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
         return true;
 	}
 
-	public function preProcess (Vtiger_Request $request, $display=true) {
+	public function preProcess (\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 		$this->preProcessSettings($request,$display);
 	}
 
-	public function preProcessSettings (Vtiger_Request $request ,$display=true) {
+	public function preProcessSettings (\Http\Request $request ,$display=true) {
 
 		$viewer = $this->getViewer($request);
 
@@ -91,23 +91,23 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
 		}
 	}
 
-	protected function preProcessTplName(Vtiger_Request $request) {
+	protected function preProcessTplName(\Http\Request $request) {
 		return 'SettingsMenuStart.tpl';
 	}
 
-	public function postProcessSettings (Vtiger_Request $request) {
+	public function postProcessSettings (\Http\Request $request) {
 
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$viewer->view('SettingsMenuEnd.tpl', $qualifiedModuleName);
 	}
 
-	public function postProcess (Vtiger_Request $request) {
+	public function postProcess (\Http\Request $request) {
 		$this->postProcessSettings($request);
 		parent::postProcess($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$usersCount = Users_Record_Model::getCount(true);
@@ -125,10 +125,10 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -190,7 +190,7 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
 		}
 	}
 
-	public function getPageTitle(Vtiger_Request $request) {
+	public function getPageTitle(\Http\Request $request) {
 		$pageTitle = parent::getPageTitle($request);
 
 		if ($pageTitle == 'Vtiger') {

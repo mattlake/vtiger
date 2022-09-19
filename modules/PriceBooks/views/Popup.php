@@ -13,7 +13,7 @@ class PriceBooks_Popup_View extends Vtiger_Popup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	*/
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $this->getModule($request);
 		$cvId = $request->get('cvid');
 		$pageNumber = $request->get('page');

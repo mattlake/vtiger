@@ -14,11 +14,11 @@ class Google_Setting_View extends Vtiger_PopupAjax_View {
 		$this->exposeMethod('emitContactSyncSettingUI');
 	}
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		switch ($request->get('sourcemodule')) {
 			case "Contacts" : $this->emitContactsSyncSettingUI($request);
 				break;
@@ -27,7 +27,7 @@ class Google_Setting_View extends Vtiger_PopupAjax_View {
 		}
 	}
 
-	public function emitCalendarSyncSettingUI(Vtiger_Request $request) {
+	public function emitCalendarSyncSettingUI(\Http\Request $request) {
 		$user = Users_Record_Model::getCurrentUserModel();
 		$connector = new Google_Contacts_Connector(FALSE);
 		$oauth2 = new Google_Oauth2_Connector($request->get('sourcemodule'));
@@ -61,11 +61,11 @@ class Google_Setting_View extends Vtiger_PopupAjax_View {
 		echo $viewer->view('CalendarSyncSettings.tpl', $request->getModule(), true);
 	}
 
-	public function emitContactsSyncSettingUI(Vtiger_Request $request) {
+	public function emitContactsSyncSettingUI(\Http\Request $request) {
 	   echo $this->intializeContactsSyncSettingParameters($request);
 	}
 
-	public function intializeContactsSyncSettingParameters(Vtiger_Request $request) {
+	public function intializeContactsSyncSettingParameters(\Http\Request $request) {
 		$user = Users_Record_Model::getCurrentUserModel();
 		$connector = new Google_Contacts_Connector(FALSE);
 		$fieldMappping = Google_Utils_Helper::getFieldMappingForUser();

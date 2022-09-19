@@ -10,14 +10,14 @@
 
 class Reports_DeleteAjax_Action extends Vtiger_DeleteAjax_Action {
     
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'Delete', 'record_parameter' => 'record');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$response = new Vtiger_Response();

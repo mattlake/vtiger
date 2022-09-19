@@ -10,7 +10,7 @@
 
 class Google_Sync_View extends Google_List_View {
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$modules = array('Contacts', 'Calendar');
 		$syncRecordList = array();
 		foreach ($modules as $sourceModule) {
@@ -28,7 +28,7 @@ class Google_Sync_View extends Google_List_View {
 		$response->emit();
 	}
 
-	function sync(Vtiger_Request $request, $sourceModule) {
+	function sync(\Http\Request $request, $sourceModule) {
 		try {
 			$records = $this->invokeExposedMethod($sourceModule);
 			return $records;

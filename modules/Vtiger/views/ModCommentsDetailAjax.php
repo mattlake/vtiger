@@ -15,14 +15,14 @@ class Vtiger_ModCommentsDetailAjax_View extends Vtiger_IndexAjax_View {
 		$this->exposeMethod('getNextGroupOfRollupComments');
 	}
     
-    function requiresPermission(Vtiger_Request $request) {
+    function requiresPermission(\Http\Request $request) {
         $permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
         $request->set('custom_module', 'ModComments');
 		
 		return $permissions;
     }
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -65,12 +65,12 @@ class Vtiger_ModCommentsDetailAjax_View extends Vtiger_IndexAjax_View {
 		return $viewer;
 	}
 
-	function saveRollupSettings(Vtiger_Request $request) {
+	function saveRollupSettings(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		ModComments_Module_Model::storeRollupSettingsForUser($currentUserModel, $request);
 	}
 
-	function getNextGroupOfRollupComments(Vtiger_Request $request) {
+	function getNextGroupOfRollupComments(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$viewer = $this->getRollupComments($request);
 		if (count($viewer->tpl_vars['PARENT_COMMENTS']->value))

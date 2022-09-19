@@ -15,15 +15,15 @@ class Settings_Vtiger_ListAjax_View extends Settings_Vtiger_List_View {
         $this->exposeMethod('getPageCount');
     }
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -33,9 +33,9 @@ class Settings_Vtiger_ListAjax_View extends Settings_Vtiger_List_View {
     
     /**
 	 * Function returns the number of records for the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$count = $this->getListViewCount($request);
@@ -51,7 +51,7 @@ class Settings_Vtiger_ListAjax_View extends Settings_Vtiger_List_View {
 		$response->emit();
 	}
     
-    public function getListViewCount(Vtiger_Request $request) {
+    public function getListViewCount(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$sourceModule = $request->get('sourceModule');
         $search_value = $request->get('search_value');
@@ -69,7 +69,7 @@ class Settings_Vtiger_ListAjax_View extends Settings_Vtiger_List_View {
 		return $listViewModel->getListViewCount();
     }
     
-    public function getPageCount(Vtiger_Request $request) {
+    public function getPageCount(\Http\Request $request) {
         $numOfRecords = $this->getListViewCount($request);
         $pagingModel = new Vtiger_Paging_Model();
         $pageCount = ceil((int) $numOfRecords/(int)($pagingModel->getPageLimit()));

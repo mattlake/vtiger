@@ -10,7 +10,7 @@
 
 Class Settings_Webforms_ShowForm_View extends Settings_Vtiger_IndexAjax_View {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 
 		$recordId = $request->get('record');
@@ -23,7 +23,7 @@ Class Settings_Webforms_ShowForm_View extends Settings_Vtiger_IndexAjax_View {
         return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$qualifiedModuleName = $request->getModule(false);
 		$moduleName = $request->getModule();

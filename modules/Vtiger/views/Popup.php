@@ -12,7 +12,7 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 	protected $listViewEntries = false;
 	protected $listViewHeaders = false;
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
@@ -21,15 +21,15 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function returns the module name for which the popup should be initialized
-	 * @param Vtiger_request $request
+	 * @param \Http\Request $request
 	 * @return <String>
 	 */
-	function getModule(Vtiger_request $request) {
+	function getModule(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		return $moduleName;
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $this->getModule($request);
 		$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
@@ -42,7 +42,7 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 		$viewer->view('Popup.tpl', $moduleName);
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $this->getModule($request);
 		$viewer->view('PopupFooter.tpl', $moduleName);
@@ -50,10 +50,10 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -80,7 +80,7 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $this->getModule($request);
 		$cvId = $request->get('cvid');
 		$pageNumber = $request->get('page');
@@ -298,9 +298,9 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request){
+	function getListViewCount(\Http\Request $request){
 		$moduleName = $this->getModule($request);
 		$sourceModule = $request->get('src_module');
 		$sourceField = $request->get('src_field');
@@ -356,7 +356,7 @@ class Vtiger_Popup_View extends Vtiger_Footer_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request){
+	function getPageCount(\Http\Request $request){
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();

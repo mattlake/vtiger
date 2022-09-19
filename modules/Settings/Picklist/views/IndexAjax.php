@@ -21,14 +21,14 @@ class Settings_Picklist_IndexAjax_View extends Settings_Vtiger_IndexAjax_View {
 		$this->exposeMethod('showAssignValueToRoleView');
     }
 
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $mode = $request->get('mode');
         if($this->isMethodExposed($mode)) {
             $this->invokeExposedMethod($mode, $request);
         }
     }
 
-    public function showEditView(Vtiger_Request $request) {
+    public function showEditView(\Http\Request $request) {
         $module = $request->get('source_module');
         $pickListFieldId = $request->get('pickListFieldId');
         $fieldModel = Settings_Picklist_Field_Model::getInstance($pickListFieldId);
@@ -52,7 +52,7 @@ class Settings_Picklist_IndexAjax_View extends Settings_Vtiger_IndexAjax_View {
         echo $viewer->view('EditView.tpl', $qualifiedName, true);
     }
 
-    public function showDeleteView(Vtiger_Request $request) {
+    public function showDeleteView(\Http\Request $request) {
         $module = $request->get('source_module');
         $pickListFieldId = $request->get('pickListFieldId');
         $fieldModel = Settings_Picklist_Field_Model::getInstance($pickListFieldId);
@@ -80,7 +80,7 @@ class Settings_Picklist_IndexAjax_View extends Settings_Vtiger_IndexAjax_View {
         echo $viewer->view('DeleteView.tpl', $qualifiedName, true);
     }
 
-    public function getPickListDetailsForModule(Vtiger_Request $request) {
+    public function getPickListDetailsForModule(\Http\Request $request) {
         $sourceModule = $request->get('source_module');
         $moduleModel = Settings_Picklist_Module_Model::getInstance($sourceModule);
         //TODO: see if you needs to optimize this , since its will gets all the fields and filter picklist fields
@@ -95,7 +95,7 @@ class Settings_Picklist_IndexAjax_View extends Settings_Vtiger_IndexAjax_View {
         $viewer->view('ModulePickListDetail.tpl',$qualifiedName);
     }
 
-    public function getPickListValueForField(Vtiger_Request $request) {
+    public function getPickListValueForField(\Http\Request $request) {
         $sourceModule = $request->get('source_module');
         $pickFieldId = $request->get('pickListFieldId');
         $fieldModel = Settings_Picklist_Field_Model::getInstance($pickFieldId);
@@ -115,7 +115,7 @@ class Settings_Picklist_IndexAjax_View extends Settings_Vtiger_IndexAjax_View {
     }
 
 
-    public function getPickListValueByRole(Vtiger_Request $request) {
+    public function getPickListValueByRole(\Http\Request $request) {
         $sourceModule = $request->get('source_module');
         $pickFieldId = $request->get('pickListFieldId');
         $fieldModel = Settings_Picklist_Field_Model::getInstance($pickFieldId);
@@ -141,9 +141,9 @@ class Settings_Picklist_IndexAjax_View extends Settings_Vtiger_IndexAjax_View {
 
 	 /**
      * Function which will assign existing values to the roles
-     * @param Vtiger_Request $request
+     * @param \Http\Request $request
      */
-    public function showAssignValueToRoleView(Vtiger_Request $request) {
+    public function showAssignValueToRoleView(\Http\Request $request) {
 		$sourceModule = $request->get('source_module');
         $pickFieldId = $request->get('pickListFieldId');
         $fieldModel = Settings_Picklist_Field_Model::getInstance($pickFieldId);

@@ -10,20 +10,20 @@
 
 class Accounts_AccountHierarchy_View extends Vtiger_View_Controller {
 
-	public function requiresPermission(Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 	
-	function preProcess(Vtiger_Request $request, $display = true) {
+	function preProcess(\Http\Request $request, $display = true) {
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
@@ -36,6 +36,6 @@ class Accounts_AccountHierarchy_View extends Vtiger_View_Controller {
 		$viewer->view('AccountHierarchy.tpl', $moduleName);
 	}
 	
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 	}
 }

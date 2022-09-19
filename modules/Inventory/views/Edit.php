@@ -10,7 +10,7 @@
 
 Class Inventory_Edit_View extends Vtiger_Edit_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
@@ -204,10 +204,10 @@ Class Inventory_Edit_View extends Vtiger_Edit_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$moduleName = $request->getModule();
@@ -228,7 +228,7 @@ Class Inventory_Edit_View extends Vtiger_Edit_View {
 		return $headerScriptInstances;
 	}
 
-	public function getOverlayHeaderScripts(Vtiger_Request $request) {
+	public function getOverlayHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$modulePopUpFile = 'modules.'.$moduleName.'.resources.Popup';
 		$moduleEditFile = 'modules.'.$moduleName.'.resources.Edit';

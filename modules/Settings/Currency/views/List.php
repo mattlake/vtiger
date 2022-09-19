@@ -10,7 +10,7 @@
 
 class Settings_Currency_List_View extends Settings_Vtiger_List_View {
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
@@ -23,7 +23,7 @@ class Settings_Currency_List_View extends Settings_Vtiger_List_View {
 		return $headerScriptInstances;
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			'~layouts/'.Vtiger_Viewer::getDefaultLayoutName().'/lib/jquery/perfect-scrollbar/css/perfect-scrollbar.css',

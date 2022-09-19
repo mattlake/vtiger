@@ -8,59 +8,65 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Users_Login_Action extends Vtiger_Action_Controller {
+use Http\Request;
 
-	function loginRequired() {
-		return false;
-	}
+class Users_Login_Action extends Vtiger_Action_Controller
+{
 
-	function checkPermission(Vtiger_Request $request) {
-		return true;
-	} 
+    function loginRequired()
+    {
+        return false;
+    }
 
-	function process(Vtiger_Request $request) {
-		$username = $request->get('username');
-		$password = $request->getRaw('password');
+    function checkPermission(Request $request)
+    {
+        return true;
+    }
 
-		$user = CRMEntity::getInstance('Users');
-		$user->column_fields['user_name'] = $username;
+    function process(Request $request)
+    {
+        $username = $request->get('username');
+        $password = $request->getRaw('password');
 
-		if ($user->doLogin($password)) {
-			session_regenerate_id(true); // to overcome session id reuse.
+        $user = CRMEntity::getInstance('Users');
+        $user->column_fields['user_name'] = $username;
 
-			$userid = $user->retrieve_user_id($username);
-			Vtiger_Session::set('AUTHUSERID', $userid);
+        if ($user->doLogin($password)) {
+            session_regenerate_id(true); // to overcome session id reuse.
 
-			// For Backward compatability
-			// TODO Remove when switch-to-old look is not needed
-			$_SESSION['authenticated_user_id'] = $userid;
-			$_SESSION['app_unique_key'] = vglobal('application_unique_key');
-			$_SESSION['authenticated_user_language'] = vglobal('default_language');
+            $userid = $user->retrieve_user_id($username);
+            Vtiger_Session::set('AUTHUSERID', $userid);
 
-			//Enabled session variable for KCFINDER 
-			$_SESSION['KCFINDER'] = array(); 
-			$_SESSION['KCFINDER']['disabled'] = false; 
-			$_SESSION['KCFINDER']['uploadURL'] = "test/upload"; 
-			$_SESSION['KCFINDER']['uploadDir'] = "../test/upload";
-			$deniedExts = implode(" ", vglobal('upload_badext'));
-			$_SESSION['KCFINDER']['deniedExts'] = $deniedExts;
-			// End
+            // For Backward compatability
+            // TODO Remove when switch-to-old look is not needed
+            $_SESSION['authenticated_user_id'] = $userid;
+            $_SESSION['app_unique_key'] = vglobal('application_unique_key');
+            $_SESSION['authenticated_user_language'] = vglobal('default_language');
 
-			//Track the login History
-			$moduleModel = Users_Module_Model::getInstance('Users');
-			$moduleModel->saveLoginHistory($user->column_fields['user_name']);
-			//End
-						
-			if(isset($_SESSION['return_params'])){
-				$return_params = $_SESSION['return_params'];
-			}
+            //Enabled session variable for KCFINDER
+            $_SESSION['KCFINDER'] = array();
+            $_SESSION['KCFINDER']['disabled'] = false;
+            $_SESSION['KCFINDER']['uploadURL'] = "test/upload";
+            $_SESSION['KCFINDER']['uploadDir'] = "../test/upload";
+            $deniedExts = implode(" ", vglobal('upload_badext'));
+            $_SESSION['KCFINDER']['deniedExts'] = $deniedExts;
+            // End
 
-			header ('Location: index.php?module=Users&parent=Settings&view=SystemSetup');
-			exit();
-		} else {
-			header ('Location: index.php?module=Users&parent=Settings&view=Login&error=login');
-			exit;
-		}
-	}
+            //Track the login History
+            $moduleModel = Users_Module_Model::getInstance('Users');
+            $moduleModel->saveLoginHistory($user->column_fields['user_name']);
+            //End
+
+            if (isset($_SESSION['return_params'])) {
+                $return_params = $_SESSION['return_params'];
+            }
+
+            header('Location: index.php?module=Users&parent=Settings&view=SystemSetup');
+            exit();
+        } else {
+            header('Location: index.php?module=Users&parent=Settings&view=Login&error=login');
+            exit;
+        }
+    }
 
 }

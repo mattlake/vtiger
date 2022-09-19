@@ -11,11 +11,11 @@
 class Vtiger_SaveStar_Action extends Vtiger_Mass_Action {
 	var $followRecordIds = Array();
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		if ($request->has('selected_ids')) {
 			$recordIds = $this->getRecordsListFromRequest($request);
@@ -33,7 +33,7 @@ class Vtiger_SaveStar_Action extends Vtiger_Mass_Action {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$module = $request->get('module');
 		if ($request->has('selected_ids')) {
 			$recordIds = $this->followRecordIds;

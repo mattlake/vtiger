@@ -10,7 +10,7 @@
 
 class Users_List_View extends Settings_Vtiger_List_View {
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
@@ -25,7 +25,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		return $headerScriptInstances;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$this->initializeListViewContents($request, $viewer);
 		$viewer->view('ListViewContents.tpl', $request->getModule(false));
@@ -34,7 +34,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$pageNumber = $request->get('page');
@@ -175,9 +175,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
 	/**
 	 * Function returns the number of records for the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$count = $this->getListViewCount($request);
@@ -195,9 +195,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request){
+	function getListViewCount(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		if(empty($cvId)) {
@@ -232,7 +232,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request){
+	function getPageCount(\Http\Request $request){
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();
@@ -286,7 +286,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		return Vtiger_Util_Helper::transferListSearchParamsToFilterCondition($listSearchParams, $moduleModel);
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/css/perfect-scrollbar.css",

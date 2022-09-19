@@ -11,7 +11,7 @@
 
 class ModComments_Save_Action extends Vtiger_Save_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$request->set('assigned_user_id', $currentUserModel->getId());
@@ -38,7 +38,7 @@ class ModComments_Save_Action extends Vtiger_Save_Action {
 	
 	/**
 	 * Function to save record
-	 * @param <Vtiger_Request> $request - values of the record
+	 * @param <\Http\Request> $request - values of the record
 	 * @return <RecordModel> - record Model of saved record
 	 */
 	public function saveRecord($request) {
@@ -59,10 +59,10 @@ class ModComments_Save_Action extends Vtiger_Save_Action {
 	
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	protected function getRecordModelFromRequest(Vtiger_Request $request) {
+	protected function getRecordModelFromRequest(\Http\Request $request) {
 		$recordModel = parent::getRecordModelFromRequest($request);
 		
 		$recordModel->set('reasontoedit', $request->getRaw('reasontoedit'));

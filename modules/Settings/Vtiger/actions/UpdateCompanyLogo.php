@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_UpdateCompanyLogo_Action extends Settings_Vtiger_Basic_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$moduleModel = Settings_Vtiger_CompanyDetails_Model::getInstance();
 
@@ -47,7 +47,7 @@ class Settings_Vtiger_UpdateCompanyLogo_Action extends Settings_Vtiger_Basic_Act
 		header('Location: ' . $reloadUrl);
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

@@ -15,7 +15,8 @@ require_once 'include/Webservices/Utils.php';
 global $adv_filter_options;
 global $mod_strings;
 
-$adv_filter_options = array("e" => "" . $mod_strings['equals'] . "",
+$adv_filter_options = [
+    "e" => "" . $mod_strings['equals'] . "",
 	"n" => "" . $mod_strings['not equal to'] . "",
 	"s" => "" . $mod_strings['starts with'] . "",
 	"ew" => "" . $mod_strings['ends with'] . "",
@@ -28,7 +29,7 @@ $adv_filter_options = array("e" => "" . $mod_strings['equals'] . "",
 	"b" => "" . $mod_strings['before'] . "",
 	"a" => "" . $mod_strings['after'] . "",
 	"bw" => "" . $mod_strings['between'] . "",
-);
+];
 
 class CustomView extends CRMEntity {
 
@@ -1588,13 +1589,14 @@ class CustomView extends CRMEntity {
 	}
 
 	/** to get the date value for the given type
-	 * @param $type :: type string
-	 * @returns  $datevalue array in the following format
+	 * @param string $type :: type string
+	 * @returns array $datevalue array in the following format
 	 * $datevalue = Array(0=>$startdate,1=>$enddate)
 	 */
+    // TODO this whole method is a mess
 	function getDateforStdFilterBytype($type) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
-		$userPeferredDayOfTheWeek = $currentUserModel->get('dayoftheweek');
+		$userPreferredDayOfTheWeek = $currentUserModel->get('dayoftheweek');
 		$date = DateTimeField::convertToUserTimeZone(date('Y-m-d H:i:s'));
 		$d = $date->format('d');
 		$m = $date->format('m');
@@ -1607,33 +1609,33 @@ class CustomView extends CRMEntity {
 		$tomorrow = date("Y-m-d", mktime(0, 0, 0, $m, $d + 1, $y));
 		$yesterday = date("Y-m-d", mktime(0, 0, 0, $m, $d - 1, $y));
 
-		$currentmonth0 = date("Y-m-d", mktime(0, 0, 0, $m, "01", $y));
+		$currentMonth0 = date("Y-m-d", mktime(0, 0, 0, $m, "01", $y));
 		$currentmonth1 = $date->format("Y-m-t");
 		$lastmonth0 = date("Y-m-d", mktime(0, 0, 0, $m - 1, "01", $y));
 		$lastmonth1 = date("Y-m-t", mktime(0, 0, 0, $m - 1, "01", $y));
 		$nextmonth0 = date("Y-m-d", mktime(0, 0, 0, $m + 1, "01", $y));
 		$nextmonth1 = date("Y-m-t", mktime(0, 0, 0, $m + 1, "01", $y));
 		// (Last Week) If Today is "Sunday" then "-2 week Sunday" will give before last week Sunday date
-		if($todayName == $userPeferredDayOfTheWeek)
-			$lastweek0 = date("Y-m-d",strtotime("-1 week $userPeferredDayOfTheWeek"));
+		if($todayName == $userPreferredDayOfTheWeek)
+			$lastweek0 = date("Y-m-d",strtotime("-1 week $userPreferredDayOfTheWeek"));
 		else
-			$lastweek0 = date("Y-m-d", strtotime("-2 week $userPeferredDayOfTheWeek"));
+			$lastweek0 = date("Y-m-d", strtotime("-2 week $userPreferredDayOfTheWeek"));
 		$prvDay = date('l',  strtotime(date('Y-m-d', strtotime('-1 day', strtotime($lastweek0)))));
 		$lastweek1 = date("Y-m-d", strtotime("-1 week $prvDay"));
 
 		// (This Week) If Today is "Sunday" then "-1 week Sunday" will give last week Sunday date
-		if($todayName == $userPeferredDayOfTheWeek)
-			$thisweek0 = date("Y-m-d",strtotime("-0 week $userPeferredDayOfTheWeek"));
+		if($todayName == $userPreferredDayOfTheWeek)
+			$thisweek0 = date("Y-m-d",strtotime("-0 week $userPreferredDayOfTheWeek"));
 		else
-			$thisweek0 = date("Y-m-d", strtotime("-1 week $userPeferredDayOfTheWeek"));
+			$thisweek0 = date("Y-m-d", strtotime("-1 week $userPreferredDayOfTheWeek"));
 		$prvDay = date('l',  strtotime(date('Y-m-d', strtotime('-1 day', strtotime($thisweek0)))));
 		$thisweek1 = date("Y-m-d", strtotime("this $prvDay"));
 
 		// (Next Week) If Today is "Sunday" then "this Sunday" will give Today's date
-		if($todayName == $userPeferredDayOfTheWeek)
-			$nextweek0 = date("Y-m-d",strtotime("+1 week $userPeferredDayOfTheWeek"));
+		if($todayName == $userPreferredDayOfTheWeek)
+			$nextweek0 = date("Y-m-d",strtotime("+1 week $userPreferredDayOfTheWeek"));
 		else
-			$nextweek0 = date("Y-m-d", strtotime("this $userPeferredDayOfTheWeek"));
+			$nextweek0 = date("Y-m-d", strtotime("this $userPreferredDayOfTheWeek"));
 		$prvDay = date('l',  strtotime(date('Y-m-d', strtotime('-1 day', strtotime($nextweek0)))));
 		$nextweek1 = date("Y-m-d", strtotime("+1 week $prvDay"));
 
@@ -1688,102 +1690,78 @@ class CustomView extends CRMEntity {
 		}
 
 		if ($type == "today") {
-
 			$datevalue[0] = $today;
 			$datevalue[1] = $today;
 		} elseif ($type == "yesterday") {
-
 			$datevalue[0] = $yesterday;
 			$datevalue[1] = $yesterday;
 		} elseif ($type == "tomorrow") {
-
 			$datevalue[0] = $tomorrow;
 			$datevalue[1] = $tomorrow;
 		} elseif ($type == "thisweek") {
-
 			$datevalue[0] = $thisweek0;
 			$datevalue[1] = $thisweek1;
 		} elseif ($type == "lastweek") {
-
 			$datevalue[0] = $lastweek0;
 			$datevalue[1] = $lastweek1;
 		} elseif ($type == "nextweek") {
-
 			$datevalue[0] = $nextweek0;
 			$datevalue[1] = $nextweek1;
 		} elseif ($type == "thismonth") {
-
-			$datevalue[0] = $currentmonth0;
+			$datevalue[0] = $currentMonth0;
 			$datevalue[1] = $currentmonth1;
 		} elseif ($type == "lastmonth") {
-
 			$datevalue[0] = $lastmonth0;
 			$datevalue[1] = $lastmonth1;
 		} elseif ($type == "nextmonth") {
-
 			$datevalue[0] = $nextmonth0;
 			$datevalue[1] = $nextmonth1;
 		} elseif ($type == "next7days") {
-
 			$datevalue[0] = $today;
 			$datevalue[1] = $next7days;
 		} elseif ($type == "next30days") {
-
 			$datevalue[0] = $today;
 			$datevalue[1] = $next30days;
 		} elseif ($type == "next60days") {
-
 			$datevalue[0] = $today;
 			$datevalue[1] = $next60days;
 		} elseif ($type == "next90days") {
-
 			$datevalue[0] = $today;
 			$datevalue[1] = $next90days;
 		} elseif ($type == "next120days") {
-
 			$datevalue[0] = $today;
 			$datevalue[1] = $next120days;
 		} elseif ($type == "last7days") {
-
 			$datevalue[0] = $last7days;
 			$datevalue[1] = $today;
 		} elseif ($type == "last14days") {
 			$datevalue[0] = $last14days;
 			$datevalue[1] = $today;
 		} elseif ($type == "last30days") {
-
 			$datevalue[0] = $last30days;
 			$datevalue[1] = $today;
 		} elseif ($type == "last60days") {
-
 			$datevalue[0] = $last60days;
 			$datevalue[1] = $today;
 		} else if ($type == "last90days") {
-
 			$datevalue[0] = $last90days;
 			$datevalue[1] = $today;
 		} elseif ($type == "last120days") {
-
 			$datevalue[0] = $last120days;
 			$datevalue[1] = $today;
 		} elseif ($type == "thisfy") {
-
 			$datevalue[0] = $currentFY0;
 			$datevalue[1] = $currentFY1;
 		} elseif ($type == "prevfy") {
-
 			$datevalue[0] = $lastFY0;
 			$datevalue[1] = $lastFY1;
 		} elseif ($type == "nextfy") {
-
 			$datevalue[0] = $nextFY0;
 			$datevalue[1] = $nextFY1;
 		} elseif ($type == "nextfq") {
-
 			$datevalue[0] = $nFq;
 			$datevalue[1] = $nFq1;
 		} elseif ($type == "prevfq") {
-
 			$datevalue[0] = $pFq;
 			$datevalue[1] = $pFq1;
 		} elseif ($type == "thisfq") {
@@ -1798,109 +1776,112 @@ class CustomView extends CRMEntity {
 	}
 
 	/** to get the customview query for the given customview
-	 * @param $viewid (custom view id):: type Integer
-	 * @param $listquery (List View Query):: type string
-	 * @param $module (Module Name):: type string
+	 * @param integer $viewId (custom view id):: type Integer
+	 * @param string $listQuery (List View Query):: type string
+	 * @param string $module (Module Name):: type string
 	 * @returns  $query
 	 */
 	//CHANGE : TO IMPROVE PERFORMANCE
-	function getModifiedCvListQuery($viewid, $listquery, $module) {
-		if ($viewid != "" && $listquery != "") {
+	function getModifiedCvListQuery($viewId, $listQuery, $module) {
+		if ($viewId != "" && $listQuery != "") {
 
-			$listviewquery = substr($listquery, strpos($listquery, 'FROM'), strlen($listquery));
+			$listViewQuery = substr($listQuery, strpos($listQuery, 'FROM'), strlen($listQuery));
 			if ($module == "Calendar" || $module == "Emails") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . ", vtiger_activity.activityid, vtiger_activity.activitytype as type, vtiger_activity.priority, case when (vtiger_activity.status not like '') then vtiger_activity.status else vtiger_activity.eventstatus end as status, vtiger_crmentity.crmid,vtiger_contactdetails.contactid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . ", vtiger_activity.activityid, vtiger_activity.activitytype as type, vtiger_activity.priority, case when (vtiger_activity.status not like '') then vtiger_activity.status else vtiger_activity.eventstatus end as status, vtiger_crmentity.crmid,vtiger_contactdetails.contactid " . $listViewQuery;
 				if ($module == "Calendar")
 					$query = str_replace('vtiger_seactivityrel.crmid,', '', $query);
 			}else if ($module == "Documents") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid,vtiger_notes.* " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid,vtiger_notes.* " . $listViewQuery;
 			} else if ($module == "Products") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid,vtiger_products.* " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid,vtiger_products.* " . $listViewQuery;
 			} else if ($module == "Vendors") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid " . $listViewQuery;
 			} else if ($module == "PriceBooks") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid " . $listViewQuery;
 			} else if ($module == "Faq") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid " . $listViewQuery;
 			} else if ($module == "Potentials" || $module == "Contacts") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid,vtiger_account.accountid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid,vtiger_account.accountid " . $listViewQuery;
 			} else if ($module == "Invoice" || $module == "SalesOrder" || $module == "Quotes") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid,vtiger_contactdetails.contactid,vtiger_account.accountid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid,vtiger_contactdetails.contactid,vtiger_account.accountid " . $listViewQuery;
 			} else if ($module == "PurchaseOrder") {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid,vtiger_contactdetails.contactid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid,vtiger_contactdetails.contactid " . $listViewQuery;
 			} else {
-				$query = "select " . $this->getCvColumnListSQL($viewid) . " ,vtiger_crmentity.crmid " . $listviewquery;
+				$query = "select " . $this->getCvColumnListSQL($viewId) . " ,vtiger_crmentity.crmid " . $listViewQuery;
 			}
-			$stdfiltersql = $this->getCVStdFilterSQL($viewid);
-			$advfiltersql = $this->getCVAdvFilterSQL($viewid);
-			if (isset($stdfiltersql) && $stdfiltersql != '') {
-				$query .= ' and ' . $stdfiltersql;
+			$stdFilterSQL = $this->getCVStdFilterSQL($viewId);
+			$advFilterSQL = $this->getCVAdvFilterSQL($viewId);
+			if (isset($stdFilterSQL) && $stdFilterSQL != '') {
+				$query .= ' and ' . $stdFilterSQL;
 			}
-			if (isset($advfiltersql) && $advfiltersql != '') {
-				$query .= ' and ' . $advfiltersql;
+			if (isset($advFilterSQL) && $advFilterSQL != '') {
+				$query .= ' and ' . $advFilterSQL;
 			}
 		}
-		return $query;
+		return $query ?? '';
 	}
 
-	/** to get the Key Metrics for the home page query for the given customview  to find the no of records
-	 * @param $viewid (custom view id):: type Integer
-	 * @param $listquery (List View Query):: type string
-	 * @param $module (Module Name):: type string
-	 * @returns  $query
+	/** to get the Key Metrics for the home page query for the given custom view  to find the no of records
+	 * @param integer $viewid (custom view id):: type Integer
+	 * @param string $listquery (List View Query):: type string
+	 * @param string $module (Module Name):: type string
+	 * @return string $query
 	 */
 	function getMetricsCvListQuery($viewid, $listquery, $module) {
 		if ($viewid != "" && $listquery != "") {
-			$listviewquery = substr($listquery, strpos($listquery, 'FROM'), strlen($listquery));
+			$listViewQuery = substr($listquery, strpos($listquery, 'FROM'), strlen($listquery));
 
-			$query = "select count(*) AS count " . $listviewquery;
+			$query = "select count(*) AS count " . $listViewQuery;
 
-			$stdfiltersql = $this->getCVStdFilterSQL($viewid);
-			$advfiltersql = $this->getCVAdvFilterSQL($viewid);
-			if (isset($stdfiltersql) && $stdfiltersql != '') {
-				$query .= ' and ' . $stdfiltersql;
+			$stdFilterSQL = $this->getCVStdFilterSQL($viewid);
+			$advFilterSQL = $this->getCVAdvFilterSQL($viewid);
+			if (isset($stdFilterSQL) && $stdFilterSQL != '') {
+				$query .= ' and ' . $stdFilterSQL;
 			}
-			if (isset($advfiltersql) && $advfiltersql != '') {
-				$query .= ' and ' . $advfiltersql;
+			if (isset($advFilterSQL) && $advFilterSQL != '') {
+				$query .= ' and ' . $advFilterSQL;
 			}
 		}
 
-		return $query;
+		return $query ?? '';
 	}
 
 	/** to get the custom action details for the given customview
-	 * @param $viewid (custom view id):: type Integer
-	 * @returns  $calist array in the following format
-	 * $calist = Array ('subject'=>$subject,
+	 * @param integer $cvid (custom view id):: type Integer
+	 * @return array $caList array in the following format
+	 * $caList = Array ('subject'=>$subject,
 	  'module'=>$module,
 	  'content'=>$content,
 	  'cvid'=>$custom view id)
 	 */
-	function getCustomActionDetails($cvid) {
+	function getCustomActionDetails($cvid)
+    {
+        // TODO remove global deps
 		global $adb;
 
 		$sSQL = "select vtiger_customaction.* from vtiger_customaction inner join vtiger_customview on vtiger_customaction.cvid = vtiger_customview.cvid";
 		$sSQL .= " where vtiger_customaction.cvid=?";
 		$result = $adb->pquery($sSQL, array($cvid));
 
-		while ($carow = $adb->fetch_array($result)) {
-			$calist["subject"] = $carow["subject"];
-			$calist["module"] = $carow["module"];
-			$calist["content"] = $carow["content"];
-			$calist["cvid"] = $carow["cvid"];
+		while ($caRow = $adb->fetch_array($result)) {
+			$caList["subject"] = $caRow["subject"];
+			$caList["module"] = $caRow["module"];
+			$caList["content"] = $caRow["content"];
+			$caList["cvid"] = $caRow["cvid"];
 		}
-		return $calist;
+		return $caList;
 	}
 
 	/* This function sets the block information for the given module to the class variable module_list
 	 * and return the array
 	 */
-
-	function getCustomViewModuleInfo($module) {
+	function getCustomViewModuleInfo($module)
+    {
+        // TODO remove global deps
 		global $adb;
 		global $current_language;
 		$current_mod_strings = return_specified_module_language($current_language, $module);
-		$block_info = Array();
+		$block_info = [];
 		$modules_list = explode(",", $module);
 		if ($module == "Calendar") {
 			$module = "Calendar','Events";
@@ -1946,14 +1927,16 @@ class CustomView extends CRMEntity {
 		return $this->module_list;
 	}
 
+	protected static $cvStatusAndUser = array();
+
 	/**
 	 * Get the userid, status information of this custom view.
 	 *
-	 * @param Integer $viewid
-	 * @return Array
+	 * @param integer $viewid
+	 * @return array
 	 */
-	protected static $cvStatusAndUser = array();
 	function getStatusAndUserid($viewid) {
+        // TODO remove global dep
 		global $adb;
 
 		if (!isset(self::$cvStatusAndUser[$viewid]) && ($this->_status === false || $this->_userid === false)) {
@@ -1971,11 +1954,15 @@ class CustomView extends CRMEntity {
 	}
 
 	//Function to check if the current user is able to see the customView
-	function isPermittedCustomView($record_id, $action, $module) {
-		global $log, $adb;
+	function isPermittedCustomView($record_id, $action, $module)
+    {
+        // TODO remove global deps
+		global $log;
+        global $adb;
 		global $current_user;
 		$log->debug("Entering isPermittedCustomView($record_id,$action,$module) method....");
 
+        // TODO Move user permissions to the DB
 		require('user_privileges/user_privileges_' . $current_user->id . '.php');
 		$permission = "yes";
 
@@ -1994,7 +1981,7 @@ class CustomView extends CRMEntity {
 						$permission = "no";
 					}
 				}
-				elseif ($is_admin) {
+				elseif ($is_admin) { // TODO remove global dep
 					$permission = 'yes';
 				} elseif ($action != 'ChangeStatus') {
 					if ($userid == $current_user->id) {
@@ -2056,15 +2043,19 @@ class CustomView extends CRMEntity {
 		return $permission;
 	}
 
-	function isPermittedChangeStatus($status) {
-		global $current_user, $log;
+	function isPermittedChangeStatus($status)
+    {
+        // TODO remove global deps
+		global $current_user;
+        global $log;
 		global $current_language;
+
 		$custom_strings = return_module_language($current_language, "CustomView");
 
 		$log->debug("Entering isPermittedChangeStatus($status) method..............");
 		require('user_privileges/user_privileges_' . $current_user->id . '.php');
-		$status_details = Array();
-		if ($is_admin) {
+		$status_details = [];
+		if ($is_admin) { //TODO remove global $current_user dep
 			if ($status == CV_STATUS_PENDING) {
 				$changed_status = CV_STATUS_PUBLIC;
 				$status_label = $custom_strings['LBL_STATUS_PUBLIC_APPROVE'];
@@ -2077,7 +2068,4 @@ class CustomView extends CRMEntity {
 		$log->debug("Exiting isPermittedChangeStatus($status) method..............");
 		return $status_details;
 	}
-
 }
-
-?>

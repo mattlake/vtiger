@@ -10,13 +10,13 @@
 
 class Reports_MoveReports_Action extends Vtiger_Mass_Action {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$parentModule = 'Reports';
 		$reportIdsList = Reports_Record_Model::getRecordsListFromRequest($request);
 		$folderId = $request->get('folderid');

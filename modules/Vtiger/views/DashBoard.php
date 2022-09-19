@@ -12,7 +12,7 @@ class Vtiger_Dashboard_View extends Vtiger_Index_View {
 
 	protected static $selectable_dashboards;
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
@@ -23,7 +23,7 @@ class Vtiger_Dashboard_View extends Vtiger_Index_View {
 		return $permissions;
 	}
 	
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
@@ -56,11 +56,11 @@ class Vtiger_Dashboard_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcessTplName(Vtiger_Request $request) {
+	function preProcessTplName(\Http\Request $request) {
 		return 'dashboards/DashBoardPreProcess.tpl';
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -98,16 +98,16 @@ class Vtiger_Dashboard_View extends Vtiger_Index_View {
 		$viewer->view('dashboards/DashBoardContents.tpl', $moduleName);
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		parent::postProcess($request);
 	}
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -147,10 +147,10 @@ class Vtiger_Dashboard_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Css models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_CssScript_Model instances
 	 */
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$parentHeaderCssScriptInstances = parent::getHeaderCss($request);
 
 		$headerCss = array(

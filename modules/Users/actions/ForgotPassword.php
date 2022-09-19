@@ -23,7 +23,7 @@ class Users_ForgotPassword_Action {
 
 	public function changePassword($request){
 
-		$request = new Vtiger_Request($request);
+		$request = new \Http\Request($request);
 		$viewer = Vtiger_Viewer::getInstance();
 		$userName = $request->get('username');
 		$newPassword = $request->get('password');

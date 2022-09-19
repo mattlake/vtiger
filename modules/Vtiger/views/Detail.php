@@ -26,7 +26,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		$this->exposeMethod('showRelatedRecords');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
@@ -57,7 +57,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
         parent::checkPermission($request);
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
@@ -72,7 +72,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		return true;
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 
 		$recordId = $request->get('record');
@@ -189,11 +189,11 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcessTplName(Vtiger_Request $request) {
+	function preProcessTplName(\Http\Request $request) {
 		return 'DetailViewPreProcess.tpl';
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -209,7 +209,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		}
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 		if($moduleName=="Calendar"){
@@ -255,7 +255,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 	}
 
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -283,7 +283,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
 
-	function showDetailViewByMode(Vtiger_Request $request) {
+	function showDetailViewByMode(\Http\Request $request) {
 		$requestMode = $request->get('requestMode');
 		if($requestMode == 'full') {
 			return $this->showModuleDetailView($request);
@@ -293,10 +293,10 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function shows the entire detail for the record
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showModuleDetailView(Vtiger_Request $request) {
+	function showModuleDetailView(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 
@@ -334,7 +334,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 			return $viewer->view('DetailViewFullContents.tpl', $moduleName, true);
 		}
 	}
-	public function getOverlayHeaderScripts(Vtiger_Request $request){
+	public function getOverlayHeaderScripts(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.$moduleName.resources.Detail",
@@ -378,7 +378,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 	 * Function shows basic detail for the record
 	 * @param <type> $request
 	 */
-	function showModuleBasicView(Vtiger_Request $request) {
+	function showModuleBasicView(\Http\Request $request) {
 
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
@@ -412,9 +412,9 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Added to support Engagements view in Vtiger7
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function _showRecentActivities(Vtiger_Request $request){
+	function _showRecentActivities(\Http\Request $request){
 		$parentRecordId = $request->get('record');
 		$pageNumber = $request->get('page');
 		$limit = $request->get('limit');
@@ -457,9 +457,9 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function returns recent changes made on the record
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function showRecentActivities (Vtiger_Request $request){
+	function showRecentActivities (\Http\Request $request){
 		$moduleName = $request->getModule();
 		$this->_showRecentActivities($request);
 
@@ -469,10 +469,10 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function returns latest comments
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showRecentComments(Vtiger_Request $request) {
+	function showRecentComments(\Http\Request $request) {
 		$parentId = $request->get('record');
 		$pageNumber = $request->get('page');
 		$limit = $request->get('limit');
@@ -529,10 +529,10 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function returns related records
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showRelatedList(Vtiger_Request $request) {
+	function showRelatedList(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$relatedModuleName = $request->get('relatedModule');
 		$targetControllerClass = null;
@@ -565,10 +565,10 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function sends the child comments for a comment
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showChildComments(Vtiger_Request $request) {
+	function showChildComments(\Http\Request $request) {
 		$parentCommentId = $request->get('commentid');
 		$parentCommentModel = ModComments_Record_Model::getInstanceById($parentCommentId);
 		$childComments = $parentCommentModel->getChildComments();
@@ -599,20 +599,20 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get activities
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <List of activity models>
 	 */
-	public function getActivities(Vtiger_Request $request) {
+	public function getActivities(\Http\Request $request) {
 		return '';
 	}
 
 
 	/**
 	 * Function returns related records based on related moduleName
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showRelatedRecords(Vtiger_Request $request) {
+	function showRelatedRecords(\Http\Request $request) {
 		$parentId = $request->get('record');
 		$pageNumber = $request->get('page');
 		$limit = $request->get('limit');
@@ -644,7 +644,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		return $viewer->view('SummaryWidgets.tpl', $moduleName, 'true');
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			'~/libraries/jquery/bootstrapswitch/css/bootstrap2/bootstrap-switch.min.css',

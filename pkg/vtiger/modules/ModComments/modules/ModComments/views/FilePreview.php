@@ -10,7 +10,7 @@
 
 class ModComments_FilePreview_View extends Vtiger_IndexAjax_View {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		if (!Users_Privileges_Model::isPermitted($moduleName, 'DetailView', $request->get('record'))) {
@@ -18,7 +18,7 @@ class ModComments_FilePreview_View extends Vtiger_IndexAjax_View {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$attachmentId = $request->get('attachmentid');

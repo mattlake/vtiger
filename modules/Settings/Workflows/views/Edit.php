@@ -10,7 +10,7 @@
 
 class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if ($mode == 'v7Edit') {
 			$this->$mode($request);
@@ -21,7 +21,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	public function preProcess(Vtiger_Request $request, $display=true) {
+	public function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request);
 		$viewer = $this->getViewer($request);
 
@@ -35,7 +35,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		$viewer->view('EditHeader.tpl', $request->getModule(false));
 	}
 
-	public function step1(Vtiger_Request $request) {
+	public function step1(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
@@ -70,7 +70,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		$viewer->view('Step1.tpl', $qualifiedModuleName);
 	}
 
-	public function step2(Vtiger_Request $request) {
+	public function step2(\Http\Request $request) {
 
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
@@ -146,7 +146,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		$viewer->view('Step2.tpl', $qualifiedModuleName);
 	}
 
-	function Step3(Vtiger_Request $request) {
+	function Step3(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
@@ -175,7 +175,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		$viewer->view('Step3.tpl', $qualifiedModuleName);
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -197,7 +197,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
 
-	function getHeaderCss(Vtiger_Request $request) {
+	function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$moduleName = $request->getModule();
 		$cssFileNames = array(
@@ -209,7 +209,7 @@ class Settings_Workflows_Edit_View extends Settings_Vtiger_Index_View {
 		return $headerCssInstances;
 	}
     
-   function v7Edit(Vtiger_Request $request) {
+   function v7Edit(\Http\Request $request) {
       $currentUser = Users_Record_Model::getCurrentUserModel();
       $viewer = $this->getViewer($request);
       $moduleName = $request->getModule();

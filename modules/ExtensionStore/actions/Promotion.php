@@ -15,11 +15,11 @@ class ExtensionStore_Promotion_Action extends Vtiger_Index_View {
 		$this->exposeMethod('maxCreatedOn');
 	}
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -27,7 +27,7 @@ class ExtensionStore_Promotion_Action extends Vtiger_Index_View {
 		}
 	}
 
-    protected function maxCreatedOn(Vtiger_Request $request){
+    protected function maxCreatedOn(\Http\Request $request){
 		$modelInstance = Settings_ExtensionStore_Extension_Model::getInstance();
 		$promotions = $modelInstance->getMaxCreatedOn('Promotion', 'max', 'createdon');
 		$response = new Vtiger_Response();

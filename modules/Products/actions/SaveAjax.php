@@ -10,7 +10,7 @@
 
 class Products_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		//the new values are added to $_REQUEST for Ajax Save, are removing the Tax details depend on the 'ajxaction' value
 		$_REQUEST['action'] = 'MassEditSave';
 		$request->set('action', 'MassEditSave');
@@ -59,10 +59,10 @@ class Products_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	function getRecordModelFromRequest(Vtiger_Request $request) {
+	function getRecordModelFromRequest(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 

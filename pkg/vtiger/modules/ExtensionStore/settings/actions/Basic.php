@@ -24,7 +24,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		$this->exposeMethod('forgotPassword');
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -39,7 +39,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		return $this->modelInstance;
 	}
 
-	protected function postReview(Vtiger_Request $request) {
+	protected function postReview(\Http\Request $request) {
 		$listing = $request->get('listing');
 		$comment = $request->get('comment');
 		$rating = $request->get('rating');
@@ -66,12 +66,12 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		return $dateString;
 	}
 
-	protected function logoutMarketPlace(Vtiger_Request $request) {
+	protected function logoutMarketPlace(\Http\Request $request) {
 		$modelInstance = $this->getModelInstance();
 		$modelInstance->logoutMarketPlace($request);
 	}
 
-	protected function uninstallExtension(Vtiger_Request $request) {
+	protected function uninstallExtension(\Http\Request $request) {
 		$extensionName = $request->get('extensionName');
 		$extensionInstance = Settings_ExtensionStore_Extension_Model::getModuleFromExtnName($extensionName);
 		$extnType = $extensionInstance->get('extnType');
@@ -141,7 +141,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		return true;
 	}
 
-	protected function registerAccount(Vtiger_Request $request) {
+	protected function registerAccount(\Http\Request $request) {
 		$options = array();
 		$userAction = $request->get('userAction');
 		$options['emailAddress'] = $request->get('emailAddress');
@@ -169,7 +169,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		$response->emit();
 	}
 
-	protected function updateTrialMode(Vtiger_Request $request) {
+	protected function updateTrialMode(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		$importedModuleName = $request->get('extensionName');
 		$trial = $request->get('trial');
@@ -179,7 +179,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		$response->emit();
 	}
 
-	protected function updateCardDetails(Vtiger_Request $request) {
+	protected function updateCardDetails(\Http\Request $request) {
 		$number = $request->get('cardNumber');
 		$expmonth = (int) $request->get('expMonth');
 		$expyear = (int) $request->get('expYear');
@@ -202,7 +202,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		$response->emit();
 	}
 
-	public function forgotPassword(Vtiger_Request $request) {
+	public function forgotPassword(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		$qualifiedModuleName = $request->getModule(false);
 		$modelInstance = $this->getModelInstance();
@@ -216,7 +216,7 @@ class Settings_ExtensionStore_Basic_Action extends Settings_Vtiger_IndexAjax_Vie
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 

@@ -10,7 +10,7 @@
 
 class Settings_Workflows_Save_Action extends Settings_Vtiger_Basic_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$summary = $request->get('summary');
 		$moduleName = $request->get('module_name');
@@ -104,7 +104,7 @@ class Settings_Workflows_Save_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

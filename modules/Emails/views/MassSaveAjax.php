@@ -14,17 +14,17 @@ class Emails_MassSaveAjax_View extends Vtiger_Footer_View {
 		$this->exposeMethod('massSave');
 	}
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -34,9 +34,9 @@ class Emails_MassSaveAjax_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function Sends/Saves mass emails
-	 * @param <Vtiger_Request> $request
+	 * @param <\Http\Request> $request
 	 */
-	public function massSave(Vtiger_Request $request) {
+	public function massSave(\Http\Request $request) {
 		global $upload_badext;
 		$adb = PearDatabase::getInstance();
 
@@ -264,10 +264,10 @@ class Emails_MassSaveAjax_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function returns the record Ids selected in the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return integer
 	 */
-	public function getRecordsListFromRequest(Vtiger_Request $request) {
+	public function getRecordsListFromRequest(\Http\Request $request) {
 		$cvId = $request->get('viewname');
 		$selectedIds = $request->get('selected_ids');
 		$excludedIds = $request->get('excluded_ids');
@@ -302,7 +302,7 @@ class Emails_MassSaveAjax_View extends Vtiger_Footer_View {
 		return array();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

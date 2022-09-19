@@ -10,12 +10,12 @@
 
 class Users_Detail_View extends Users_PreferenceDetail_View {
 
-	public function preProcess(Vtiger_Request $request) {
+	public function preProcess(\Http\Request $request) {
 		parent::preProcess($request, false);
 		$this->preProcessSettings($request);
 	}
 
-	public function preProcessSettings(Vtiger_Request $request) {
+	public function preProcessSettings(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
@@ -73,18 +73,18 @@ class Users_Detail_View extends Users_PreferenceDetail_View {
 		$viewer->view('SettingsMenuStart.tpl', $qualifiedModuleName);
 	}
 
-	public function postProcessSettings(Vtiger_Request $request) {
+	public function postProcessSettings(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$viewer->view('SettingsMenuEnd.tpl', $qualifiedModuleName);
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		$this->postProcessSettings($request);
 		parent::postProcess($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 
 		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
@@ -92,7 +92,7 @@ class Users_Detail_View extends Users_PreferenceDetail_View {
 		parent::process($request);
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -117,7 +117,7 @@ class Users_Detail_View extends Users_PreferenceDetail_View {
 		return $recordModel->isEditable();
 	}
 
-	public function getPageTitle(Vtiger_Request $request) {
+	public function getPageTitle(\Http\Request $request) {
 		return vtranslate($request->getModule(), $request->getModule());
 	}
 }

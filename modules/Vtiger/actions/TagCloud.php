@@ -19,11 +19,11 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 		$this->exposeMethod('remove');
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -33,9 +33,9 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function saves a tag for a record
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function save(Vtiger_Request $request) {
+	public function save(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 
 		$tagModel = new Vtiger_Tag_Model();
@@ -53,9 +53,9 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function deleted a tag
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function delete(Vtiger_Request $request) {
+	public function delete(\Http\Request $request) {
 		$tagModel = new Vtiger_Tag_Model();
 		$tagModel->set('record', $request->get('record'));
 		$tagModel->set('tag_id', $request->get('tag_id'));
@@ -64,9 +64,9 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function returns list of tage for the record
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function getTags(Vtiger_Request $request) {
+	public function getTags(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
 		$module = $request->getModule();
@@ -76,7 +76,7 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 		$response->emit($tags);
 	}
 
-	public function saveTags(Vtiger_Request $request) {
+	public function saveTags(\Http\Request $request) {
 		$module = $request->get('module');
 		$parent = $request->get('addedFrom');
 
@@ -142,7 +142,7 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 		$response->emit();
 	}
 
-	public function update(Vtiger_Request $request) {
+	public function update(\Http\Request $request) {
 		$module = $request->get('module');
 		$tagId = $request->get('id');
 		$tagName = $request->get('name');
@@ -175,7 +175,7 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 		$response->emit();
 	}
 
-	public function remove(Vtiger_Request $request) {
+	public function remove(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$tagId = $request->get('tag_id');
 		if( Vtiger_Tag_Model::checkIfOtherUsersUsedTag($tagId, $currentUser->getId())) {
@@ -194,7 +194,7 @@ class Vtiger_TagCloud_Action extends Vtiger_Mass_Action {
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

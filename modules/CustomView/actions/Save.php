@@ -9,13 +9,13 @@
  *************************************************************************************/
 
 class CustomView_Save_Action extends Vtiger_Action_Controller {
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'source_module', 'action' => 'DetailView');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
         $sourceModuleName = $request->get('source_module');
         $moduleModel = Vtiger_Module_Model::getInstance($sourceModuleName);
 		$customViewModel = $this->getCVModelFromRequest($request);
@@ -40,10 +40,10 @@ class CustomView_Save_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function to get the custom view model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return CustomView_Record_Model or Module specific Record Model instance
 	 */
-	private function getCVModelFromRequest(Vtiger_Request $request) {
+	private function getCVModelFromRequest(\Http\Request $request) {
 		$cvId = $request->get('record');
 
 		if(!empty($cvId)) {
@@ -80,7 +80,7 @@ class CustomView_Save_Action extends Vtiger_Action_Controller {
 		return $customViewModel->setData($customViewData);
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

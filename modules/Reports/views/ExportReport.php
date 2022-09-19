@@ -17,21 +17,21 @@ class Reports_ExportReport_View extends Vtiger_View_Controller {
 		$this->exposeMethod('GetCSV');
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return false;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return false;
 	}
 
-	function process(Vtiger_request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -40,9 +40,9 @@ class Reports_ExportReport_View extends Vtiger_View_Controller {
 
 	/**
 	 * Function exports the report in a Excel sheet
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function GetXLS(Vtiger_Request $request) {
+	function GetXLS(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$reportModel = Reports_Record_Model::getInstanceById($recordId);
         $this->checkReportModulePermission($request);
@@ -52,9 +52,9 @@ class Reports_ExportReport_View extends Vtiger_View_Controller {
 
 	/**
 	 * Function exports report in a CSV file
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function GetCSV(Vtiger_Request $request) {
+	function GetCSV(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$reportModel = Reports_Record_Model::getInstanceById($recordId);
         $this->checkReportModulePermission($request);
@@ -64,9 +64,9 @@ class Reports_ExportReport_View extends Vtiger_View_Controller {
 
 	/**
 	 * Function displays the report in printable format
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function GetPrintReport(Vtiger_Request $request) {
+	function GetPrintReport(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -85,7 +85,7 @@ class Reports_ExportReport_View extends Vtiger_View_Controller {
 		$viewer->view('PrintReport.tpl', $moduleName);
 	}
     
-    function checkReportModulePermission(Vtiger_Request $request){
+    function checkReportModulePermission(\Http\Request $request){
         $viewer = $this->getViewer($request);
         $recordId = $request->get('record');
 		$reportModel = Reports_Record_Model::getInstanceById($recordId);

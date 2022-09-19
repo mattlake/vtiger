@@ -13,7 +13,7 @@ class Documents_List_View extends Vtiger_List_View {
 		parent::__construct();
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
@@ -21,10 +21,10 @@ class Documents_List_View extends Vtiger_List_View {
 	}
 
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
-	function preProcess (Vtiger_Request $request, $display=true) {
+	function preProcess (\Http\Request $request, $display=true) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 
@@ -42,7 +42,7 @@ class Documents_List_View extends Vtiger_List_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$pageNumber = $request->get('page');
@@ -298,7 +298,7 @@ class Documents_List_View extends Vtiger_List_View {
 		$viewer->assign('CUSTOM_VIEWS', CustomView_Record_Model::getAllByGroup($moduleName));
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		return true;
 	}
 }

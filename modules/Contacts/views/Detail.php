@@ -15,7 +15,7 @@ class Contacts_Detail_View extends Accounts_Detail_View {
 		parent::__construct();
 	}
 
-	public function showModuleDetailView(Vtiger_Request $request) {
+	public function showModuleDetailView(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 

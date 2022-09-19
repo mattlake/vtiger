@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_OutgoingServerSaveAjax_Action extends Settings_Vtiger_Basic_Action {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $outgoingServerSettingsModel = Settings_Vtiger_Systems_Model::getInstanceFromServerType('email', 'OutgoingServer');
         $loadDefaultSettings = $request->get('default');
         if($loadDefaultSettings == "true") {
@@ -34,7 +34,7 @@ class Settings_Vtiger_OutgoingServerSaveAjax_Action extends Settings_Vtiger_Basi
         $response->emit();
     }
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

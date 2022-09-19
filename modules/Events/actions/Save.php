@@ -12,7 +12,7 @@ class Events_Save_Action extends Calendar_Save_Action {
 
 	/**
 	 * Function to save record
-	 * @param <Vtiger_Request> $request - values of the record
+	 * @param <\Http\Request> $request - values of the record
 	 * @return <RecordModel> - record Model of saved record
 	 */
 	public function saveRecord($request) {
@@ -109,10 +109,10 @@ class Events_Save_Action extends Calendar_Save_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	protected function getRecordModelFromRequest(Vtiger_Request $request) {
+	protected function getRecordModelFromRequest(\Http\Request $request) {
 		$recordModel = parent::getRecordModelFromRequest($request);
 		if($request->has('selectedusers')) {
 			$recordModel->set('selectedusers', $request->get('selectedusers'));

@@ -10,7 +10,7 @@
 
 class Reports_ChartReportWidget_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
         $viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 

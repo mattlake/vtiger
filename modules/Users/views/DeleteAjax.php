@@ -10,14 +10,14 @@
 
 class Users_DeleteAjax_View extends Vtiger_Index_View {
 	
-	public function checkPermission(Vtiger_Request $request){
+	public function checkPermission(\Http\Request $request){
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUserModel->isAdminUser()) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$userid = $request->get('record');
 		

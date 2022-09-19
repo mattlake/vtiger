@@ -21,7 +21,7 @@ class Inventory_ServicesPopup_View extends Inventory_ProductsPopup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		//src_module value is added just to stop showing inactive services
 		$request->set('src_module', $request->getModule());
 

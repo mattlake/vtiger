@@ -10,7 +10,7 @@
 
 Class Settings_SharingAccess_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
-    public function checkPermission(Vtiger_Request $request) {
+    public function checkPermission(\Http\Request $request) {
         $currentUser = Users_Record_Model::getCurrentUserModel();
         if($currentUser->isAdminUser()) {
             return true;
@@ -19,7 +19,7 @@ Class Settings_SharingAccess_SaveAjax_Action extends Vtiger_SaveAjax_Action {
         }
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$modulePermissions = $request->get('permissions');
 
 		foreach($modulePermissions as $tabId => $permission) {

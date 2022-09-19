@@ -16,13 +16,13 @@ class Reports_ChartActions_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('unpinChartFromDashboard');
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -32,9 +32,9 @@ class Reports_ChartActions_Action extends Vtiger_Action_Controller {
     
     /**
      * Function to add the report chart to dashboard
-     * @param Vtiger_Request $request
+     * @param \Http\Request $request
      */
-    public function pinChartToDashboard(Vtiger_Request $request){
+    public function pinChartToDashboard(\Http\Request $request){
         $db = PearDatabase::getInstance();
         $reportid = $request->get('reportid');
         $currentUser = Users_Record_Model::getCurrentUserModel();

@@ -10,17 +10,17 @@
 
 class Emails_CheckServerInfo_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 		$response = new Vtiger_Response();
 

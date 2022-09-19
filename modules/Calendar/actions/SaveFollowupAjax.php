@@ -10,7 +10,7 @@
 
 class Calendar_SaveFollowupAjax_Action extends Calendar_SaveAjax_Action {
     
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 
@@ -30,7 +30,7 @@ class Calendar_SaveFollowupAjax_Action extends Calendar_SaveAjax_Action {
         $this->exposeMethod('markAsHeldCompleted');
     }
     
-    public function process(Vtiger_Request $request) {  
+    public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -39,7 +39,7 @@ class Calendar_SaveFollowupAjax_Action extends Calendar_SaveAjax_Action {
 
 	}
 
-	public function createFollowupEvent(Vtiger_Request $request) {
+	public function createFollowupEvent(\Http\Request $request) {
         
         $recordId = $request->get('record');
         
@@ -86,7 +86,7 @@ class Calendar_SaveFollowupAjax_Action extends Calendar_SaveAjax_Action {
 		$response->emit();
 	}
     
-    public function markAsHeldCompleted(Vtiger_Request $request) {
+    public function markAsHeldCompleted(\Http\Request $request) {
         $moduleName = $request->getModule();
         $recordId = $request->get('record');
         $recordModel = Vtiger_Record_Model::getInstanceById($recordId,$moduleName);

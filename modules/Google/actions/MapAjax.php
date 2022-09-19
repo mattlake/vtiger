@@ -11,11 +11,11 @@
 
 class Google_MapAjax_Action extends Vtiger_BasicAjax_Action {
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         switch ($request->get("mode")) {
             case 'getLocation'	:	$result = $this->getLocation($request);
 									break;
@@ -25,15 +25,15 @@ class Google_MapAjax_Action extends Vtiger_BasicAjax_Action {
 
     /**
      * get address for the record, based on the module type.
-     * @param Vtiger_Request $request
+     * @param \Http\Request $request
      * @return type 
      */
-    function getLocation(Vtiger_Request $request) {
+    function getLocation(\Http\Request $request) {
         $result = Google_Map_Helper::getLocation($request);
         return $result;
     }
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateReadAccess();
     }
 }

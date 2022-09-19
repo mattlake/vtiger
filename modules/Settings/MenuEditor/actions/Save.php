@@ -10,7 +10,7 @@
 
 class Settings_MenuEditor_Save_Action extends Settings_Vtiger_Index_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule(false);
 		$menuEditorModuleModel = Settings_Vtiger_Module_Model::getInstance($moduleName);
 		$selectedModulesList = $request->get('selectedModulesList');
@@ -23,7 +23,7 @@ class Settings_MenuEditor_Save_Action extends Settings_Vtiger_Index_Action {
 		header("Location: $loadUrl");
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

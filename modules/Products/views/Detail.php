@@ -15,7 +15,7 @@ class Products_Detail_View extends Vtiger_Detail_View {
 		$this->exposeMethod('showBundleTotalCostView');
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {
@@ -29,7 +29,7 @@ class Products_Detail_View extends Vtiger_Detail_View {
 		return $permissions;
 	}
 	
-	function preProcess(Vtiger_Request $request, $display = true) {
+	function preProcess(\Http\Request $request, $display = true) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 
@@ -42,7 +42,7 @@ class Products_Detail_View extends Vtiger_Detail_View {
 		parent::preProcess($request, $display);
 	}
 
-	public function showModuleDetailView(Vtiger_Request $request) {
+	public function showModuleDetailView(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 
@@ -57,11 +57,11 @@ class Products_Detail_View extends Vtiger_Detail_View {
 		return parent::showModuleDetailView($request);
 	}
 
-	public function showModuleBasicView(Vtiger_Request $request) {
+	public function showModuleBasicView(\Http\Request $request) {
 		return $this->showModuleDetailView($request);
 	}
 	
-	public function getOverlayHeaderScripts(Vtiger_Request $request){
+	public function getOverlayHeaderScripts(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$moduleDetailFile = 'modules.'.$moduleName.'.resources.Detail';
 		$jsFileNames = array(
@@ -73,7 +73,7 @@ class Products_Detail_View extends Vtiger_Detail_View {
 		return $jsScriptInstances;	
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 		$moduleDetailFile = 'modules.'.$moduleName.'.resources.Detail';
@@ -96,7 +96,7 @@ class Products_Detail_View extends Vtiger_Detail_View {
 		return $headerScriptInstances;
 	}
 	
-	public function showBundleTotalCostView(Vtiger_Request $request) {
+	public function showBundleTotalCostView(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$relatedModuleName = $request->get('relatedModule');
 		$parentRecordId = $request->get('record');

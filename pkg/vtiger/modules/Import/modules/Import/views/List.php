@@ -17,7 +17,7 @@ class Import_List_View extends Vtiger_Popup_View{
 		$this->exposeMethod('getPageCount');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$mode = $request->get('mode');
 		if(!empty($mode)){
@@ -52,7 +52,7 @@ class Import_List_View extends Vtiger_Popup_View{
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->get('for_module');
 		$cvId = $request->get('viewname');
 		$pageNumber = $request->get('page');
@@ -121,7 +121,7 @@ class Import_List_View extends Vtiger_Popup_View{
 		$viewer->assign('POPUP_CLASS_NAME', 'Import_Popup_Js');
 	}
 
-	public function getImportDetails(Vtiger_Request $request) {
+	public function getImportDetails(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$user = Users_Record_Model::getCurrentUserModel();
@@ -135,9 +135,9 @@ class Import_List_View extends Vtiger_Popup_View{
 
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request){
+	function getListViewCount(\Http\Request $request){
 		$moduleName = $request->get('for_module');
 		$searchKey = $request->get('search_key');
 		$searchValue = $request->get('search_value');
@@ -155,7 +155,7 @@ class Import_List_View extends Vtiger_Popup_View{
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request){
+	function getPageCount(\Http\Request $request){
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();

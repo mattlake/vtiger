@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_CompanyDetailsSave_Action extends Settings_Vtiger_Basic_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleModel = Settings_Vtiger_CompanyDetails_Model::getInstance();
 		$reloadUrl = $moduleModel->getIndexViewUrl();
 
@@ -27,7 +27,7 @@ class Settings_Vtiger_CompanyDetailsSave_Action extends Settings_Vtiger_Basic_Ac
 		header('Location: ' . $reloadUrl);
 	}
 
-	public function Save(Vtiger_Request $request) {
+	public function Save(\Http\Request $request) {
 		$moduleModel = Settings_Vtiger_CompanyDetails_Model::getInstance();
 		$status = false;
 		if ($request->get('organizationname')) {
@@ -90,7 +90,7 @@ class Settings_Vtiger_CompanyDetailsSave_Action extends Settings_Vtiger_Basic_Ac
 		return;
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

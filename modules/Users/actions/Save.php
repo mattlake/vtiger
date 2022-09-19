@@ -10,11 +10,11 @@
 
 class Users_Save_Action extends Vtiger_Save_Action {
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
         return array();
     }
     
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$allowed = parent::checkPermission($request);
 		if ($allowed) {
 			$moduleName = $request->getModule();
@@ -38,10 +38,10 @@ class Users_Save_Action extends Vtiger_Save_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	public function getRecordModelFromRequest(Vtiger_Request $request) {
+	public function getRecordModelFromRequest(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
@@ -109,7 +109,7 @@ class Users_Save_Action extends Vtiger_Save_Action {
 		return $recordModel;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$result = Vtiger_Util_Helper::transformUploadedFiles($_FILES, true);
 		$_FILES = $result['imagename'];
 

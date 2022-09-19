@@ -8,34 +8,41 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Users_SystemSetup_View extends Vtiger_Index_View {
-	
-	public function requiresPermission(\Vtiger_Request $request) {
-		return array();
-	}
-    
-    public function preProcess(Vtiger_Request $request, $display=true) {
-		return true;
-	}
-	
-	public function process(Vtiger_Request $request) {
-		$moduleName = $request->getModule();
-		$viewer = $this->getViewer($request);
-		$userModel = Users_Record_Model::getCurrentUserModel();
-		$isFirstUser = Users_CRMSetup::isFirstUser($userModel);
-		
-		if($isFirstUser) {
-			$viewer->assign('IS_FIRST_USER', $isFirstUser);
-			$viewer->assign('PACKAGES_LIST', Users_CRMSetup::getPackagesList());
-			$viewer->view('SystemSetup.tpl', $moduleName);
-		} else {
-			header ('Location: index.php?module=Users&parent=Settings&view=UserSetup');
-			exit();
-		}
-	}
-	
-	function postProcess(Vtiger_Request $request) {
-		return true;
-	}
-	
+use Http\Request;
+
+class Users_SystemSetup_View extends Vtiger_Index_View
+{
+
+    public function requiresPermission(Request $request)
+    {
+        return array();
+    }
+
+    public function preProcess(Request $request, $display = true)
+    {
+        return true;
+    }
+
+    public function process(Request $request)
+    {
+        $moduleName = $request->getModule();
+        $viewer = $this->getViewer($request);
+        $userModel = Users_Record_Model::getCurrentUserModel();
+        $isFirstUser = Users_CRMSetup::isFirstUser($userModel);
+
+        if ($isFirstUser) {
+            $viewer->assign('IS_FIRST_USER', $isFirstUser);
+            $viewer->assign('PACKAGES_LIST', Users_CRMSetup::getPackagesList());
+            $viewer->view('SystemSetup.tpl', $moduleName);
+        } else {
+            header('Location: index.php?module=Users&parent=Settings&view=UserSetup');
+            exit();
+        }
+    }
+
+    function postProcess(Request $request)
+    {
+        return true;
+    }
+
 }

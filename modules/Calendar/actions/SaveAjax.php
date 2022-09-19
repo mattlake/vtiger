@@ -10,7 +10,7 @@
 
 class Calendar_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 		
@@ -25,7 +25,7 @@ class Calendar_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			$user = Users_Record_Model::getCurrentUserModel();
@@ -128,10 +128,10 @@ class Calendar_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	public function getRecordModelFromRequest(Vtiger_Request $request) {
+	public function getRecordModelFromRequest(\Http\Request $request) {
 		$recordModel = parent::getRecordModelFromRequest($request);
 
 		$startDate = $request->get('date_start');

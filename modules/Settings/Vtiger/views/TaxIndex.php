@@ -16,7 +16,7 @@ class Settings_Vtiger_TaxIndex_View extends Settings_Vtiger_Index_View {
 		$this->exposeMethod('showTaxRegions');
 	}
 
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -35,7 +35,7 @@ class Settings_Vtiger_TaxIndex_View extends Settings_Vtiger_Index_View {
 		$viewer->view('TaxIndex.tpl', $qualifiedModuleName);
     }
 
-	public function showChargesAndItsTaxes(Vtiger_Request $request) {
+	public function showChargesAndItsTaxes(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$taxRecordModel = new Inventory_TaxRecord_Model();
 		$charges = Inventory_Charges_Model::getInventoryCharges();
@@ -50,7 +50,7 @@ class Settings_Vtiger_TaxIndex_View extends Settings_Vtiger_Index_View {
 		$viewer->view('ChargesAndItsTaxes.tpl', $qualifiedModuleName);
 	}
 
-	public function showTaxRegions(Vtiger_Request $request) {
+	public function showTaxRegions(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$taxRegions = Inventory_TaxRegion_Model::getAllTaxRegions();
 
@@ -61,17 +61,17 @@ class Settings_Vtiger_TaxIndex_View extends Settings_Vtiger_Index_View {
 		$viewer->view('TaxRegions.tpl', $qualifiedModuleName);
 	}
 
-	function getPageTitle(Vtiger_Request $request) {
+	function getPageTitle(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_TAX_CALCULATIONS',$qualifiedModuleName);
 	}
 	
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

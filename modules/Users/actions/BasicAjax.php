@@ -10,18 +10,18 @@
 
 class Users_BasicAjax_Action extends Vtiger_BasicAjax_Action {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    function checkPermission(Vtiger_Request $request) {
+    function checkPermission(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUser->isAdminUser()) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$searchValue = $request->get('search_value');
 		$searchModule = $request->get('search_module');
 

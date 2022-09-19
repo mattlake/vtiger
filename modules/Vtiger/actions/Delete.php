@@ -10,14 +10,14 @@
 
 class Vtiger_Delete_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'Delete', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 
@@ -32,7 +32,7 @@ class Vtiger_Delete_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$ajaxDelete = $request->get('ajaxDelete');
@@ -56,7 +56,7 @@ class Vtiger_Delete_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

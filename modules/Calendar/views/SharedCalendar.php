@@ -10,7 +10,7 @@
 
 class Calendar_SharedCalendar_View extends Calendar_Calendar_View {
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		
@@ -19,7 +19,7 @@ class Calendar_SharedCalendar_View extends Calendar_Calendar_View {
 		$viewer->view('SharedCalendarView.tpl', $request->getModule());
 	}
 	
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$jsFileNames = array(
 			'modules.Calendar.resources.SharedCalendar',

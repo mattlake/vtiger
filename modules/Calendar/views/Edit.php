@@ -16,7 +16,7 @@ Class Calendar_Edit_View extends Vtiger_Edit_View {
 		$this->exposeMethod('Calendar');
 	}
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 
@@ -31,7 +31,7 @@ Class Calendar_Edit_View extends Vtiger_Edit_View {
 		}
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 
 		$recordId = $request->get('record');
@@ -207,7 +207,7 @@ Class Calendar_Edit_View extends Vtiger_Edit_View {
 			$viewer->view('EditView.tpl', $moduleName);
 		}
 	}
-	public function getOverlayHeaderScripts(Vtiger_Request $request) {
+	public function getOverlayHeaderScripts(\Http\Request $request) {
 		parent::getOverlayHeaderScripts($request);
 	}
 

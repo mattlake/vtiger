@@ -10,17 +10,17 @@
 
 class Products_SubProductQuantityUpdate_View extends Vtiger_View_Controller {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 
-	public function preProcess(Vtiger_Request $request, $display = true) {
+	public function preProcess(\Http\Request $request, $display = true) {
 
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$relId = $request->get('relid');
@@ -35,7 +35,7 @@ class Products_SubProductQuantityUpdate_View extends Vtiger_View_Controller {
 		$viewer->view('QuantityUpdate.tpl', $moduleName);
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		
 	}
 

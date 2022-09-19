@@ -11,7 +11,7 @@
 
 class Services_Detail_View extends Products_Detail_View {
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		parent::getHeaderScripts($request);
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
@@ -36,7 +36,7 @@ class Services_Detail_View extends Products_Detail_View {
 		return $headerScriptInstances;
 	}
 
-	public function getOverlayHeaderScripts(Vtiger_Request $request){
+	public function getOverlayHeaderScripts(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.PriceBooks.resources.Detail",

@@ -10,7 +10,7 @@
 
 class Events_AddCalendarEvent_View extends Vtiger_QuickCreateAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$recordId = $request->get('record');

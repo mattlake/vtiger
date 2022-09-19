@@ -10,7 +10,7 @@
 
 class PriceBooks_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode) && method_exists($this, "$mode")) {
 			$this->$mode($request);
@@ -18,7 +18,7 @@ class PriceBooks_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		}
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {

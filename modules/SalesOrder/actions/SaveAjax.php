@@ -11,10 +11,10 @@ class SalesOrder_SaveAjax_Action extends Inventory_SaveAjax_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	public function getRecordModelFromRequest(Vtiger_Request $request) {
+	public function getRecordModelFromRequest(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 

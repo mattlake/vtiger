@@ -20,7 +20,7 @@ class MailManager_List_View extends MailManager_Abstract_View {
 			'search'  =>array('class' => 'MailManager_Search_View'),
 	);
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -37,7 +37,7 @@ class MailManager_List_View extends MailManager_Abstract_View {
 		return $headerScriptInstances;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$request = MailManager_Request::getInstance($request);
 
 		if (!$request->has('_operation')) {
@@ -57,7 +57,7 @@ class MailManager_List_View extends MailManager_Abstract_View {
 		unset($response);
 	}
 
-	public function processRoot(Vtiger_Request $request) {
+	public function processRoot(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$viewer->assign('MODULE', $moduleName);

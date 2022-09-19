@@ -13,7 +13,7 @@ vimport('includes.http.Request');
 
 class SMSNotifier_ClickATellNew_Callbacks {
 	
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		if(vtlib_isModuleActive('SMSNotifier')) {
 			$providerModel = SMSNotifier_Provider_Model::getInstance('ClickATellNew');
 			if($providerModel->validateRequest($request)) {
@@ -24,4 +24,4 @@ class SMSNotifier_ClickATellNew_Callbacks {
 }
 
 $clickATell = new SMSNotifier_ClickATellNew_Callbacks();
-$clickATell->process(new Vtiger_Request($_REQUEST));
+$clickATell->process(new \Http\Request($_REQUEST));

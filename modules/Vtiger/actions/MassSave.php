@@ -10,13 +10,13 @@
 
 class Vtiger_MassSave_Action extends Vtiger_Mass_Action {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'EditView');
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			vglobal('VTIGER_TIMESTAMP_NO_CHANGE_MODE', $request->get('_timeStampNoChangeMode',false));
@@ -46,10 +46,10 @@ class Vtiger_MassSave_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function to get the updated record models
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return array of Vtiger_Record_Model
 	 */
-	protected function getRecordModelsFromRequest(Vtiger_Request $request) {
+	protected function getRecordModelsFromRequest(\Http\Request $request) {
 		$recordIds = $this->getRecordsListFromRequest($request);
 		$recordModels = array();
 
@@ -60,7 +60,7 @@ class Vtiger_MassSave_Action extends Vtiger_Mass_Action {
 		return $recordModels;
 	}
 	
-	private function getUpdatedRecord(Vtiger_Request $request, $recordId) {
+	private function getUpdatedRecord(\Http\Request $request, $recordId) {
 		$recordModel = Vtiger_Record_Model::getInstanceById($recordId);
 		$recordModel->set('mode', 'edit');
 		$fieldModelList = $recordModel->getModule()->getFields();

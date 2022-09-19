@@ -19,7 +19,7 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 		$this->exposeMethod('showDuplicationHandling');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		switch($mode) {
 			case 'showRelatedListLayout'	:	$selectedTab = 'relatedListTab';	break;
@@ -54,7 +54,7 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	public function showFieldLayout(Vtiger_Request $request) {
+	public function showFieldLayout(\Http\Request $request) {
 		$sourceModule = $request->get('sourceModule');
 		$supportedModulesList = Settings_LayoutEditor_Module_Model::getSupportedModules();
 		$supportedModulesList = array_flip($supportedModulesList);
@@ -119,7 +119,7 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	public function showRelatedListLayout(Vtiger_Request $request) {
+	public function showRelatedListLayout(\Http\Request $request) {
 		$sourceModule = $request->get('sourceModule');
 		$supportedModulesList = Settings_LayoutEditor_Module_Model::getSupportedModules();
 
@@ -169,7 +169,7 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	public function showFieldEdit(Vtiger_Request $request) {
+	public function showFieldEdit(\Http\Request $request) {
 		$sourceModule = $request->get('sourceModule');
 		$fieldId = $request->get('fieldid');
 		$fieldInstance = Settings_LayoutEditor_Field_Model::getInstance($fieldId);
@@ -204,7 +204,7 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 		$viewer->view('FieldCreate.tpl', $qualifiedModule);
 	}
 
-	public function showDuplicationHandling(Vtiger_Request $request) {
+	public function showDuplicationHandling(\Http\Request $request) {
 		$qualifiedModule = $request->getModule(false);
 		$sourceModuleName = $request->get('sourceModule');
 		$moduleModel = Vtiger_Module_Model::getInstance($sourceModuleName);
@@ -240,10 +240,10 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
@@ -290,7 +290,7 @@ class Settings_LayoutEditor_Index_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			'~/libraries/jquery/bootstrapswitch/css/bootstrap2/bootstrap-switch.min.css',

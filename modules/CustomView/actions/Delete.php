@@ -10,17 +10,17 @@
 
 class CustomView_Delete_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'sourceModule', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$customViewModel = CustomView_Record_Model::getInstanceById($request->get('record'));
 		$moduleModel = $customViewModel->getModule();
 		$customViewOwner = $customViewModel->getOwnerId();
@@ -40,7 +40,7 @@ class CustomView_Delete_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

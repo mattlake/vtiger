@@ -34,7 +34,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		set_time_limit(0); // override limits on execution time to allow install to finish
 	}
 
-	public function preProcess(Vtiger_Request $request, $display = true) {
+	public function preProcess(\Http\Request $request, $display = true) {
 		$this->applyInstallFriendlyEnv();
 
 		date_default_timezone_set('Europe/London'); // to overcome the pre configuration settings
@@ -54,7 +54,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$viewer->view('InstallPreProcess.tpl', $moduleName);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		global $default_charset;$default_charset='UTF-8';
 		$mode = $request->getMode();
 		if(!empty($mode) && $this->isMethodExposed($mode)) {
@@ -63,13 +63,13 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$this->Step1($request);
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->view('InstallPostProcess.tpl', $moduleName);
 	}
 
-	public function Step1(Vtiger_Request $request) {
+	public function Step1(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->assign('CURRENT_LANGUAGE', vglobal('default_language'));
@@ -77,13 +77,13 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$viewer->view('Step1.tpl', $moduleName);
 	}
 
-	public function Step2(Vtiger_Request $request) {
+	public function Step2(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->view('Step2.tpl', $moduleName);
 	}
 
-	public function Step3(Vtiger_Request $request) {
+	public function Step3(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->assign('FAILED_FILE_PERMISSIONS', Install_Utils_Model::getFailedPermissionsFiles());
@@ -93,14 +93,14 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$viewer->view('Step3.tpl', $moduleName);
 	}
 
-	public function Step4(Vtiger_Request $request) {
+	public function Step4(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->assign('CURRENCIES', Install_Utils_Model::getCurrencyList());
 
 		require_once 'modules/Users/UserTimeZonesArray.php';
 		$timeZone = new UserTimeZones();
-		$viewer->assign('TIMEZONES', $timeZone->userTimeZones());
+		$viewer->assign('TIMEZONES', $timeZone->__construct());
 
 		$defaultParameters = Install_Utils_Model::getDefaultPreInstallParameters();
 		$viewer->assign('DB_HOSTNAME', $defaultParameters['db_hostname']);
@@ -119,7 +119,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$viewer->view('Step4.tpl', $moduleName);
 	}
 
-	public function Step5(Vtiger_Request $request) {
+	public function Step5(\Http\Request $request) {
 		set_time_limit(0); // Override default limit to let install complete.
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
@@ -166,7 +166,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$viewer->view('Step5.tpl', $moduleName);
 	}
 
-	public function Step6(Vtiger_Request $request) {
+	public function Step6(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 
@@ -174,7 +174,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		$viewer->view('Step6.tpl', $moduleName);
 	}
 
-	public function Step7(Vtiger_Request $request) {
+	public function Step7(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$webuiInstance = new Vtiger_WebUI();
 		$isInstalled = $webuiInstance->isInstalled();
@@ -219,7 +219,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		return $application_unique_key;
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$parentCSSScripts = parent::getHeaderCss($request);
 		$styleFileNames = array(
@@ -230,7 +230,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		return $headerCSSScriptInstances;
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$parentScripts = parent::getHeaderScripts($request);
 		$jsFileNames = array("modules.Vtiger.resources.List",
@@ -241,7 +241,7 @@ class Install_Index_view extends Vtiger_View_Controller {
 		return $headerScriptInstances;
 	}
 
-	public function validateRequest(Vtiger_Request $request) { 
+	public function validateRequest(\Http\Request $request) {
 		return $request->validateWriteAccess(true); 
 	}
 }

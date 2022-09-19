@@ -9,7 +9,7 @@
  *************************************************************************************/
 
 class Inventory_Detail_View extends Vtiger_Detail_View {
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		$viewer = $this->getViewer($request);
 		$viewer->assign('NO_SUMMARY', true);
 		parent::preProcess($request);
@@ -17,19 +17,19 @@ class Inventory_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function returns Inventory details
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function showModuleDetailView(Vtiger_Request $request) {
+	function showModuleDetailView(\Http\Request $request) {
 		$this->showLineItemDetails($request);
 		return parent::showModuleDetailView($request);
 	}
 
 	/**
 	 * Function returns Inventory details
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return type
 	 */
-	function showDetailViewByMode(Vtiger_Request $request) {
+	function showDetailViewByMode(\Http\Request $request) {
 		$requestMode = $request->get('requestMode');
 		if($requestMode == 'full') {
 			return $this->showModuleDetailView($request);
@@ -71,9 +71,9 @@ class Inventory_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function returns Inventory Line Items
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function showLineItemDetails(Vtiger_Request $request) {
+	function showLineItemDetails(\Http\Request $request) {
 		$record = $request->get('record');
 		$moduleName = $request->getModule();
 
@@ -197,7 +197,7 @@ class Inventory_Detail_View extends Vtiger_Detail_View {
 //		$viewer->view('LineItemsDetail.tpl', 'Inventory');
 	}
 
-	public function getActivities(Vtiger_Request $request) {
+	public function getActivities(\Http\Request $request) {
 		$moduleName = 'Calendar';
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
@@ -235,10 +235,10 @@ class Inventory_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getOverlayHeaderScripts(Vtiger_Request $request) {
+	function getOverlayHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getOverlayHeaderScripts($request);
 		$moduleName = $request->getModule();
 		$moduleDetailFile = 'modules.' . $moduleName . '.resources.Detail';
@@ -251,7 +251,7 @@ class Inventory_Detail_View extends Vtiger_Detail_View {
 		return $headerScriptInstances;
 	}
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$moduleName = $request->getModule();

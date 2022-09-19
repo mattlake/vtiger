@@ -17,15 +17,15 @@ class Documents_ListAjax_View extends Documents_List_View {
 		$this->exposeMethod('ShowListColumnsEdit');
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -35,18 +35,18 @@ class Documents_ListAjax_View extends Documents_List_View {
 
 	/**
 	 * Extending Vtiger List Ajax API to show Advance Search results
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function showSearchResults(Vtiger_Request $request) {
+	public function showSearchResults(\Http\Request $request) {
 		$vtigerListAjaxInstance = new Vtiger_ListAjax_View();
 		$vtigerListAjaxInstance->showSearchResults($request);
 	}
 
 	/**
 	 * Extending Vtiger List Ajax API to show List Columns Edit view
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function ShowListColumnsEdit(Vtiger_Request $request){
+	public function ShowListColumnsEdit(\Http\Request $request){
 		$vtigerListAjaxInstance = new Vtiger_ListAjax_View();
 		$vtigerListAjaxInstance->ShowListColumnsEdit($request);
 	}

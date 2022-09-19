@@ -21,7 +21,7 @@ class PBXManager_Detail_View extends Vtiger_Detail_View{
     /*
      * Overided to convert totalduration to minutes
      */
-    function preProcess(Vtiger_Request $request, $display=true) {
+    function preProcess(\Http\Request $request, $display=true) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 		if(!$this->record){

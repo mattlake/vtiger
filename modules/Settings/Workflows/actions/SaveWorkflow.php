@@ -10,7 +10,7 @@
 
 class Settings_Workflows_SaveWorkflow_Action extends Vtiger_Action_Controller {
     
-    function checkPermission(Vtiger_Request $request) {
+    function checkPermission(\Http\Request $request) {
         parent::checkPermission($request);
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUserModel->isAdminUser()) {
@@ -19,7 +19,7 @@ class Settings_Workflows_SaveWorkflow_Action extends Vtiger_Action_Controller {
         return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$summary = $request->get('summary');
 		$moduleName = $request->get('module_name');
@@ -148,14 +148,14 @@ class Settings_Workflows_SaveWorkflow_Action extends Vtiger_Action_Controller {
 			foreach ($tasks as $task) {
 				$taskDecodedArray = json_decode($task, true);
 				$taskAjaxObject = new Settings_Workflows_TaskAjax_Action();
-				$request = new Vtiger_Request($taskDecodedArray, $taskDecodedArray);
+				$request = new \Http\Request($taskDecodedArray, $taskDecodedArray);
 				$request->set('for_workflow', $id);
 				$taskAjaxObject->process($request);
 			}
 		}
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

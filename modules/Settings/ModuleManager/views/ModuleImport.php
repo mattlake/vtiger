@@ -18,7 +18,7 @@ class Settings_ModuleManager_ModuleImport_View extends Settings_Vtiger_Index_Vie
 		$this->exposeMethod('importUserModuleStep2');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -34,7 +34,7 @@ class Settings_ModuleManager_ModuleImport_View extends Settings_Vtiger_Index_Vie
 		$viewer->view('Step1.tpl', $qualifiedModuleName);
 	}
 
-	public function step2(Vtiger_Request $request) {
+	public function step2(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$upgradeError = true;
 		$qualifiedModuleName = $request->getModule(false);
@@ -93,7 +93,7 @@ class Settings_ModuleManager_ModuleImport_View extends Settings_Vtiger_Index_Vie
 		$viewer->view('Step2.tpl', $qualifiedModuleName);
 	}
 
-	public function step3(Vtiger_Request $request) {
+	public function step3(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		global $Vtiger_Utils_Log;
 		$viewer->assign('VTIGER_UTILS_LOG', $Vtiger_Utils_Log);
@@ -132,10 +132,10 @@ class Settings_ModuleManager_ModuleImport_View extends Settings_Vtiger_Index_Vie
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -148,14 +148,14 @@ class Settings_ModuleManager_ModuleImport_View extends Settings_Vtiger_Index_Vie
 		return $headerScriptInstances;
 	}
 
-	public function importUserModuleStep1(Vtiger_Request $request){
+	public function importUserModuleStep1(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
 		$viewer->view('ImportUserModuleStep1.tpl', $qualifiedModuleName);
 	}
 
-	public function importUserModuleStep2(Vtiger_Request $request){
+	public function importUserModuleStep2(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		$uploadDir = Settings_ModuleManager_Extension_Model::getUploadDirectory();
 		$qualifiedModuleName = $request->getModule(false);
@@ -199,7 +199,7 @@ class Settings_ModuleManager_ModuleImport_View extends Settings_Vtiger_Index_Vie
 		$viewer->view('ImportUserModuleStep2.tpl', $qualifiedModuleName);
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateReadAccess();
 	}
 }

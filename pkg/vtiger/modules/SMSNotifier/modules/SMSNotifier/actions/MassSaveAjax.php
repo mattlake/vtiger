@@ -12,9 +12,9 @@ class SMSNotifier_MassSaveAjax_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function that saves SMS records
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();

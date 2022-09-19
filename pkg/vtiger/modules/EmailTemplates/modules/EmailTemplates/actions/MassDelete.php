@@ -10,7 +10,7 @@
 
 class EmailTemplates_MassDelete_Action extends Vtiger_Mass_Action {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 
@@ -23,15 +23,15 @@ class EmailTemplates_MassDelete_Action extends Vtiger_Mass_Action {
         return true;
     }
     
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$recordModel = new EmailTemplates_Record_Model();
@@ -62,7 +62,7 @@ class EmailTemplates_MassDelete_Action extends Vtiger_Mass_Action {
 		$response->emit();
 	}
 	
-	public function getRecordsListFromRequest(Vtiger_Request $request, $recordModel) {
+	public function getRecordsListFromRequest(\Http\Request $request, $recordModel) {
 		$selectedIds = $request->get('selected_ids');
 		$excludedIds = $request->get('excluded_ids');
 		

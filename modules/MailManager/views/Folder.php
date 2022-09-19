@@ -13,10 +13,10 @@ class MailManager_Folder_View extends MailManager_Abstract_View {
 	/**
 	 * Process the request for Folder opertions
 	 * @global <type> $maxEntriesPerPage
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return MailManager_Response
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$maxEntriesPerPage = vglobal('list_max_entries_per_page');
 
@@ -120,7 +120,7 @@ class MailManager_Folder_View extends MailManager_Abstract_View {
 		$options = array('SUBJECT'=>'SUBJECT','TO'=>'TO','BODY'=>'BODY','BCC'=>'BCC','CC'=>'CC','FROM'=>'FROM','DATE'=>'ON');
 		return $options;
 	}
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         return $request->validateWriteAccess();
     }
 }

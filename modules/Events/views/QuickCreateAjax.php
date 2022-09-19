@@ -10,7 +10,7 @@
 
 class Events_QuickCreateAjax_View extends Calendar_QuickCreateAjax_View {
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.Calendar.resources.Edit",

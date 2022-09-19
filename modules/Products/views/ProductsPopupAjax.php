@@ -10,7 +10,7 @@
 
 class Products_ProductsPopupAjax_View extends Products_ProductsPopup_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);

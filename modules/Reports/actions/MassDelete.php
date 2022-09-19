@@ -10,21 +10,21 @@
 
 class Reports_MassDelete_Action extends Vtiger_Mass_Action {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$parentModule = 'Reports';
 		$recordIds = Reports_Record_Model::getRecordsListFromRequest($request);
 

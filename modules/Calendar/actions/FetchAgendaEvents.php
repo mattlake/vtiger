@@ -12,7 +12,7 @@ vimport('~~/include/Webservices/Query.php');
 
 class Calendar_FetchAgendaEvents_Action extends Vtiger_BasicAjax_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$result = array();
 		$start = $request->get('startDate');
 		$noOfDays = $request->get('numOfDays');

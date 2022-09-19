@@ -10,7 +10,7 @@
 
 class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

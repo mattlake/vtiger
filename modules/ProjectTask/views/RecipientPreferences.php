@@ -10,7 +10,7 @@
 
 class ProjectTask_RecipientPreferences_View extends Project_RecipientPreferences_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$sourceModule = $request->getModule();
 		$emailFieldsInfo = $this->getEmailFieldsInfo('Project');
 		$viewer = $this->getViewer($request);

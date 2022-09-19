@@ -11,7 +11,7 @@
 
 class Settings_Workflows_SaveAjax_Action extends Settings_Vtiger_IndexAjax_View {
 
-   public function process(Vtiger_Request $request) {
+   public function process(\Http\Request $request) {
       $record = $request->get('record');
       $status = $request->get('status');
       
@@ -28,7 +28,7 @@ class Settings_Workflows_SaveAjax_Action extends Settings_Vtiger_IndexAjax_View 
       $response->emit();
    }
 
-   public function validateRequest(Vtiger_Request $request) {
+   public function validateRequest(\Http\Request $request) {
       $request->validateWriteAccess();
    }
 

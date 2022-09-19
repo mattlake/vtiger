@@ -12,7 +12,7 @@ vimport('~~/include/Webservices/Custom/DeleteUser.php');
 
 class Users_Import_View extends Vtiger_Import_View {
     
-    function checkPermission(Vtiger_Request $request) {
+    function checkPermission(\Http\Request $request) {
         parent::checkPermission($request);
 
         if($request->getMode() == 'import') {
@@ -24,7 +24,7 @@ class Users_Import_View extends Vtiger_Import_View {
         return true;
 	}
 
-	public function initializeMappingParameters(Vtiger_Request $request) {
+	public function initializeMappingParameters(\Http\Request $request) {
 		parent::initializeMappingParameters($request);
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -34,7 +34,7 @@ class Users_Import_View extends Vtiger_Import_View {
 		$viewer->assign('IMPORTABLE_FIELDS', $moduleModel->getImportableFieldModels($moduleName));
 	}
 
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         if($request->getMode() != 'undoImport') {
             parent::process($request);
         } else {

@@ -10,12 +10,12 @@
 
 Class Users_Edit_View extends Users_PreferenceEdit_View {
 
-	public function preProcess(Vtiger_Request $request) {
+	public function preProcess(\Http\Request $request) {
 		parent::preProcess($request, false);
 		$this->preProcessSettings($request);
 	}
 
-	public function preProcessSettings(Vtiger_Request $request) {
+	public function preProcessSettings(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
@@ -65,18 +65,18 @@ Class Users_Edit_View extends Users_PreferenceEdit_View {
 		$viewer->view('SettingsMenuStart.tpl', $qualifiedModuleName);
 	}
 
-	public function postProcessSettings(Vtiger_Request $request) {
+	public function postProcessSettings(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$viewer->view('SettingsMenuEnd.tpl', $qualifiedModuleName);
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		$this->postProcessSettings($request);
 		parent::postProcess($request);
 	}
 	
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -90,7 +90,7 @@ Class Users_Edit_View extends Users_PreferenceEdit_View {
 		return $headerScriptInstances;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		parent::process($request);
 	}
 }

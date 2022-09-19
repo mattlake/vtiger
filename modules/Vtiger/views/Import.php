@@ -26,14 +26,14 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		$this->exposeMethod('updateSavedMapping');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'Import');
 		return $permissions;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		global $VTIGER_BULK_SAVE_MODE;
 		$previousBulkSaveMode = $VTIGER_BULK_SAVE_MODE;
 		$VTIGER_BULK_SAVE_MODE = true;
@@ -59,10 +59,10 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
@@ -92,7 +92,7 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 	}
 
 	//vtiger7
-	function importLandingPage(Vtiger_Request $request) {
+	function importLandingPage(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->assign('FOR_MODULE', $moduleName);
@@ -100,7 +100,7 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		return $viewer->view('ImportLandingPage.tpl', 'Import');
 	}
 
-	function importBasicStep(Vtiger_Request $request) {
+	function importBasicStep(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -148,7 +148,7 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		return $viewer->view('ImportBasicStep.tpl', 'Import');
 	}
 
-	function uploadAndParse(Vtiger_Request $request) {
+	function uploadAndParse(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$duplicateHandlingNotSupportedModules = $this->getUnsupportedDuplicateHandlingModules();
@@ -163,7 +163,7 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		}
 	}
 
-	function initializeMappingParameters(Vtiger_Request $request) {
+	function initializeMappingParameters(\Http\Request $request) {
 		if(Import_Utils_Helper::validateFileUpload($request)) {
 			$moduleName = $request->getModule();
 			$user = Users_Record_Model::getCurrentUserModel();
@@ -234,12 +234,12 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		}
 	}
 
-	function import(Vtiger_Request $request) {
+	function import(\Http\Request $request) {
 		$user = Users_Record_Model::getCurrentUserModel();
 		Import_Main_View::import($request, $user);
 	}
 
-	function undoImport(Vtiger_Request $request) {
+	function undoImport(\Http\Request $request) {
 		$viewer = new Vtiger_Viewer();
 		$db = PearDatabase::getInstance();
 
@@ -289,23 +289,23 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		$viewer->view('ImportUndoResult.tpl', 'Import');
 	}
 
-	function lastImportedRecords(Vtiger_Request $request) {
+	function lastImportedRecords(\Http\Request $request) {
 		$importList = new Import_List_View();
 		$importList->process($request);
 	}
 
-	function deleteMap(Vtiger_Request $request) {
+	function deleteMap(\Http\Request $request) {
 		Import_Main_View::deleteMap($request);
 	}
 
 	//TODO need to move it to an action
-	function clearCorruptedData(Vtiger_Request $request) {
+	function clearCorruptedData(\Http\Request $request) {
 		$user = Users_Record_Model::getCurrentUserModel();
 		Import_Utils_Helper::clearUserImportInfo($user);
 		$this->importBasicStep($request);
 	}
 
-	function cancelImport(Vtiger_Request $request) {
+	function cancelImport(\Http\Request $request) {
 		$importId = $request->get('import_id');
 		$user = Users_Record_Model::getCurrentUserModel();
 
@@ -321,7 +321,7 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		}
 	}
 
-	function checkImportStatus(Vtiger_Request $request) {
+	function checkImportStatus(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$user = Users_Record_Model::getCurrentUserModel();
 		$mode = $request->getMode();
@@ -362,7 +362,7 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 		Import_Utils_Helper::clearUserImportInfo($user);
 	}
 
-	public function updateSavedMapping(Vtiger_Request $request) {
+	public function updateSavedMapping(\Http\Request $request) {
 		Import_Main_View::updateMap($request);
 	}
 }

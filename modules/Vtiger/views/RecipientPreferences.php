@@ -2,7 +2,7 @@
 
 class Vtiger_RecipientPreferences_View extends Vtiger_MassActionAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$sourceModule = $request->getModule();
 		$emailFieldsInfo = $this->getEmailFieldsInfo($sourceModule);
 		$viewer = $this->getViewer($request);

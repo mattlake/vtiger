@@ -10,7 +10,7 @@
 
 class ModComments_InRelation_View extends Vtiger_RelatedList_View {
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$startindex = 0;
 		$parentRecordId = $request->get('record');
 		$commentRecordId = $request->get('commentid');

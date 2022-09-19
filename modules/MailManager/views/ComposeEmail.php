@@ -10,7 +10,7 @@
 
 class MailManager_ComposeEmail_View extends Vtiger_ComposeEmail_View {
     
-    public function requiresPermission(Vtiger_Request $request){
+    public function requiresPermission(\Http\Request $request){
 		return array();
 	}
 

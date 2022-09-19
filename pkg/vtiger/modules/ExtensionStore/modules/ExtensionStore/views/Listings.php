@@ -15,11 +15,11 @@ class ExtensionStore_Listings_View extends Vtiger_Index_View {
 		$this->exposeMethod('getPromotions');
 	}
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$jsFileNames = array(
 			"libraries.jquery.boxslider.jqueryBxslider",
 		);
@@ -27,7 +27,7 @@ class ExtensionStore_Listings_View extends Vtiger_Index_View {
 		return $jsScriptInstances;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -38,7 +38,7 @@ class ExtensionStore_Listings_View extends Vtiger_Index_View {
 	/**
 	 * Function to get news listings by passing type as News
 	 */
-	protected function getPromotions(Vtiger_Request $request) {
+	protected function getPromotions(\Http\Request $request) {
 		$modelInstance = Settings_ExtensionStore_Extension_Model::getInstance();
 		$promotions = $modelInstance->getListings(null, 'Promotion');
 		$qualifiedModuleName = $request->getModule(false);

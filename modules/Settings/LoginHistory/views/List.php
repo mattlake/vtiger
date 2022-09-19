@@ -10,19 +10,19 @@
 
 class Settings_LoginHistory_List_View extends Settings_Vtiger_List_View {
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		$viewer = $this->getViewer($request);
 		$this->initializeUsersList($request);
 		$viewer->assign('SELECTED_USER',$request->get('user_name'));
 		parent::preProcess($request, false);
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$this->initializeUsersList($request);
 		parent::process($request);
 	}
 
-	function initializeUsersList(Vtiger_Request $request){
+	function initializeUsersList(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		$loginHistoryRecordModel = new  Settings_LoginHistory_Record_Model();
 		$usersList = $loginHistoryRecordModel->getAccessibleUsers();
@@ -31,10 +31,10 @@ class Settings_LoginHistory_List_View extends Settings_Vtiger_List_View {
 
 	/**
 	* Function to get the list of Script models to be included
-	* @param Vtiger_Request $request
+	* @param \Http\Request $request
 	* @return <Array> - List of Vtiger_JsScript_Model instances
 	*/
-   function getHeaderScripts(Vtiger_Request $request) {
+   function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -48,7 +48,7 @@ class Settings_LoginHistory_List_View extends Settings_Vtiger_List_View {
 		return $headerScriptInstances;
    }
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/css/perfect-scrollbar.css",

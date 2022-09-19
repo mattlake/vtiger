@@ -15,7 +15,7 @@ class Settings_LayoutEditor_IndexAjax_View extends Settings_Vtiger_IndexAjax_Vie
 		$this->exposeMethod('getFieldUI');
 	}
     
-    public function addBlock(Vtiger_Request $request) {
+    public function addBlock(\Http\Request $request) {
         $moduleName = $request->get('sourceModule');
         $moduleModel = Vtiger_Module_Model::getInstance($moduleName);
         $blockList = $moduleModel->getBlocks();
@@ -27,7 +27,7 @@ class Settings_LayoutEditor_IndexAjax_View extends Settings_Vtiger_IndexAjax_Vie
         echo $viewer->view('AddBlock.tpl', $qualifiedModuleName,true);
     } 
     
-    public function getFieldUI (Vtiger_Request $request) {
+    public function getFieldUI (\Http\Request $request) {
         $fieldsList = $request->get('fieldIdList');
         $module = $request->get('sourceModule');
         $fieldModelList = Settings_LayoutEditor_Field_Model::getInstanceFromFieldId($fieldsList, getTabId($module));

@@ -1161,6 +1161,7 @@ if (!defined('_ADODB_LAYER')) {
 				// clean memory
 				unset($element0);
 
+                // TODO, yet another mess to fix
 				foreach($inputarr as $arr) {
 					$sql = ''; $i = 0;
 					//Use each() instead of foreach to reduce memory usage -mikefedyk

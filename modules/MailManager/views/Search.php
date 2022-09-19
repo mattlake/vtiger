@@ -13,10 +13,10 @@ class MailManager_Search_View extends MailManager_Relation_View {
 	/**
 	 * Processes the request for search Operation
 	 * @global <type> $currentUserModel
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return boolean
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 
 		$response = new MailManager_Response(true);
 		$viewer = $this->getViewer($request);

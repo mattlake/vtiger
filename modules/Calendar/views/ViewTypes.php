@@ -16,7 +16,7 @@ class Calendar_ViewTypes_View extends Vtiger_IndexAjax_View {
 		$this->exposeMethod('getSharedUsersList');
 	}
 
-	function getViewTypes(Vtiger_Request $request) {
+	function getViewTypes(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$currentUser = Users_Record_Model::getCurrentUserModel();
@@ -31,9 +31,9 @@ class Calendar_ViewTypes_View extends Vtiger_IndexAjax_View {
 
 	/**
 	 * Function to get Shared Users
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getSharedUsersList(Vtiger_Request $request){
+	function getSharedUsersList(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 

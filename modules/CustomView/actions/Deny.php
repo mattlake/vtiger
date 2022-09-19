@@ -10,7 +10,7 @@
 
 class CustomView_Deny_Action extends Vtiger_Action_Controller {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$customViewModel = CustomView_Record_Model::getInstanceById($request->get('record'));
 		$moduleModel = $customViewModel->getModule();
@@ -22,7 +22,7 @@ class CustomView_Deny_Action extends Vtiger_Action_Controller {
 		header("Location: $listViewUrl");
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

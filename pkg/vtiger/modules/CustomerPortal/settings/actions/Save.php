@@ -10,7 +10,7 @@
 
 class Settings_CustomerPortal_Save_Action extends Settings_Vtiger_Index_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$enableModules = $request->get('enableModules');
 		$defaultAssignee = $request->get('defaultAssignee');
@@ -36,7 +36,7 @@ class Settings_CustomerPortal_Save_Action extends Settings_Vtiger_Index_Action {
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

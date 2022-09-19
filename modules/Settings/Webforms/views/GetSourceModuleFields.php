@@ -10,7 +10,7 @@
 
 class Settings_Webforms_GetSourceModuleFields_View extends Settings_Vtiger_IndexAjax_View {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 
 		$moduleModel = Vtiger_Module_Model::getInstance($request->getModule());
@@ -22,7 +22,7 @@ class Settings_Webforms_GetSourceModuleFields_View extends Settings_Vtiger_Index
         return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$qualifiedModuleName = $request->getModule(false);
 		$sourceModule = $request->get('sourceModule');

@@ -10,13 +10,13 @@
 
 class Rss_GetHtml_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	} 
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$module = $request->get('module');
         $url = $request->get('url');
         $recordModel = Rss_Record_Model::getCleanInstance($module);

@@ -15,11 +15,11 @@ class Settings_PBXManager_Gateway_Action extends Settings_Vtiger_IndexAjax_View{
         $this->exposeMethod('getSecretKey');
     }
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $this->getSecretKey($request);
     }
     
-    public function getSecretKey(Vtiger_Request $request) {
+    public function getSecretKey(\Http\Request $request) {
         $serverModel = PBXManager_Server_Model::getInstance();
         $response = new Vtiger_Response();
         $vtigersecretkey = $serverModel->get('vtigersecretkey');

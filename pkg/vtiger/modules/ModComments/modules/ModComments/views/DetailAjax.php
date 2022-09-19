@@ -10,7 +10,7 @@
 
 class ModComments_DetailAjax_View extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$record = $request->get('record');
 		$moduleName = $request->getModule();
 		$recordModel = ModComments_Record_Model::getInstanceById($record);

@@ -10,7 +10,7 @@
 
 class Project_ExportChart_View extends Vtiger_Index_View {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Reports_Module_Model::getInstance($moduleName);
 
@@ -23,23 +23,23 @@ class Project_ExportChart_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return false;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return false;
 	}
 
-	function process(Vtiger_request $request) {
+	function process(\Http\Request $request) {
 		$this->GetPrintReport($request);
 	}
 
 	/**
 	 * Function displays the report in printable format
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function GetPrintReport(Vtiger_Request $request) {
+	function GetPrintReport(\Http\Request $request) {
 		$parentId = $request->get('record');
 		$projectTasks = array();
 		$moduleName = $request->getModule();

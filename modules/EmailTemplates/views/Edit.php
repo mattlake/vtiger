@@ -10,7 +10,7 @@
 
 Class EmailTemplates_Edit_View extends Vtiger_Index_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
@@ -23,7 +23,7 @@ Class EmailTemplates_Edit_View extends Vtiger_Index_View {
         return true;
     }
     
-    public function preProcess(Vtiger_Request $request, $display = true) {
+    public function preProcess(\Http\Request $request, $display = true) {
 		$record = $request->get('record');
 		if (!empty($record)) {
 			$recordModel = EmailTemplates_Record_Model::getInstanceById($record);
@@ -51,10 +51,10 @@ Class EmailTemplates_Edit_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$jsFileNames = array(
 			"libraries.jquery.ckeditor.ckeditor",
@@ -80,7 +80,7 @@ Class EmailTemplates_Edit_View extends Vtiger_Index_View {
 		return str_replace('{$site_URL}', $site_URL, $content);
 	}
 
-	public function initializeContents(Vtiger_Request $request, Vtiger_Viewer $viewer){
+	public function initializeContents(\Http\Request $request, Vtiger_Viewer $viewer){
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 
@@ -124,9 +124,9 @@ Class EmailTemplates_Edit_View extends Vtiger_Index_View {
 
 	/**
 	 * Funtioin to process the Edit view
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 

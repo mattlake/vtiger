@@ -11,7 +11,7 @@
 class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 
 	var $moduleCall = false;
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'Export');
         if (!empty($request->get('source_module'))) {
@@ -22,9 +22,9 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function is called by the controller
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$this->ExportData($request);
 	}
 
@@ -33,9 +33,9 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function exports the data based on the mode
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function ExportData(Vtiger_Request $request) {
+	function ExportData(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 		$moduleName = $request->get('source_module');
 
@@ -96,10 +96,10 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function that generates Export Query based on the mode
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <String> export query
 	 */
-	function getExportQuery(Vtiger_Request $request) {
+	function getExportQuery(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$mode = $request->getMode();
 		$cvId = $request->get('viewname');
@@ -222,10 +222,10 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function returns the export type - This can be extended to support different file exports
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <String>
 	 */
-	function getExportContentType(Vtiger_Request $request) {
+	function getExportContentType(\Http\Request $request) {
 		$type = $request->get('export_type');
 		if(empty($type)) {
 			return 'text/csv';
@@ -234,7 +234,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function that create the exported file
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @param <Array> $headers - output file header
 	 * @param <Array> $entries - outfput file data
 	 */

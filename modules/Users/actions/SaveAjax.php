@@ -21,11 +21,11 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$this->exposeMethod('changeAccessKey');
 	}
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		$userId = $request->get('userid');
@@ -41,7 +41,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
@@ -83,10 +83,10 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	public function getRecordModelFromRequest(Vtiger_Request $request) {
+	public function getRecordModelFromRequest(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
@@ -168,7 +168,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	}
 
 
-        public function getOwnerRoleValue(Vtiger_Request $request, $fieldName) {
+        public function getOwnerRoleValue(\Http\Request $request, $fieldName) {
             $recordId = $request->get('record');
             $moduleName = $request->getModule();
             if(!empty($recordId)) {
@@ -176,7 +176,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
                     return $existingRecordModel->get($fieldName);
             }
         }
-        public function userExists(Vtiger_Request $request){
+        public function userExists(\Http\Request $request){
 		$module = $request->getModule();
 		$userName = $request->get('user_name');
 		$status = Users_Record_Model::isUserExists($userName);
@@ -185,7 +185,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$response->emit();
 	}
 
-	public function savePassword(Vtiger_Request $request) {
+	public function savePassword(\Http\Request $request) {
 		$module = $request->getModule();
 		$userModel = vglobal('current_user');
 		$newPassword = $request->get('new_password');
@@ -205,9 +205,9 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
 		/*
 		 * To restore a user
-		 * @param Vtiger_Request Object
+		 * @param \Http\Request Object
 		 */
-		public function restoreUser(Vtiger_Request $request) {
+		public function restoreUser(\Http\Request $request) {
 			$moduleName = $request->getModule();
 			$record = $request->get('userid');
 
@@ -231,7 +231,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	/*
 	 * Function to transfer CRM owner without deleting User
 	 */
-	public function transferOwner(Vtiger_Request $request) {
+	public function transferOwner(\Http\Request $request) {
 		$moduleName = $request->getModule(false);
 		$record = $request->get('record');
 		$usersInstance = CRMEntity::getInstance($moduleName);
@@ -248,7 +248,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	/**
 	 * Function to change username
 	 */
-	public function changeUsername(Vtiger_Request $request) {
+	public function changeUsername(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		$userId = $request->get('userid');
 
@@ -261,7 +261,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$response->emit();
 	}
 
-	public function changeAccessKey(Vtiger_Request $request) {
+	public function changeAccessKey(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 

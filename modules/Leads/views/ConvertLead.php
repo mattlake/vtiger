@@ -10,14 +10,14 @@
 
 class Leads_ConvertLead_View extends Vtiger_Index_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'ConvertLead', 'record_parameter' => 'record');
 		return $permissions;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$currentUserPriviligeModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
 
 		$viewer = $this->getViewer($request);

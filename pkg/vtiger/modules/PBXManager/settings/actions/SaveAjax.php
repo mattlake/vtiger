@@ -12,7 +12,7 @@
 class Settings_PBXManager_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
     // To save Mapping of user from mapping popup
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $id = $request->get('id');
         $qualifiedModuleName = 'PBXManager';
         

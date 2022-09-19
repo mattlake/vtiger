@@ -10,7 +10,7 @@
 
 class Invoice_SaveAjax_Action extends Inventory_SaveAjax_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 
 		if ($recordId && $_REQUEST['action'] == 'SaveAjax') {

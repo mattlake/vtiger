@@ -16,13 +16,13 @@ class Vtiger_ListViewQuickPreview_View extends Vtiger_Index_View {
 		parent::__construct();
 	}
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 
@@ -38,7 +38,7 @@ class Vtiger_ListViewQuickPreview_View extends Vtiger_Index_View {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
@@ -134,7 +134,7 @@ class Vtiger_ListViewQuickPreview_View extends Vtiger_Index_View {
 		$viewer->assign('NAVIGATION', true);
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateReadAccess();
 	}
 

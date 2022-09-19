@@ -13,10 +13,10 @@ class MailManager_MainUI_View extends MailManager_Abstract_View {
     /**
      * Process the request for displaying UI
      * @global String $moduleName
-     * @param Vtiger_Request $request
+     * @param \Http\Request $request
      * @return MailManager_Response
      */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$response = new MailManager_Response();
 		$viewer = $this->getViewer($request);
@@ -44,7 +44,7 @@ class MailManager_MainUI_View extends MailManager_Abstract_View {
 		}
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         return $request->validateReadAccess();
     }
 }

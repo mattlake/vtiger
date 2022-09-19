@@ -10,7 +10,7 @@
 
 Class Vtiger_OverdueActivities_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 
 		$moduleName = $request->getModule();

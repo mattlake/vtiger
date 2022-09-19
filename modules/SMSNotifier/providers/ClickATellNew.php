@@ -172,7 +172,7 @@ class SMSNotifier_ClickATellNew_Provider implements SMSNotifier_ISMSProvider_Mod
 		return 'ClickATellNew.tpl';
 	}
     
-	function updateMessageStatus(Vtiger_Request $request) {
+	function updateMessageStatus(\Http\Request $request) {
 		$messageId = $request->get('messageId');
 		$status = $request->get('status');
 		$messageDescription = $request->get('statusDescription');		

@@ -15,7 +15,7 @@ class MailManager_Folder_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('showMailContent');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -25,9 +25,9 @@ class MailManager_Folder_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function to show body of all the mails in a folder
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function showMailContent(Vtiger_Request $request) {
+	public function showMailContent(\Http\Request $request) {
 		$mailIds = $request->get("mailids");
 		$folderName = $request->get("folderName");
 

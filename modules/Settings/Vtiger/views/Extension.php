@@ -10,7 +10,7 @@
 
 class Settings_Vtiger_Extension_View extends Settings_Vtiger_Index_View {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->get('extensionModule');
 
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -29,10 +29,10 @@ class Settings_Vtiger_Extension_View extends Settings_Vtiger_Index_View {
 
 	/**
 	 * Function to get extension view instance from view name and module
-	 * @param <Vtiger_Request> $request
+	 * @param <\Http\Request> $request
 	 * @return $extensionViewClass
 	 */
-	function getExtensionViewInstance(Vtiger_Request $request) {
+	function getExtensionViewInstance(\Http\Request $request) {
 		$extensionModule = $request->get('extensionModule');
 		$extensionView = $request->get('extensionView');
 		$extensionViewClass = Vtiger_Loader::getComponentClassName('view', $extensionView, $extensionModule);
@@ -53,7 +53,7 @@ class Settings_Vtiger_Extension_View extends Settings_Vtiger_Index_View {
 		return $links['EXTENSIONLINK'];
 	}
 
-	function preProcess(Vtiger_Request $request, $display = true) {
+	function preProcess(\Http\Request $request, $display = true) {
 		parent::preProcess($request, false);
 		$viewer = $this->getViewer($request);
 		$viewer->assign('EXTENSION_MODULE', $request->get('extensionModule'));
@@ -65,17 +65,17 @@ class Settings_Vtiger_Extension_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$extensionViewInstance = $this->getExtensionViewInstance($request);
 		$extensionViewInstance->process($request);
 	}
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 		$extensionViewInstance = $this->getExtensionViewInstance($request);

@@ -10,7 +10,7 @@
 
 class Events_SaveAjax_Action extends Events_Save_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			$user = Users_Record_Model::getCurrentUserModel();
@@ -150,10 +150,10 @@ class Events_SaveAjax_Action extends Events_Save_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	public function getRecordModelFromRequest(Vtiger_Request $request) {
+	public function getRecordModelFromRequest(\Http\Request $request) {
 		$recordModel = parent::getRecordModelFromRequest($request);
 
 		if ($recordModel->get('mode') == 'edit') {

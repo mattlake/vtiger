@@ -10,7 +10,7 @@
 
 class Migration_Extract_Action extends Vtiger_Action_Controller {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		global $root_directory, $log;
 		@session_start();
 		$userName = $request->get('username');

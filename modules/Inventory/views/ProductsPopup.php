@@ -11,7 +11,7 @@
 class Inventory_ProductsPopup_View extends Vtiger_Popup_View {
 
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
@@ -27,7 +27,7 @@ class Inventory_ProductsPopup_View extends Vtiger_Popup_View {
 		return 'Products';
 	}
 	
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
 		$companyLogo = $companyDetails->getLogo();
@@ -43,7 +43,7 @@ class Inventory_ProductsPopup_View extends Vtiger_Popup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		//src_module value is added to just to stop showing inactive products
 		$request->set('src_module', $request->getModule());
 
@@ -205,10 +205,10 @@ class Inventory_ProductsPopup_View extends Vtiger_Popup_View {
 
 	 /**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$moduleName = $request->getModule();

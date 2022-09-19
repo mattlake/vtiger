@@ -10,7 +10,7 @@
 
 class RecycleBin_List_View extends Vtiger_Index_View {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
@@ -20,7 +20,7 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
@@ -39,11 +39,11 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcessTplName(Vtiger_Request $request) {
+	function preProcessTplName(\Http\Request $request) {
 		return 'ListViewPreProcess.tpl';
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -56,7 +56,7 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 		$viewer->view('ListViewContents.tpl', $moduleName);
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 
@@ -67,7 +67,7 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$sourceModule = $request->get('sourceModule');
 
@@ -222,10 +222,10 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -251,7 +251,7 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request){
+	function getPageCount(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$sourceModule = $request->get('sourceModule');
 		$listViewModel = RecycleBin_ListView_Model::getInstance($moduleName, $sourceModule);
@@ -276,9 +276,9 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function returns the number of records for the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$sourceModule = $request->get('sourceModule');
 		$listViewModel = RecycleBin_ListView_Model::getInstance($moduleName, $sourceModule);
@@ -338,7 +338,7 @@ class RecycleBin_List_View extends Vtiger_Index_View {
 		$viewer->assign('MODULE_SETTING_ACTIONS', $settingLinks);
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/css/perfect-scrollbar.css",

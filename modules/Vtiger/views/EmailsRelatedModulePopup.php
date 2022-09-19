@@ -10,7 +10,7 @@
 
 class Vtiger_EmailsRelatedModulePopup_View extends Vtiger_Popup_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		$permissions[] = array('module_parameter' => 'src_module', 'action' => 'DetailView');
@@ -18,7 +18,7 @@ class Vtiger_EmailsRelatedModulePopup_View extends Vtiger_Popup_View {
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		if($moduleName == 'Users') {
 			return true;
@@ -26,7 +26,7 @@ class Vtiger_EmailsRelatedModulePopup_View extends Vtiger_Popup_View {
 		return parent::checkPermission($request);
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
@@ -44,7 +44,7 @@ class Vtiger_EmailsRelatedModulePopup_View extends Vtiger_Popup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $this->getModule($request);
 		$cvId = $request->get('cvid');
 		$pageNumber = $request->get('page');
@@ -187,10 +187,10 @@ class Vtiger_EmailsRelatedModulePopup_View extends Vtiger_Popup_View {
 	
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

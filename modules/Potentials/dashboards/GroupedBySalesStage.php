@@ -12,10 +12,10 @@ class Potentials_GroupedBySalesStage_Dashboard extends Vtiger_IndexAjax_View {
 
 	/**
 	 * Retrieves css styles that need to loaded in the page
-	 * @param Vtiger_Request $request - request model
+	 * @param \Http\Request $request - request model
 	 * @return <array> - array of Vtiger_CssScript_Model
 	 */
-	function getHeaderCss(Vtiger_Request $request){
+	function getHeaderCss(\Http\Request $request){
 		$cssFileNames = array(
 			//Place your widget specific css files here
 		);
@@ -48,7 +48,7 @@ class Potentials_GroupedBySalesStage_Dashboard extends Vtiger_IndexAjax_View {
         return '&search_params='. json_encode($listSearchParams);
     }
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

@@ -11,7 +11,7 @@
 class Users_SaveCalendarSettings_Action extends Users_Save_Action {
 
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordModel = $this->getRecordModelFromRequest($request);
 		
 		$recordModel->save();
@@ -21,9 +21,9 @@ class Users_SaveCalendarSettings_Action extends Users_Save_Action {
 
 	/**
 	 * Function to update Calendar Sharing information
-	 * @params - Vtiger_Request $request
+	 * @params - \Http\Request $request
 	 */
-	public function saveCalendarSharing(Vtiger_Request $request){
+	public function saveCalendarSharing(\Http\Request $request){
 		
 		$sharedIds = $request->get('sharedIds');
 		$sharedType = $request->get('sharedtype');

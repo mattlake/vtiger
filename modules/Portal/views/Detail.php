@@ -10,18 +10,18 @@
 
 class Portal_Detail_View extends Vtiger_Index_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		
 		return $permissions;
 	}
 	
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$module = $request->getModule();
 
@@ -38,7 +38,7 @@ class Portal_Detail_View extends Vtiger_Index_View {
 		$viewer->view('DetailView.tpl', $module);
 	}
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

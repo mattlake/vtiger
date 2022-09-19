@@ -12,10 +12,10 @@ class MailManager_Settings_View extends MailManager_MainUI_View {
 
 	/**
 	 * Process the request for Settings Operations
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return MailManager_Response
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new MailManager_Response();
 		$module = $request->getModule();
 		if ('edit' == $this->getOperationArg($request)) {
@@ -89,7 +89,7 @@ class MailManager_Settings_View extends MailManager_MainUI_View {
 		return $response;
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         return $request->validateWriteAccess();
     }
 }

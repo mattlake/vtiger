@@ -10,11 +10,11 @@
 
 class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    public function checkPermission(Vtiger_Request $request) {
+    public function checkPermission(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
 
@@ -30,7 +30,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 	 * @param <type> $request
 	 * @return <String>
 	 */
-	public function preProcessTplName(Vtiger_Request $request) {
+	public function preProcessTplName(\Http\Request $request) {
 		return 'PreferenceDetailViewPreProcess.tpl';
 	}
 
@@ -42,7 +42,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 		return $this->showModuleDetailView($request);
 	}
 
-	public function preProcess(Vtiger_Request $request, $display=true) {
+	public function preProcess(\Http\Request $request, $display=true) {
 		if($this->checkPermission($request)) {
 			$qualifiedModuleName = $request->getModule(false);
 			$currentUser = Users_Record_Model::getCurrentUserModel();
@@ -153,12 +153,12 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 		}
 	}
 
-	protected function preProcessDisplay(Vtiger_Request $request) {
+	protected function preProcessDisplay(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 
@@ -178,7 +178,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 		return parent::process($request);
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 		$moduleDetailFile = 'modules.'.$moduleName.'.resources.PreferenceDetail';

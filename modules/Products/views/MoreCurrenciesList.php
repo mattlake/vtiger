@@ -11,7 +11,7 @@
 
 class Products_MoreCurrenciesList_View extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$record = $request->get('record');
 
@@ -20,7 +20,7 @@ class Products_MoreCurrenciesList_View extends Vtiger_IndexAjax_View {
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$currencyName = $request->get('currency');

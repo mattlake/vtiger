@@ -17,7 +17,7 @@ class Settings_Vtiger_TaxAjax_View extends Settings_Vtiger_Index_View {
 		$this->exposeMethod('editCharge');
 	}
 
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -25,7 +25,7 @@ class Settings_Vtiger_TaxAjax_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	public function editTax(Vtiger_Request $request) {
+	public function editTax(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
@@ -48,7 +48,7 @@ class Settings_Vtiger_TaxAjax_View extends Settings_Vtiger_Index_View {
 		echo $viewer->view('EditTax.tpl', $qualifiedModuleName, true);
     }
 
-	public function editTaxRegion(Vtiger_Request $request) {
+	public function editTaxRegion(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
@@ -62,7 +62,7 @@ class Settings_Vtiger_TaxAjax_View extends Settings_Vtiger_Index_View {
 		echo $viewer->view('EditRegion.tpl', $qualifiedModuleName, true);
     }
 
-	public function editCharge(Vtiger_Request $request) {
+	public function editCharge(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);

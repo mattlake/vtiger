@@ -1,99 +1,41 @@
 <?php
-/*********************************************************************************
- * The contents of this file are subject to the SugarCRM Public License Version 1.1.2
- * ("License"); You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at http://www.sugarcrm.com/SPL
- * Software distributed under the License is distributed on an  "AS IS"  basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
- * the specific language governing rights and limitations under the License.
- * The Original Code is:  SugarCRM Open Source
- * The Initial Developer of the Original Code is SugarCRM, Inc.
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.;
- * All Rights Reserved.
- * Contributor(s): ______________________________________.
- ********************************************************************************/
+
+use Infrastructure\DataAccess\Databases\Contracts\DatabaseContract;
 
 require_once 'include/logging.php';
 include_once 'libraries/adodb/adodb.inc.php';
 require_once 'libraries/adodb/adodb-xmlschema.inc.php';
+require_once __DIR__.'/PreparedQMark2SqlValue.php';
+require_once __DIR__.'/PerformancePrefs.php';
 
 $log = Logger::getLogger('VT');
 $logsqltm = Logger::getLogger('SQLTIME');
 
-// Callback class useful to convert PreparedStatement Question Marks to SQL value
-// See function convertPS2Sql in PearDatabase below
-class PreparedQMark2SqlValue {
-	// Constructor
-	function __construct($vals){
-        $this->ctr = 0;
-        $this->vals = $vals;
-    }
-    function call($matches){
-            /**
-             * If ? is found as expected in regex used in function convert2sql
-             * /('[^']*')|(\"[^\"]*\")|([?])/
-             *
-             */
-            if($matches[3]=='?'){
-                    $this->ctr++;
-                    return $this->vals[$this->ctr-1];
-            }else{
-                    return $matches[0];
-            }
-    }
-}
-
-/**
- * Performance perference API
- */
-@include_once('config.performance.php'); // Ignore warning if not present
-class PerformancePrefs {
-	/**
-	 * Get performance parameter configured value or default one
-	 */
-	static function get($key, $defvalue=false) {
-		global $PERFORMANCE_CONFIG;
-		if(isset($PERFORMANCE_CONFIG)){
-			if(isset($PERFORMANCE_CONFIG[$key])) {
-				return $PERFORMANCE_CONFIG[$key];
-			}
-		}
-		return $defvalue;
-	}
-	/** Get boolean value */
-	static function getBoolean($key, $defvalue=false) {
-		return self::get($key, $defvalue);
-	}
-	/** Get Integer value */
-	static function getInteger($key, $defvalue=false) {
-		return intval(self::get($key, $defvalue));
-	}
-}
-
-class PearDatabase{
-    var $database = null;
-    var $dieOnError = false;
-    var $dbType = null;
-    var $dbHostName = null;
-    var $dbName = null;
-    var $dbOptions = null;
-    var $userName=null;
-    var $userPassword=null;
-    var $query_time = 0;
-    var $log = null;
-    var $lastmysqlrow = -1;
-    var $enableSQLlog = false;
-    var $continueInstallOnError = true;
+class PearDatabase implements DatabaseContract
+{
+    public $database = null;
+    public $dieOnError = false;
+    public $dbType = null;
+    public $dbHostName = null;
+    public $dbName = null;
+    public $dbOptions = null;
+    public $userName=null;
+    public $userPassword=null;
+    public $query_time = 0;
+    public $log = null;
+    public $lastmysqlrow = -1;
+    public $enableSQLlog = false;
+    public $continueInstallOnError = true;
 
     // If you want to avoid executing PreparedStatement, set this to true
     // PreparedStatement will be converted to normal SQL statement for execution
-	var $avoidPreparedSql = false;
+	public $avoidPreparedSql = false;
 
 	/**
 	 * Performance tunning parameters (can be configured through performance.prefs.php)
 	 * See the constructor for initialization
 	 */
-	var $isdb_default_utf8_charset = false;
+	public $isdb_default_utf8_charset = false;
 
 	/**
 	 * Manage instance usage of this class
@@ -548,15 +490,15 @@ class PearDatabase{
 
     function sql_quote($data) {
 		if (is_array($data)) {
-			switch($data{'type'}) {
+			switch($data['type']) {
 			case 'text':
 			case 'numeric':
 			case 'integer':
 			case 'oid':
-				return $this->quote($data{'value'});
+				return $this->quote($data['value']);
 				break;
 			case 'timestamp':
-				return $this->formatDate($data{'value'});
+				return $this->formatDate($data['value']);
 				break;
 			default:
 				throw new Exception("unhandled type: ".serialize($cur));
@@ -611,7 +553,7 @@ class PearDatabase{
     function run_query_field($query,$field='') {
 	    $rowdata = $this->run_query_record($query);
 	    if(isset($field) && $field != '')
-	    	return $rowdata{$field};
+	    	return $rowdata[$field];
 	    else
 	    	return array_shift($rowdata);
     }
@@ -619,7 +561,7 @@ class PearDatabase{
     function run_query_list($query,$field){
 	    $records = $this->run_query_allrecords($query);
 	    foreach($records as $walk => $cur)
-			$list[] = $cur{$field};
+			$list[] = $cur[$field];
     }
 
     function run_query_field_html($query,$field){
@@ -652,7 +594,7 @@ class PearDatabase{
 	    	throw new Exception("empty arrays not allowed");
 
 	    foreach($a as $walk => $cur)
-	    	$l .= ($l?',':'').$this->quote($cur{$field});
+	    	$l .= ($l?',':'').$this->quote($cur[$field]);
 
 	    return ' ( '.$l.' ) ';
     }
@@ -1093,9 +1035,9 @@ class PearDatabase{
 	}
 } /* End of class */
 
-if(empty($adb)) {
-	$adb = new PearDatabase();
-	$adb->connect();
-}
-//$adb->database->setFetchMode(ADODB_FETCH_BOTH);
-?>
+//if(empty($adb)) {
+//	$adb = new PearDatabase();
+//	$adb->connect();
+//}
+////$adb->database->setFetchMode(ADODB_FETCH_BOTH);
+//?>

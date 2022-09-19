@@ -11,13 +11,13 @@
 class Vtiger_MergeRecord_View extends Vtiger_Popup_View {
 	var $mergeRecordIds = Array();
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'EditView');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$records = $request->get('records');
 		$records = explode(',', $records);
@@ -35,7 +35,7 @@ class Vtiger_MergeRecord_View extends Vtiger_Popup_View {
 		return true;
 	}
 	
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$module = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($module);
 		$fieldModels =  $moduleModel->getFields();

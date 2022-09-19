@@ -18,9 +18,9 @@ class Rss_ViewTypes_View extends Vtiger_IndexAjax_View {
         
 	/**
      * Function to display rss sidebar widget
-     * @param <Vtiger_Request> $request 
+     * @param <\Http\Request> $request
      */
-    public function getRssWidget(Vtiger_Request $request) {
+    public function getRssWidget(\Http\Request $request) {
         $module = $request->get('module');
         $moduleModel = Vtiger_Module_Model::getInstance($module);
         $rssSources = $moduleModel->getRssSources();
@@ -32,9 +32,9 @@ class Rss_ViewTypes_View extends Vtiger_IndexAjax_View {
     
     /**
      * Function to get the rss add form 
-     * @param <Vtiger_Request> $request
+     * @param <\Http\Request> $request
      */
-    public function getRssAddForm(Vtiger_Request $request) { 
+    public function getRssAddForm(\Http\Request $request) {
         $module = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($module);
 		$viewer = $this->getViewer($request);

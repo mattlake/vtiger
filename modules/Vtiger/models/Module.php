@@ -1612,7 +1612,7 @@ class Vtiger_Module_Model extends Vtiger_Module {
 		return $mandatoryFields;
 	}
 
-	public function getRelatedModuleRecordIds(Vtiger_Request $request, $recordIds = array(), $nonAdminCheck = false) {
+	public function getRelatedModuleRecordIds(\Http\Request $request, $recordIds = array(), $nonAdminCheck = false) {
 		$db = PearDatabase::getInstance();
 		$relationIds = $request->get('related_modules');
         if(empty($relationIds))  return array();

@@ -15,7 +15,7 @@ class Project_EditAjax_View extends Vtiger_IndexAjax_View {
 		$this->exposeMethod('editColor');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -23,7 +23,7 @@ class Project_EditAjax_View extends Vtiger_IndexAjax_View {
 		}
 	}
 
-	public function editColor(Vtiger_Request $request) {
+	public function editColor(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->get('module');
 		$parentRecordModel = Vtiger_Record_Model::getCleanInstance($moduleName);

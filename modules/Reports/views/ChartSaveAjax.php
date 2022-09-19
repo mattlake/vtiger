@@ -10,12 +10,12 @@
 
 class Reports_ChartSaveAjax_View extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

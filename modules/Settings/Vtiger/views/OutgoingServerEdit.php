@@ -10,7 +10,7 @@
 
 class Settings_Vtiger_OutgoingServerEdit_View extends Settings_Vtiger_Index_View {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $systemDetailsModel = Settings_Vtiger_Systems_Model::getInstanceFromServerType('email', 'OutgoingServer');
         $viewer = $this->getViewer($request);
         $qualifiedName = $request->getModule(false);
@@ -21,17 +21,17 @@ class Settings_Vtiger_OutgoingServerEdit_View extends Settings_Vtiger_Index_View
         $viewer->view('OutgoingServerEdit.tpl',$qualifiedName);
     }
 		
-	function getPageTitle(Vtiger_Request $request) {
+	function getPageTitle(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_OUTGOING_SERVER',$qualifiedModuleName);
 	}
 	
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

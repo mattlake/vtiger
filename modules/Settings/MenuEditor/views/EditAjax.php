@@ -15,7 +15,7 @@ class Settings_MenuEditor_EditAjax_View extends Settings_Vtiger_Index_View {
 		$this->exposeMethod('showAddModule');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -23,7 +23,7 @@ class Settings_MenuEditor_EditAjax_View extends Settings_Vtiger_Index_View {
 		}
 	}
 
-	function showAddModule(Vtiger_Request $request) {
+	function showAddModule(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$appName = $request->get('appname');

@@ -27,17 +27,17 @@ vimport('includes.runtime.LanguageHandler');
 
 class Emails_TrackAccess_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		if (vglobal('application_unique_key') !== $request->get('applicationKey')) {
 			exit;
 		}
@@ -62,7 +62,7 @@ class Emails_TrackAccess_Action extends Vtiger_Action_Controller {
 		}
 	}
 	
-	public function clickHandler(Vtiger_Request $request) {
+	public function clickHandler(\Http\Request $request) {
 		$parentId = $request->get('parentId');
 		$recordId = $request->get('record');
 
@@ -79,4 +79,4 @@ class Emails_TrackAccess_Action extends Vtiger_Action_Controller {
 }
 
 $track = new Emails_TrackAccess_Action();
-$track->process(new Vtiger_Request($_REQUEST));
+$track->process(new \Http\Request($_REQUEST));

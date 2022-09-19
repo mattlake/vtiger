@@ -10,13 +10,13 @@
 
 class Vtiger_GetData_Action extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'source_module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$record = $request->get('record');
 		$sourceModule = $request->get('source_module');
 		$response = new Vtiger_Response();

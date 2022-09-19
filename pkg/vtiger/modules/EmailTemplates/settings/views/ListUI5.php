@@ -10,7 +10,7 @@
 
 class Settings_EmailTemplates_ListUI5_View extends Settings_Vtiger_UI5Embed_View {
 
-	protected function getUI5EmbedURL(Vtiger_Request $request) {
+	protected function getUI5EmbedURL(\Http\Request $request) {
 		return '../index.php?module=Settings&action=listemailtemplates&parenttab=Settings';
 	}
 

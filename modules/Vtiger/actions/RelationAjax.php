@@ -17,7 +17,7 @@ class Vtiger_RelationAjax_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('getRelatedRecordInfo');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {
@@ -39,19 +39,19 @@ class Vtiger_RelationAjax_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
  		return parent::checkPermission($request);
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -147,7 +147,7 @@ class Vtiger_RelationAjax_Action extends Vtiger_Action_Controller {
 	 * Function to get the page count for reltedlist
 	 * @return total number of pages
 	 */
-	function getRelatedListPageCount(Vtiger_Request $request){
+	function getRelatedListPageCount(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$relatedModuleName = $request->get('relatedModule');
 		$parentId = $request->get('record');
@@ -170,7 +170,7 @@ class Vtiger_RelationAjax_Action extends Vtiger_Action_Controller {
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 

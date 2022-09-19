@@ -17,7 +17,7 @@ class Vtiger_DashboardTab_View extends Vtiger_Index_View {
         $this->exposeMethod('showDashBoardTabList');
 	}
     
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
@@ -29,7 +29,7 @@ class Vtiger_DashboardTab_View extends Vtiger_Index_View {
 		return $permissions;
 	}
 	
-    function process(Vtiger_Request $request) {
+    function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -66,7 +66,7 @@ class Vtiger_DashboardTab_View extends Vtiger_Index_View {
 		echo $viewer->view('dashboards/DashBoardTabContents.tpl', $moduleName,true);
     }
     
-    public function showDashBoardTabList(Vtiger_Request $request) {
+    public function showDashBoardTabList(\Http\Request $request) {
         
         $viewer = $this->getViwer($request);
         $moduleName = $this->getModule();

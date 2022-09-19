@@ -17,7 +17,7 @@ class Settings_ModuleManager_Basic_Action extends Settings_Vtiger_IndexAjax_View
 		$this->exposeMethod('updateUserModuleStep3');
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -25,7 +25,7 @@ class Settings_ModuleManager_Basic_Action extends Settings_Vtiger_IndexAjax_View
 		}
 	}
 
-	public function updateModuleStatus(Vtiger_Request $request) {
+	public function updateModuleStatus(\Http\Request $request) {
 		$moduleName = $request->get('forModule');
 		$updateStatus = $request->get('updateStatus');
 
@@ -40,7 +40,7 @@ class Settings_ModuleManager_Basic_Action extends Settings_Vtiger_IndexAjax_View
 		$response->emit();
 	}
 
-	public function importUserModuleStep3(Vtiger_Request $request) {
+	public function importUserModuleStep3(\Http\Request $request) {
 		$importModuleName = $request->get('module_import_name');
 		$uploadFile = $request->get('module_import_file');
 		$uploadDir = Settings_ModuleManager_Extension_Model::getUploadDirectory();
@@ -66,7 +66,7 @@ class Settings_ModuleManager_Basic_Action extends Settings_Vtiger_IndexAjax_View
 		$response->emit();
 	}
 
-	public function updateUserModuleStep3(Vtiger_Request $request){
+	public function updateUserModuleStep3(\Http\Request $request){
 		$importModuleName = $request->get('module_import_name');
 		$uploadFile = $request->get('module_import_file');
 		$uploadDir = Settings_ModuleManager_Extension_Model::getUploadDirectory();
@@ -97,7 +97,7 @@ class Settings_ModuleManager_Basic_Action extends Settings_Vtiger_IndexAjax_View
 		$response->emit();
 	}
 
-	 public function validateRequest(Vtiger_Request $request) { 
+	 public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess(); 
 	} 
 }

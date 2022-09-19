@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_CustomRecordNumbering_View extends Settings_Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$supportedModules = Settings_Vtiger_CustomRecordNumberingModule_Model::getSupportedModules();
 
@@ -30,17 +30,17 @@ class Settings_Vtiger_CustomRecordNumbering_View extends Settings_Vtiger_Index_V
 		$viewer->view('CustomRecordNumbering.tpl', $qualifiedModuleName);
 	}
 	
-	function getPageTitle(Vtiger_Request $request) {
+	function getPageTitle(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_CUSTOMIZE_RECORD_NUMBERING',$qualifiedModuleName);
 	}
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

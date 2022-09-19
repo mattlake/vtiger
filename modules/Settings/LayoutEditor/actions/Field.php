@@ -21,7 +21,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
 		$this->exposeMethod('updateDuplicateHandling');
     }
 
-    public function add(Vtiger_Request $request) {
+    public function add(\Http\Request $request) {
         $type = $request->get('fieldType');
         $moduleName = $request->get('sourceModule');
         $blockId = $request->get('blockid');
@@ -55,7 +55,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
         $response->emit();
     }
 
-    public function save(Vtiger_Request $request) {
+    public function save(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
         $fieldId = $request->get('fieldid');
         $fieldInstance = Settings_LayoutEditor_Field_Model::getInstance($fieldId);
@@ -126,7 +126,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
 		$response->emit();
 	}
 
-    public function delete(Vtiger_Request $request) {
+    public function delete(\Http\Request $request) {
         $fieldId = $request->get('fieldid');
         $fieldInstance = Settings_LayoutEditor_Field_Model::getInstance($fieldId);
         $response = new Vtiger_Response();
@@ -159,7 +159,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
         Settings_Workflows_Record_Model::deleteUpadateFieldWorkflow($moduleName, $fieldInstance->getFieldName());
     }
 
-    public function move(Vtiger_Request $request) {
+    public function move(\Http\Request $request) {
         $updatedFieldsList = $request->get('updatedFields');
         
         // for Clearing cache we need Module Model
@@ -174,7 +174,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
         $response->emit();
     }
 
-    public function unHide(Vtiger_Request $request) {
+    public function unHide(\Http\Request $request) {
         $response = new Vtiger_Response();
         try{
 			$fieldIds = $request->get('fieldIdList');
@@ -193,7 +193,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
 
     }
 
-	public function updateDuplicateHandling(Vtiger_Request $request) {
+	public function updateDuplicateHandling(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			$sourceModule = $request->get('sourceModule');
@@ -209,7 +209,7 @@ class Settings_LayoutEditor_Field_Action extends Settings_Vtiger_Index_Action {
 		$response->emit();
 	}
 
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

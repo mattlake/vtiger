@@ -10,7 +10,7 @@
 
 class Calendar_DeleteAjax_Action extends Vtiger_DeleteAjax_Action {
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$moduleParameter = $request->get('sourceModule');
 		if (!$moduleParameter) {
@@ -22,7 +22,7 @@ class Calendar_DeleteAjax_Action extends Vtiger_DeleteAjax_Action {
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$sourceModule = $request->get('sourceModule');
 		$record = $request->get('record');
 		parent::checkPermission($request);
@@ -38,7 +38,7 @@ class Calendar_DeleteAjax_Action extends Vtiger_DeleteAjax_Action {
 		return true;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$recurringEditMode = $request->get('recurringEditMode');

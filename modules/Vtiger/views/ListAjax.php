@@ -10,7 +10,7 @@
 
 class Vtiger_ListAjax_View extends Vtiger_List_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$moduleName = $request->get('module');
 		if($moduleName == 'Vtiger'){
@@ -30,15 +30,15 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 		$this->exposeMethod('searchAll');
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -46,7 +46,7 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 		}
 	}
 
-	public function showSearchResults(Vtiger_Request $request) {
+	public function showSearchResults(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -76,7 +76,7 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 		}
 	}
 
-	public function ShowListColumnsEdit(Vtiger_Request $request){
+	public function ShowListColumnsEdit(\Http\Request $request){
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$cvId = $request->get('cvid');
@@ -107,7 +107,7 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 		$viewer->view('ListColumnsEdit.tpl',$moduleName);
 	}
 
-	public function searchAll(Vtiger_Request $request) {
+	public function searchAll(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$searchValue = $request->get('value');
 		$searchModule = $request->get('searchModule');
@@ -173,7 +173,7 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 		echo $viewer->view('SearchResults.tpl', '', true);
 	}
 
-	public function showSearchResultsWithValue(Vtiger_Request $request) {
+	public function showSearchResultsWithValue(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$pageNumber = $request->get('page');
 		$searchValue = $request->get('value');

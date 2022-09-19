@@ -16,7 +16,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
 		$this->exposeMethod('getContentsOfPriority');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -24,7 +24,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
 		}
 	}
 
-	public function showManagementView(Vtiger_Request $request) {
+	public function showManagementView(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$statusField = Vtiger_Field_Model::getInstance('taskstatus', $moduleModel);
@@ -51,7 +51,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
 		$viewer->view('TaskManagement.tpl', $moduleName);
 	}
 
-	public function getAllContents(Vtiger_Request $request) {
+	public function getAllContents(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$module = Vtiger_Module_Model::getInstance($moduleName);
 		$field = Vtiger_Field_Model::getInstance('taskpriority', $module);
@@ -66,7 +66,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
 		echo json_encode($data);
 	}
 
-	public function getContentsOfPriority(Vtiger_Request $request, $fetch = false) {
+	public function getContentsOfPriority(\Http\Request $request, $fetch = false) {
 		$moduleName = $request->getModule();
 
 		$page = 1;
@@ -90,7 +90,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
 		return $viewer->view('TaskManagementContents.tpl', $moduleName, $fetch);
 	}
 
-	public function generateColors(Vtiger_Request $request) {
+	public function generateColors(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$module = Vtiger_Module_Model::getInstance($moduleName);
 		$field = Vtiger_Field_Model::getInstance('taskpriority', $module);
@@ -137,7 +137,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
 		return $filters;
 	}
 
-	public function filterRecords(Vtiger_Request $request, $pagingModel) {
+	public function filterRecords(\Http\Request $request, $pagingModel) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$filters = $request->get('filters');

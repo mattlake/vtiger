@@ -10,7 +10,7 @@
 
 class Calendar_Calendar_View extends Vtiger_Index_View {
 
-	public function preProcess(Vtiger_Request $request, $display = true) {
+	public function preProcess(\Http\Request $request, $display = true) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->assign('MODULE_NAME', $moduleName);
@@ -25,11 +25,11 @@ class Calendar_Calendar_View extends Vtiger_Index_View {
 		}
 	}
 
-	protected function preProcessTplName(Vtiger_Request $request) {
+	protected function preProcessTplName(\Http\Request $request) {
 		return 'CalendarViewPreProcess.tpl';
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$jsFileNames = array(
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/fullcalendar/lib/moment.min.js",
@@ -44,7 +44,7 @@ class Calendar_Calendar_View extends Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 
 		$cssFileNames = array(
@@ -59,7 +59,7 @@ class Calendar_Calendar_View extends Vtiger_Index_View {
 		return $headerCssInstances;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if($mode == 'settings'){
 			$this->getCalendarSettings($request);
@@ -78,7 +78,7 @@ class Calendar_Calendar_View extends Vtiger_Index_View {
 	/*
 	 * Function to get the calendar settings view
 	 */
-	public function getCalendarSettings(Vtiger_Request $request){
+	public function getCalendarSettings(\Http\Request $request){
 
 		$viewer = $this->getViewer($request);
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();

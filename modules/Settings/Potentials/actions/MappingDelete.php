@@ -10,13 +10,13 @@
 
 class Settings_Potentials_MappingDelete_Action extends Settings_Vtiger_Index_Action {
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('mappingId');
 		$qualifiedModuleName = $request->getModule(false);
 
@@ -30,7 +30,7 @@ class Settings_Potentials_MappingDelete_Action extends Settings_Vtiger_Index_Act
 		$response->emit();
 	}
 	
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

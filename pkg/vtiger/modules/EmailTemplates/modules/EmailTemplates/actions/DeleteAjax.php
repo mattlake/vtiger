@@ -10,7 +10,7 @@
 
 class EmailTemplates_DeleteAjax_Action extends Vtiger_Delete_Action {
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
@@ -23,7 +23,7 @@ class EmailTemplates_DeleteAjax_Action extends Vtiger_Delete_Action {
         return true;
     }
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 

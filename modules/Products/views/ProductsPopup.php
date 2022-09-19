@@ -10,7 +10,7 @@
 
 class Products_ProductsPopup_View extends Vtiger_Popup_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$qtyPerUnitField = $moduleModel->getField('qty_per_unit');
@@ -34,7 +34,7 @@ class Products_ProductsPopup_View extends Vtiger_Popup_View {
 		$viewer->view('ProductsPopup.tpl', $moduleName);
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -59,7 +59,7 @@ class Products_ProductsPopup_View extends Vtiger_Popup_View {
 		return $headerScriptInstances;
 	}
 
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		parent::initializeListViewContents($request, $viewer);
 		$sourceModule = $request->get('src_module');
 		if ($sourceModule && in_array($sourceModule, getInventoryModules())) {

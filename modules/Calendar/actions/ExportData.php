@@ -17,10 +17,10 @@ class Calendar_ExportData_Action extends Vtiger_ExportData_Action {
 
 	/**
 	 * Function that generates Export Query based on the mode
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <String> export query
 	 */
-	public function getExportQueryForIcal(Vtiger_Request $request) {
+	public function getExportQueryForIcal(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
@@ -29,10 +29,10 @@ class Calendar_ExportData_Action extends Vtiger_ExportData_Action {
 
 	/**
 	 * Function returns the export type - This can be extended to support different file exports
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <String>
 	 */
-	public function getExportContentType(Vtiger_Request $request) {
+	public function getExportContentType(\Http\Request $request) {
 		if ($request->get('type') == 'csv') {
 			return parent::getExportContentType($request);
 		}
@@ -41,9 +41,9 @@ class Calendar_ExportData_Action extends Vtiger_ExportData_Action {
 
 	/**
 	 * Function exports the data based on the mode
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function ExportData(Vtiger_Request $request) {
+	public function ExportData(\Http\Request $request) {
 		$this->moduleCall = true;
 		if ($request->get('type') == 'csv') {
 			parent::ExportData($request);
@@ -65,7 +65,7 @@ class Calendar_ExportData_Action extends Vtiger_ExportData_Action {
 
 	/**
 	 * Function that create the exported file
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @param <Array> $result
 	 * @param Vtiger_Module_Model $moduleModel
 	 */
@@ -155,7 +155,7 @@ class Calendar_ExportData_Action extends Vtiger_ExportData_Action {
 		echo $myiCal->serialize();
 	}
 
-	public function getExportQuery(Vtiger_Request $request) {
+	public function getExportQuery(\Http\Request $request) {
 		$query = parent::getExportQuery($request);
 
 		$queryComponents = preg_split('/ FROM /i', $query);

@@ -15,7 +15,7 @@ Class Settings_Groups_EditAjax_Action extends Settings_Vtiger_IndexAjax_View {
 		$this->exposeMethod('checkDuplicate');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -23,7 +23,7 @@ Class Settings_Groups_EditAjax_Action extends Settings_Vtiger_IndexAjax_View {
 		}
 	}
 
-	public function checkDuplicate(Vtiger_Request $request) {
+	public function checkDuplicate(\Http\Request $request) {
 		$groupName = $request->get('groupname');
 		$recordId = $request->get('record');
 		

@@ -10,7 +10,7 @@
 
 class ProjectTask_QuickEditAjax_View extends Vtiger_IndexAjax_View {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		if (!(Users_Privileges_Model::isPermitted($moduleName, 'EditView'))) {
@@ -18,7 +18,7 @@ class ProjectTask_QuickEditAjax_View extends Vtiger_IndexAjax_View {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$projectId = $request->get('parentid');
 		$recordId = $request->get('record');
@@ -69,7 +69,7 @@ class ProjectTask_QuickEditAjax_View extends Vtiger_IndexAjax_View {
 		$viewer->view('QuickEdit.tpl', $moduleName);
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.$moduleName.resources.Edit"

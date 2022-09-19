@@ -10,7 +10,7 @@
 
 class Calendar_MassDelete_Action extends Vtiger_MassDelete_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$adb = PearDatabase::getInstance();
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);

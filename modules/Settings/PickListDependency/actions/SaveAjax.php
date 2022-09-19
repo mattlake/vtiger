@@ -11,7 +11,7 @@
 
 class Settings_PickListDependency_SaveAjax_Action extends Settings_Vtiger_Index_Action {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $sourceModule = $request->get('sourceModule');
         $sourceField = $request->get('sourceField');
         $targetField = $request->get('targetField');
@@ -27,7 +27,7 @@ class Settings_PickListDependency_SaveAjax_Action extends Settings_Vtiger_Index_
         $response->emit();
     }
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

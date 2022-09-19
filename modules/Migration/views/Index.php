@@ -17,11 +17,11 @@ class Migration_Index_View extends Vtiger_View_Controller {
 		$this->exposeMethod('applyDBChanges');
 	}
 
-	public function checkPermission(Vtiger_Request $request){
+	public function checkPermission(\Http\Request $request){
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		// Override error reporting to production mode
 		version_compare(PHP_VERSION, '5.5.0') <= 0 ? error_reporting(E_WARNING & ~E_NOTICE & ~E_DEPRECATED) : error_reporting(E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 		// Migration could be heavy at-times.
@@ -33,7 +33,7 @@ class Migration_Index_View extends Vtiger_View_Controller {
 		}
 	}
 
-	protected function step1(Vtiger_Request $request) {
+	protected function step1(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 
@@ -41,7 +41,7 @@ class Migration_Index_View extends Vtiger_View_Controller {
 		$viewer->view('MigrationStep1.tpl', $moduleName);
 	}
 
-	protected function step2(Vtiger_Request $request){
+	protected function step2(\Http\Request $request){
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 
@@ -50,20 +50,20 @@ class Migration_Index_View extends Vtiger_View_Controller {
 	}
 
 
-	public function preProcess(Vtiger_Request $request, $display = true) {
+	public function preProcess(\Http\Request $request, $display = true) {
 		$viewer = $this->getViewer($request);
 		$selectedModule = $request->getModule();
 		$viewer->assign('MODULE', $selectedModule);
 		parent::preProcess($request, false);
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$viewer->view('MigrationPostProcess.tpl', $moduleName);
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = array();
 		$cssFileNames = array(
 			'~/layouts/vlayout/modules/Migration/css/style.css',
@@ -76,7 +76,7 @@ class Migration_Index_View extends Vtiger_View_Controller {
 		return $headerCssInstances;
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = array();
 		$moduleName = $request->getModule();
 

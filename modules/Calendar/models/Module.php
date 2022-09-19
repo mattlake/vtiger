@@ -557,7 +557,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	 *  Function to check duplicate activity view while adding
 	 * @return <boolean>
 	 */
-	public function checkDuplicateView(Vtiger_Request $request) {
+	public function checkDuplicateView(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userId = $currentUser->getId();
 		$viewmodule = $request->get('viewmodule');
@@ -582,7 +582,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	/**
 	 *  Function to delete calendar view
 	 */
-	public function deleteCalendarView(Vtiger_Request $request) {
+	public function deleteCalendarView(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userId = $currentUser->getId();
 		$viewmodule = $request->get('viewmodule');
@@ -614,7 +614,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	 *  Function to add calendar view
 	 * @return <string>
 	 */
-	public function addCalendarView(Vtiger_Request $request) {
+	public function addCalendarView(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userId = $currentUser->getId();
 		$viewmodule = $request->get('viewmodule');

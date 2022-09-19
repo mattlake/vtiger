@@ -13,10 +13,10 @@ class PriceBooks_Detail_View extends Vtiger_Detail_View {
 	
 	/**
 	 * Function returns related records
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showRelatedList(Vtiger_Request $request) {
+	function showRelatedList(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$relatedModuleName = $request->get('relatedModule');
 		$parentId = $request->get('record');

@@ -10,7 +10,7 @@
 
 class Settings_PickListDependency_List_View extends Settings_Vtiger_List_View {
 
-	public function preProcess(Vtiger_Request $request, $display = true) {
+	public function preProcess(\Http\Request $request, $display = true) {
 		$moduleModelList = Settings_PickListDependency_Module_Model::getPicklistSupportedModules();
 		$forModule = $request->get('formodule');
 		$viewer = $this->getViewer($request);
@@ -19,7 +19,7 @@ class Settings_PickListDependency_List_View extends Settings_Vtiger_List_View {
 		parent::preProcess($request, $display);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 	   if($request->isAjax()) {
 			$moduleModelList = Settings_PickListDependency_Module_Model::getPicklistSupportedModules();
 			$forModule = $request->get('formodule');
@@ -36,10 +36,10 @@ class Settings_PickListDependency_List_View extends Settings_Vtiger_List_View {
 
    /**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -54,7 +54,7 @@ class Settings_PickListDependency_List_View extends Settings_Vtiger_List_View {
 		return $headerScriptInstances;
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 
 		$cssFileNames = array(
@@ -70,7 +70,7 @@ class Settings_PickListDependency_List_View extends Settings_Vtiger_List_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		parent::initializeListViewContents($request, $viewer);
 		$viewer->assign('SHOW_LISTVIEW_CHECKBOX', false);
 		$viewer->assign('LISTVIEW_ACTIONS_ENABLED', true);

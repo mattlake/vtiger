@@ -58,38 +58,30 @@ require_once dirname(__FILE__) . '/Net/Socket.php';
  */
 require_once dirname(__FILE__) . '/Net/URL.php';
 
-/**#@+
+/**
  * Constants for HTTP request methods
  */
-define('HTTP_REQUEST_METHOD_GET',     'GET',     true);
-define('HTTP_REQUEST_METHOD_HEAD',    'HEAD',    true);
-define('HTTP_REQUEST_METHOD_POST',    'POST',    true);
-define('HTTP_REQUEST_METHOD_PUT',     'PUT',     true);
-define('HTTP_REQUEST_METHOD_DELETE',  'DELETE',  true);
-define('HTTP_REQUEST_METHOD_OPTIONS', 'OPTIONS', true);
-define('HTTP_REQUEST_METHOD_TRACE',   'TRACE',   true);
-/**#@-*/
+const HTTP_REQUEST_METHOD_GET = 'GET';
+const HTTP_REQUEST_METHOD_HEAD = 'HEAD';
+const HTTP_REQUEST_METHOD_POST = 'POST';
 
-/**#@+
+/**
  * Constants for HTTP request error codes
  */
-define('HTTP_REQUEST_ERROR_FILE',             1);
-define('HTTP_REQUEST_ERROR_URL',              2);
-define('HTTP_REQUEST_ERROR_PROXY',            4);
-define('HTTP_REQUEST_ERROR_REDIRECTS',        8);
-define('HTTP_REQUEST_ERROR_RESPONSE',        16);
-define('HTTP_REQUEST_ERROR_GZIP_METHOD',     32);
-define('HTTP_REQUEST_ERROR_GZIP_READ',       64);
-define('HTTP_REQUEST_ERROR_GZIP_DATA',      128);
-define('HTTP_REQUEST_ERROR_GZIP_CRC',       256);
-/**#@-*/
+const HTTP_REQUEST_ERROR_FILE = 1;
+const HTTP_REQUEST_ERROR_URL = 2;
+const HTTP_REQUEST_ERROR_PROXY = 4;
+const HTTP_REQUEST_ERROR_REDIRECTS = 8;
+const HTTP_REQUEST_ERROR_RESPONSE = 16;
+const HTTP_REQUEST_ERROR_GZIP_METHOD = 32;
+const HTTP_REQUEST_ERROR_GZIP_READ = 64;
+const HTTP_REQUEST_ERROR_GZIP_DATA = 128;
+const HTTP_REQUEST_ERROR_GZIP_CRC = 256;
 
-/**#@+
+/**
  * Constants for HTTP protocol versions
  */
-define('HTTP_REQUEST_HTTP_VER_1_0', '1.0', true);
-define('HTTP_REQUEST_HTTP_VER_1_1', '1.1', true);
-/**#@-*/
+const HTTP_REQUEST_HTTP_VER_1_1 = '1.1';
 
 if (extension_loaded('mbstring') && (2 & ini_get('mbstring.func_overload'))) {
    /**
@@ -798,7 +790,7 @@ class HTTP_Request
                 $this->_url = new Net_URL($redirect);
                 $this->addHeader('Host', $this->_generateHostHeader());
             // Absolute path
-            } elseif ($redirect{0} == '/') {
+            } elseif ($redirect[0] == '/') {
                 $this->_url->path = $redirect;
 
             // Relative path

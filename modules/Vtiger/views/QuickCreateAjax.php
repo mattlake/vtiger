@@ -10,14 +10,14 @@
 
 class Vtiger_QuickCreateAjax_View extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'CreateView');
 		return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$recordModel = Vtiger_Record_Model::getCleanInstance($moduleName);
@@ -61,7 +61,7 @@ class Vtiger_QuickCreateAjax_View extends Vtiger_IndexAjax_View {
 	}
 	
 	
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		
 		$moduleName = $request->getModule();
 		

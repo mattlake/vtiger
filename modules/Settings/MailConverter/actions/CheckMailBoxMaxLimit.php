@@ -10,7 +10,7 @@
 
 class Settings_MailConverter_CheckMailBoxMaxLimit_Action extends Settings_Vtiger_Index_Action {
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordsCount = Settings_MailConverter_Record_Model::getCount();
 		$qualifiedModuleName = $request->getModule(false);
 		$response = new Vtiger_Response();

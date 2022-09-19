@@ -10,17 +10,17 @@
 
 class Vtiger_FindDuplicates_View extends Vtiger_List_View {
 
-	function preProcess(Vtiger_Request $request, $display = true) {
+	function preProcess(\Http\Request $request, $display = true) {
 		$viewer = $this->getViewer ($request);
 		$this->initializeListViewContents($request, $viewer);
         parent::preProcess($request, $display);
 	}
 
-	public function preProcessTplName(Vtiger_Request $request) {
+	public function preProcessTplName(\Http\Request $request) {
 		return 'FindDuplicatePreProcess.tpl';
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -34,10 +34,10 @@ class Vtiger_FindDuplicates_View extends Vtiger_List_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -54,7 +54,7 @@ class Vtiger_FindDuplicates_View extends Vtiger_List_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$currentUser = vglobal('current_user');
 		$viewer = $this->getViewer ($request);
 		$module = $request->getModule();
@@ -123,9 +123,9 @@ class Vtiger_FindDuplicates_View extends Vtiger_List_View {
 
 	/**
 	 * Function returns the number of records for the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$duplicateSearchFields = $request->get('fields');
 		$dataModelInstance = Vtiger_FindDuplicate_Model::getInstance($moduleName);

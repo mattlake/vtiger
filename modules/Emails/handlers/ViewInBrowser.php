@@ -11,7 +11,7 @@ include_once 'modules/Users/Users.php';
 
 class Emails_ViewInBrowser_Handler {
 
-	function isRequestAuthorized(Vtiger_Request $request) {
+	function isRequestAuthorized(\Http\Request $request) {
 		$urlParameters = array();
 		$urlParameters['rid'] = $request->get('rid');
 		$urlParameters['applicationKey'] = vglobal('application_unique_key');
@@ -33,7 +33,7 @@ class Emails_ViewInBrowser_Handler {
 	 * @param type $data
 	 */
 	function viewInBrowser($data) {
-		$request = new Vtiger_Request(vtlib_purify($_REQUEST));
+		$request = new \Http\Request(vtlib_purify($_REQUEST));
 		$isRequestAuthorized = $this->isRequestAuthorized($request);
 		if ($isRequestAuthorized) {
 			$applicationKey = $request->get('applicationKey');

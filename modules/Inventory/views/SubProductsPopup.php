@@ -10,7 +10,7 @@
 
 class Inventory_SubProductsPopup_View extends Vtiger_Popup_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
@@ -26,7 +26,7 @@ class Inventory_SubProductsPopup_View extends Vtiger_Popup_View {
 		return 'Products';
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
 		$companyLogo = $companyDetails->getLogo();
@@ -41,7 +41,7 @@ class Inventory_SubProductsPopup_View extends Vtiger_Popup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		//src_module value is added to just to stop showing inactive products
 		$request->set('src_module', $request->getModule());
 
@@ -195,9 +195,9 @@ class Inventory_SubProductsPopup_View extends Vtiger_Popup_View {
 	}
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request){
+	function getListViewCount(\Http\Request $request){
 		$moduleName = $this->getModule($request);
 		$sourceModule = $request->get('src_module');
 		$sourceField = $request->get('src_field');
@@ -242,7 +242,7 @@ class Inventory_SubProductsPopup_View extends Vtiger_Popup_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request){
+	function getPageCount(\Http\Request $request){
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();

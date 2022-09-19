@@ -10,7 +10,7 @@
 
 class Settings_Webforms_Save_Action extends Settings_Vtiger_Index_Action {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 
 		$moduleModel = Vtiger_Module_Model::getInstance($request->getModule());
@@ -22,7 +22,7 @@ class Settings_Webforms_Save_Action extends Settings_Vtiger_Index_Action {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$qualifiedModuleName = $request->getModule(false);
 
@@ -58,7 +58,7 @@ class Settings_Webforms_Save_Action extends Settings_Vtiger_Index_Action {
 		header("Location: $returnUrl");
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

@@ -10,7 +10,7 @@
 
 class Settings_Profiles_Delete_Action extends Settings_Vtiger_Basic_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
 		$recordId = $request->get('record');
@@ -30,7 +30,7 @@ class Settings_Profiles_Delete_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

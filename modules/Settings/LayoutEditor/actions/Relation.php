@@ -11,7 +11,7 @@
 
 class Settings_LayoutEditor_Relation_Action extends Settings_Vtiger_Index_Action {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $relationInfo = $request->get('related_info');
         $updatedRelatedList = $relationInfo['updated'];
         $deletedRelatedList = $relationInfo['deleted'];
@@ -49,7 +49,7 @@ class Settings_LayoutEditor_Relation_Action extends Settings_Vtiger_Index_Action
         $response->emit();
     }
     
-    public function validateRequest(Vtiger_Request $request) { 
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess(); 
     } 
 }

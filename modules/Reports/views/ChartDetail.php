@@ -10,13 +10,13 @@
 
 class Reports_ChartDetail_View extends Vtiger_Index_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$record = $request->get('record');
 		$reportModel = Reports_Record_Model::getCleanInstance($record);
@@ -35,7 +35,7 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		return true;
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
@@ -116,7 +116,7 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		$viewer->view('ChartReportHeader.tpl', $moduleName);
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -125,7 +125,7 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		echo $this->getReport($request);
 	}
 
-	function getReport(Vtiger_Request $request) {
+	function getReport(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -175,10 +175,10 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -215,10 +215,10 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Css models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_CssScript_Model instances
 	 */
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$parentHeaderCssScriptInstances = parent::getHeaderCss($request);
 
 		$headerCss = array(

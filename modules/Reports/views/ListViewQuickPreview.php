@@ -10,7 +10,7 @@
 
 class Reports_ListViewQuickPreview_View extends Vtiger_ListViewQuickPreview_View {
 
-    public function checkPermission(Vtiger_Request $request) {
+    public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Reports_Module_Model::getInstance($moduleName);
 
@@ -35,7 +35,7 @@ class Reports_ListViewQuickPreview_View extends Vtiger_ListViewQuickPreview_View
         }
 	}
     
-    function process(Vtiger_Request $request) {
+    function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$record = $request->get('record');

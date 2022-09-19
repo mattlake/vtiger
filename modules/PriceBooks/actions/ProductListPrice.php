@@ -10,14 +10,14 @@
 
 class PriceBooks_ProductListPrice_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		
 		return $permissions;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleModel = $request->getModule();
 		$priceBookModel = Vtiger_Record_Model::getInstanceById($recordId, $moduleModel);

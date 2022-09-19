@@ -15,7 +15,7 @@ class Products_Mass_Action extends Vtiger_Mass_Action {
 		$this->exposeMethod('isChildProduct');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -25,7 +25,7 @@ class Products_Mass_Action extends Vtiger_Mass_Action {
 		}
 	}
 
-	public function isChildProduct(Vtiger_Request $request) {
+	public function isChildProduct(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordIdsList = $this->getRecordsListFromRequest($request);
 

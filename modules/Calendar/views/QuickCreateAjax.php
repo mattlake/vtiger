@@ -10,7 +10,7 @@
 
 class Calendar_QuickCreateAjax_View extends Vtiger_QuickCreateAjax_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$record = $request->get('record');
 		//Need to check record permission as Calendar view is using QuickCreateAjax to show edit form
@@ -20,7 +20,7 @@ class Calendar_QuickCreateAjax_View extends Vtiger_QuickCreateAjax_View {
 		return $permissions;
 	}
 	
-	public function  process(Vtiger_Request $request) {
+	public function  process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$moduleList = array('Calendar','Events');

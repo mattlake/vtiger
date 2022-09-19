@@ -11,14 +11,14 @@
 class Accounts_TransferOwnership_Action extends Vtiger_Action_Controller {
 	var $transferRecordIds = Array();
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'EditView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$recordIds = $this->getRecordIds($request);
 		foreach ($recordIds as $key => $recordId) {
@@ -34,7 +34,7 @@ class Accounts_TransferOwnership_Action extends Vtiger_Action_Controller {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$module = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($module);
 		$transferOwnerId = $request->get('transferOwnerId');
@@ -51,7 +51,7 @@ class Accounts_TransferOwnership_Action extends Vtiger_Action_Controller {
 		$response->emit();
 	}
 	
-	public function getRecordIds(Vtiger_Request $request) {
+	public function getRecordIds(\Http\Request $request) {
 		$module = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($module);
 		$record = $request->get('record');
@@ -68,7 +68,7 @@ class Accounts_TransferOwnership_Action extends Vtiger_Action_Controller {
 		return $relatedModuleRecordIds;
 	}
 	
-	protected function getBaseModuleRecordIds(Vtiger_Request $request) {
+	protected function getBaseModuleRecordIds(\Http\Request $request) {
 		$cvId = $request->get('viewname');
 		$module = $request->getModule();
 		$selectedIds = $request->get('selected_ids');
@@ -120,7 +120,7 @@ class Accounts_TransferOwnership_Action extends Vtiger_Action_Controller {
         return array();
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

@@ -15,15 +15,15 @@ class Vtiger_IndexAjax_View extends Vtiger_Index_View {
 		$this->exposeMethod('showActiveRecords');
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -34,7 +34,7 @@ class Vtiger_IndexAjax_View extends Vtiger_Index_View {
 	/*
 	 * Function to show the recently modified or active records for the given module
 	 */
-	function showActiveRecords(Vtiger_Request $request) {
+	function showActiveRecords(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -47,7 +47,7 @@ class Vtiger_IndexAjax_View extends Vtiger_Index_View {
 		echo $viewer->view('RecordNamesList.tpl', $moduleName, true);
 	}
 
-	function getRecordsListFromRequest(Vtiger_Request $request) {
+	function getRecordsListFromRequest(\Http\Request $request) {
 		$cvId = $request->get('cvid');
 		$selectedIds = $request->get('selected_ids');
 		$excludedIds = $request->get('excluded_ids');

@@ -10,7 +10,7 @@
 
 class Calendar_Detail_View extends Vtiger_Detail_View {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 
@@ -26,7 +26,7 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 		return true;
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 
 		$recordId = $request->get('record');
@@ -112,10 +112,10 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function shows the entire detail for the record
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showModuleDetailView(Vtiger_Request $request) {
+	function showModuleDetailView(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 

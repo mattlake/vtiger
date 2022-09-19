@@ -10,7 +10,7 @@
 
 class Settings_Roles_Popup_View extends Vtiger_Footer_View {
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
         parent::checkPermission($request);
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUser->isAdminUser()) {
@@ -19,7 +19,7 @@ class Settings_Roles_Popup_View extends Vtiger_Footer_View {
         return true;
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
@@ -45,10 +45,10 @@ class Settings_Roles_Popup_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

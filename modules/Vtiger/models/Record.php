@@ -737,7 +737,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 		}
 
 		//To get all the record ids for all the modules that are shown in related tab
-		$indirectrelatedModuleRecordIds = $moduleModel->getRelatedModuleRecordIds(new Vtiger_Request($commentEnabledModules), array($recordId), true);
+		$indirectrelatedModuleRecordIds = $moduleModel->getRelatedModuleRecordIds(new \Http\Request($commentEnabledModules), array($recordId), true);
 
 		return array_merge($relatedModuleRecordIds, $directrelatedModuleRecordIds, $indirectrelatedModuleRecordIds);
 	}

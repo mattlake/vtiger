@@ -8,7 +8,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Let's bootstrap the application
  */
-$app = Application::boot();
+//$app = Application::boot();
 
 /*+**********************************************************************************
  * The contents of this file are subject to the vtiger CRM Public License Version 1.1

@@ -15,13 +15,13 @@ class Reports_DetailAjax_Action extends Vtiger_BasicAjax_Action{
 		$this->exposeMethod('getRecordsCount');
 	}
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -31,10 +31,10 @@ class Reports_DetailAjax_Action extends Vtiger_BasicAjax_Action{
     
     /**
 	 * Function to get related Records count from this relation
-	 * @param <Vtiger_Request> $request
+	 * @param <\Http\Request> $request
 	 * @return <Number> Number of record from this relation
 	 */
-	public function getRecordsCount(Vtiger_Request $request) {
+	public function getRecordsCount(\Http\Request $request) {
 		$record = $request->get('record');
 		$reportModel = Reports_Record_Model::getInstanceById($record);
 		$reportModel->setModule('Reports');

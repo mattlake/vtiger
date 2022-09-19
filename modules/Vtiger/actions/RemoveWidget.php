@@ -10,7 +10,7 @@
 
 class Vtiger_RemoveWidget_Action extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
 			$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
@@ -21,7 +21,7 @@ class Vtiger_RemoveWidget_Action extends Vtiger_IndexAjax_View {
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$linkId = $request->get('linkid');
 		$response = new Vtiger_Response();
@@ -43,7 +43,7 @@ class Vtiger_RemoveWidget_Action extends Vtiger_IndexAjax_View {
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

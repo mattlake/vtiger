@@ -18,13 +18,13 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 		$this->exposeMethod('checkDuplicateView');
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
         $permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -34,10 +34,10 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 	
 	/**
 	 * Function to delete the user calendar from shared calendar
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Response $response
 	 */
-	function deleteUserCalendar(Vtiger_Request $request) {
+	function deleteUserCalendar(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userId = $currentUser->getId();
 		$sharedUserId = $request->get('userid');
@@ -62,10 +62,10 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 	
 	/**
 	 * Function to add other user calendar to shared calendar
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Response $response
 	 */
-	function addUserCalendar(Vtiger_Request $request) {
+	function addUserCalendar(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userId = $currentUser->getId();
 		$sharedUserId = $request->get('selectedUser');
@@ -88,10 +88,10 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 	
 	/**
 	 * Function to check duplication for calendar views while adding
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Response $response
 	 */
-	function checkDuplicateView(Vtiger_Request $request) {
+	function checkDuplicateView(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		if (Calendar_Module_Model::checkDuplicateView($request)) {
 			$result = array('success' => true, 'message' => vtranslate('LBL_DUPLICATE_VIEW_EXIST', $moduleName));
@@ -106,10 +106,10 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 	
 	/**
 	 * Function to delete the calendar view from My Calendar
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Response $response
 	 */
-	function deleteCalendarView(Vtiger_Request $request) {
+	function deleteCalendarView(\Http\Request $request) {
 		Calendar_Module_Model::deleteCalendarView($request);
 
 		$result = array('viewmodule' => $request->get('viewmodule'), 'viewfieldname' => $request->get('viewfieldname'), 'viewfieldlabel' => $request->get('viewfieldlabel'));
@@ -120,10 +120,10 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 	
 	/**
 	 * Function to add calendar views to My calendar
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Response $response
 	 */
-	function addCalendarView(Vtiger_Request $request) {
+	function addCalendarView(\Http\Request $request) {
 			$type = Calendar_Module_Model::addCalendarView($request);
 
 		$response = new Vtiger_Response();

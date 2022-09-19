@@ -68,7 +68,7 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 		return $this->modelInstance;
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		parent::preProcess($request, false);
 		$extensionStoreModuleModel = Settings_ExtensionStore_Module_Model::getInstance();
 		$viewer = $this->getViewer($request);
@@ -79,7 +79,7 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 		$this->preProcessDisplay($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$modelInstance = $this->getModelInstance();
 		$mode = $request->getMode();
 		if (!empty($mode)) {
@@ -115,10 +115,10 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -133,7 +133,7 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 		return $headerScriptInstances;
 	}
 
-	protected function searchExtension(Vtiger_Request $request) {
+	protected function searchExtension(\Http\Request $request) {
 		$searchTerm = $request->get('searchTerm');
 		$searchType = $request->get('type');
 		$viewer = $this->getViewer($request);
@@ -148,7 +148,7 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 		$viewer->view('ExtensionModules.tpl', $qualifiedModuleName);
 	}
 
-	protected function detail(Vtiger_Request $request) {
+	protected function detail(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$extensionId = $request->get('extensionId');
@@ -193,7 +193,7 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 		}
 	}
 
-	protected function installationLog(Vtiger_Request $request) {
+	protected function installationLog(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		global $Vtiger_Utils_Log;
 		$viewer->assign('VTIGER_UTILS_LOG', $Vtiger_Utils_Log);
@@ -265,7 +265,7 @@ class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_
 		$viewer->view('InstallationLog.tpl', $qualifiedModuleName);
 	}
 
-	protected function oneClickInstall(Vtiger_Request $request) {
+	protected function oneClickInstall(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		global $Vtiger_Utils_Log;
 		$viewer->assign('VTIGER_UTILS_LOG', $Vtiger_Utils_Log);

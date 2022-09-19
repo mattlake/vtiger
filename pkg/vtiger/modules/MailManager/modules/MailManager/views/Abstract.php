@@ -16,11 +16,11 @@ vimport('modules/Settings/MailConverter/handlers/MailRecord.php');
 
 abstract class MailManager_Abstract_View extends Vtiger_Index_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    public function preProcess (Vtiger_Request $request, $display = true) {
+    public function preProcess (\Http\Request $request, $display = true) {
 		if ($this->getOperationArg($request) === 'attachment_dld') {
 			return true;
 		} else {
@@ -28,7 +28,7 @@ abstract class MailManager_Abstract_View extends Vtiger_Index_View {
 		}
 	}
 
-	public function postProcess(Vtiger_Request $request) {
+	public function postProcess(\Http\Request $request) {
 		if ($this->getOperationArg($request) === 'attachment_dld') {
 			return true;
 		} else {
@@ -41,7 +41,7 @@ abstract class MailManager_Abstract_View extends Vtiger_Index_View {
 	 * @global String $currentModule
 	 * @return MailManager_Viewer
 	 */
-	public function getViewer(Vtiger_Request $request) {
+	public function getViewer(\Http\Request $request) {
 		$viewer = parent::getViewer($request);
 		$viewer->assign('MAILBOX', $this->getMailboxModel());
 		$viewer->assign('QUALIFIED_MODULE', $request->get('module'));
@@ -50,10 +50,10 @@ abstract class MailManager_Abstract_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to extract operation argument from request.
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return type
 	 */
-	public function getOperationArg(Vtiger_Request $request) {
+	public function getOperationArg(\Http\Request $request) {
 		return $request->get('_operationarg');
 	}
 

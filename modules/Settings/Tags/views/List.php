@@ -11,7 +11,7 @@
 
 class Settings_Tags_List_View extends Settings_Vtiger_List_View {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$layout = Vtiger_Viewer::getDefaultLayoutName();
 		if ($layout == 'vlayout') {
 			throw new AppException(vtranslate('LBL_NOT_ACCESSIBLE'));
@@ -19,17 +19,17 @@ class Settings_Tags_List_View extends Settings_Vtiger_List_View {
 		return true;
 	}
 
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		parent::initializeListViewContents($request, $viewer);
 		$viewer->assign('SHOW_LISTVIEW_CHECKBOX', false);
 	}
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
@@ -42,7 +42,7 @@ class Settings_Tags_List_View extends Settings_Vtiger_List_View {
 		return $headerScriptInstances;
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 
 		$cssFileNames = array(

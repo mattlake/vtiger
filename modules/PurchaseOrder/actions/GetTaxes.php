@@ -10,7 +10,7 @@
 
 class PurchaseOrder_GetTaxes_Action extends Inventory_GetTaxes_Action {
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$decimalPlace = getCurrencyDecimalPlaces();
 		$currencyId = $request->get('currency_id');
 		$currencies = Inventory_Module_Model::getAllCurrencies();

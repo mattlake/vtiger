@@ -17,13 +17,13 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		$this->exposeMethod('step3');
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$recordModel = Reports_Record_Model::getInstanceById($request->get('record'));
 		if(!$recordModel->isEditableBySharing()) {
@@ -32,7 +32,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		return true;
 	}
 
-	public function preProcess(Vtiger_Request $request) {
+	public function preProcess(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$record = $request->get('record');
 		$moduleName = $request->getModule();
@@ -64,7 +64,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		parent::preProcess($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -73,7 +73,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		$this->step1($request);
 	}
 
-	function step1(Vtiger_Request $request) {
+	function step1(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
@@ -136,7 +136,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		$viewer->view('Step1.tpl', $moduleName);
 	}
 
-	function step2(Vtiger_request $request) {
+	function step2(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
@@ -228,7 +228,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		$viewer->view('step2.tpl', $moduleName);
 	}
 
-	function step3(Vtiger_Request $request) {
+	function step3(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
@@ -333,10 +333,10 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -352,7 +352,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		return $headerScriptInstances;
 	}
 
-	function getHeaderCss(Vtiger_Request $request) {
+	function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$moduleName = $request->getModule();
 		$cssFileNames = array(

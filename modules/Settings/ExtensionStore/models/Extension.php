@@ -386,7 +386,7 @@ class Settings_ExtensionStore_Extension_Model extends Vtiger_Base_Model {
 	/**
 	 * Function to Logout from extension store
 	 */
-	public function logoutMarketPlace(Vtiger_Request $request) {
+	public function logoutMarketPlace(\Http\Request $request) {
 		$sql = 'DELETE FROM vtiger_extnstore_users';
 		$db = PearDatabase::getInstance();
 		$db->pquery($sql, array());

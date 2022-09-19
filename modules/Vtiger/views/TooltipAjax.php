@@ -10,15 +10,15 @@
 
 class Vtiger_TooltipAjax_View extends Vtiger_PopupAjax_View {
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		
@@ -26,7 +26,7 @@ class Vtiger_TooltipAjax_View extends Vtiger_PopupAjax_View {
 		echo $viewer->view('TooltipContents.tpl', $moduleName, true);
 	}
 	
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $this->getModule($request);
 		$recordId = $request->get('record');
 

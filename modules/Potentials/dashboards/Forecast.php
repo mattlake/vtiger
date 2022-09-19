@@ -12,10 +12,10 @@ class Potentials_Forecast_Dashboard extends Vtiger_IndexAjax_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 
 		$jsFileNames = array(
 			'~/libraries/jquery/jqplot/plugins/jqplot.cursor.min.js',
@@ -29,7 +29,7 @@ class Potentials_Forecast_Dashboard extends Vtiger_IndexAjax_View {
 		return $headerScriptInstances;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

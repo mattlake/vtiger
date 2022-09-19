@@ -10,7 +10,7 @@
 
 class Settings_Roles_Delete_Action extends Settings_Vtiger_Basic_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
 		$recordId = $request->get('record');
@@ -27,7 +27,7 @@ class Settings_Roles_Delete_Action extends Settings_Vtiger_Basic_Action {
 		header("Location: $redirectUrl");
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

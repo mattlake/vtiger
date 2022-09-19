@@ -14,7 +14,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		parent::__construct();
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$record = $request->get('record');
 		$actionName = 'CreateView';
@@ -25,7 +25,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 
@@ -55,7 +55,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		$viewer->assign('MODULE_SETTING_ACTIONS', $settingLinks);
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) { 
+	function preProcess(\Http\Request $request, $display=true) {
 		//Vtiger7 - TO show custom view name in Module Header
 		$viewer = $this->getViewer ($request); 
 		$moduleName = $request->getModule(); 
@@ -78,7 +78,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		parent::preProcess($request, $display); 
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
@@ -174,7 +174,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		}
 	}
 
-	public function getOverlayHeaderScripts(Vtiger_Request $request) {
+	public function getOverlayHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.$moduleName.resources.Edit",

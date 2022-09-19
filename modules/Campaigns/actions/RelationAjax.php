@@ -16,7 +16,7 @@ class Campaigns_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		$this->exposeMethod('updateStatus');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {
@@ -35,15 +35,15 @@ class Campaigns_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 	
 	/**
 	 * Function to add relations using related module viewid
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function addRelationsFromRelatedModuleViewId(Vtiger_Request $request) {
+	public function addRelationsFromRelatedModuleViewId(\Http\Request $request) {
 		$sourceRecordId = $request->get('sourceRecord');
 		$relatedModuleName = $request->get('relatedModule');
 
@@ -86,9 +86,9 @@ class Campaigns_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 
 	/**
 	 * Function to update Relation status
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function updateStatus(Vtiger_Request $request) {
+	public function updateStatus(\Http\Request $request) {
 		$relatedModuleName = $request->get('relatedModule');
 		$relatedRecordId = $request->get('relatedRecord');
 		$status = $request->get('status');

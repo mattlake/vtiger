@@ -10,11 +10,11 @@
 
 Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
@@ -31,12 +31,12 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 		}
 	}
 
-	function preProcessTplName(Vtiger_Request $request) {
+	function preProcessTplName(\Http\Request $request) {
 		return 'UserEditViewPreProcess.tpl';
 	}
 
 
-	public function preProcess (Vtiger_Request $request, $display=true) {
+	public function preProcess (\Http\Request $request, $display=true) {
 		if($this->checkPermission($request)) {
 			$currentUser = Users_Record_Model::getCurrentUserModel();
 			$viewer = $this->getViewer($request);
@@ -128,12 +128,12 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 		}
 	}
 
-	protected function preProcessDisplay(Vtiger_Request $request) {
+	protected function preProcessDisplay(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 
@@ -158,7 +158,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 		parent::process($request);
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 		$moduleDetailFile = 'modules.'.$moduleName.'.resources.PreferenceEdit';

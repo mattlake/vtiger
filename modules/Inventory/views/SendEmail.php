@@ -13,9 +13,9 @@ class Inventory_SendEmail_View extends Vtiger_ComposeEmail_View {
 	/**
 	 * Function which will construct the compose email
 	 * This will handle the case of attaching the invoice pdf as attachment
-	 * @param Vtiger_Request $request 
+	 * @param \Http\Request $request
 	 */
-	public function composeMailData(Vtiger_Request $request) {
+	public function composeMailData(\Http\Request $request) {
 		parent::composeMailData($request);
 		$viewer = $this->getViewer($request);
 		$inventoryRecordId = $request->get('record');

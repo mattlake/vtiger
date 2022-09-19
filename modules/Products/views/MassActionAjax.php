@@ -10,7 +10,7 @@
 
 class Products_MassActionAjax_View extends Vtiger_MassActionAjax_View {
 
-	public function initMassEditViewContents(Vtiger_Request $request) {
+	public function initMassEditViewContents(\Http\Request $request) {
 		parent::initMassEditViewContents($request);
 
 		$viewer = $this->getViewer($request);

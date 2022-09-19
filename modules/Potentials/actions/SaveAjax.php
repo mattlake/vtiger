@@ -10,7 +10,7 @@
 
 class Potentials_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		//Restrict to store indirect relationship from Potentials to Contacts
 		$sourceModule = $request->get('sourceModule');
 		$relationOperation = $request->get('relationOperation');

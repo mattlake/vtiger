@@ -10,7 +10,7 @@
 
 class HelpDesk_ConvertFAQ_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'CreateView');
@@ -18,7 +18,7 @@ class HelpDesk_ConvertFAQ_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 
@@ -55,7 +55,7 @@ class HelpDesk_ConvertFAQ_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

@@ -14,7 +14,7 @@ class Vtiger_NoteBook_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('NoteBookCreate');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
@@ -26,7 +26,7 @@ class Vtiger_NoteBook_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 
 		if($mode){
@@ -34,7 +34,7 @@ class Vtiger_NoteBook_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	function NoteBookCreate(Vtiger_Request $request){
+	function NoteBookCreate(\Http\Request $request){
 		$adb = PearDatabase::getInstance();
 
 		$moduleName = $request->getModule();
@@ -75,7 +75,7 @@ class Vtiger_NoteBook_Action extends Vtiger_Action_Controller {
 
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

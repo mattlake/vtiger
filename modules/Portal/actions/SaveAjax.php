@@ -10,12 +10,12 @@
 
 class Portal_SaveAjax_Action extends Vtiger_SaveAjax_Action {
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
         $module = $request->getModule();
         $recordId = $request->get('record');
         $bookmarkName = $request->get('bookmarkName');

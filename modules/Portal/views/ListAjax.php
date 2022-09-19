@@ -17,15 +17,15 @@ class Portal_ListAjax_View extends Vtiger_List_View {
 		$this->exposeMethod('getListViewCount');
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -33,13 +33,13 @@ class Portal_ListAjax_View extends Vtiger_List_View {
 		}
 	}
 
-	public function getListViewCount(\Vtiger_Request $request) {
+	public function getListViewCount(\Http\Request $request) {
 		$listViewModel = new Portal_ListView_Model();
 		$countResult = $listViewModel->getRecordCount();
 		return $countResult;
 	}
 
-	public function getRecordCount(Vtiger_Request $request) {
+	public function getRecordCount(\Http\Request $request) {
 
 		$countResult = $this->getListViewCount($request);
 		$result['count'] = $countResult;
@@ -53,7 +53,7 @@ class Portal_ListAjax_View extends Vtiger_List_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request) {
+	function getPageCount(\Http\Request $request) {
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();

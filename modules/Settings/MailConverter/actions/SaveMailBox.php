@@ -10,7 +10,7 @@
 
 class Settings_MailConverter_SaveMailBox_Action extends Settings_Vtiger_Index_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$qualifiedModuleName = $request->getModule(false);
 
@@ -40,7 +40,7 @@ class Settings_MailConverter_SaveMailBox_Action extends Settings_Vtiger_Index_Ac
 		$response->emit();
 	}
         
-        public function validateRequest(Vtiger_Request $request) { 
+        public function validateRequest(\Http\Request $request) {
             $request->validateWriteAccess(); 
         }
 }

@@ -10,7 +10,7 @@
 
 class PriceBooks_ProductPriceBookPopup_View extends Vtiger_Popup_View {
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 		$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
@@ -27,10 +27,10 @@ class PriceBooks_ProductPriceBookPopup_View extends Vtiger_Popup_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->get('src_module');
 		$jsFileNames = array(
@@ -49,7 +49,7 @@ class PriceBooks_ProductPriceBookPopup_View extends Vtiger_Popup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('cvid');
 		$pageNumber = $request->get('page');

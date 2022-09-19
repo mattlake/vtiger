@@ -10,7 +10,7 @@
 
 class Services_QuickCreateAjax_View extends Products_QuickCreateAjax_View {
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$moduleName = $request->getModule();

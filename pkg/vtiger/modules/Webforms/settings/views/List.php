@@ -10,13 +10,13 @@
 
 class Settings_Webforms_List_View extends Settings_Vtiger_List_View {
 	
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		$viewer = $this->getViewer($request);
 		$viewer->assign('DESCRIPTION', 'LBL_ALLOWS_YOU_TO_MANAGE_WEBFORMS');
 		parent::preProcess($request, false);
 	}
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 
 		$moduleModel = Vtiger_Module_Model::getInstance($request->getModule());
@@ -30,10 +30,10 @@ class Settings_Webforms_List_View extends Settings_Vtiger_List_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -51,7 +51,7 @@ class Settings_Webforms_List_View extends Settings_Vtiger_List_View {
 		return $headerScriptInstances;
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 
 		$cssFileNames = array(

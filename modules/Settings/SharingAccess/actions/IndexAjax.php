@@ -16,7 +16,7 @@ Class Settings_SharingAccess_IndexAjax_Action extends Settings_Vtiger_IndexAjax_
 		$this->exposeMethod('deleteRule');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -24,7 +24,7 @@ Class Settings_SharingAccess_IndexAjax_Action extends Settings_Vtiger_IndexAjax_
 		}
 	}
 
-	public function saveRule(Vtiger_Request $request) {
+	public function saveRule(\Http\Request $request) {
 		$forModule = $request->get('for_module');
 		$ruleId = $request->get('record');
 
@@ -50,7 +50,7 @@ Class Settings_SharingAccess_IndexAjax_Action extends Settings_Vtiger_IndexAjax_
 		$response->emit();
 	}
 
-	public function deleteRule(Vtiger_Request $request) {
+	public function deleteRule(\Http\Request $request) {
 		$forModule = $request->get('for_module');
 		$ruleId = $request->get('record');
 
@@ -67,7 +67,7 @@ Class Settings_SharingAccess_IndexAjax_Action extends Settings_Vtiger_IndexAjax_
 		$response->emit();
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

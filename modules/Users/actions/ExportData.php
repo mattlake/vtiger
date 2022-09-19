@@ -10,11 +10,11 @@
 
 class Users_ExportData_Action extends Vtiger_ExportData_Action {
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    public function checkPermission(Vtiger_Request $request){
+    public function checkPermission(\Http\Request $request){
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUserModel->isAdminUser()) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
@@ -39,9 +39,9 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 
 	/**
 	 * Function exports the data based on the mode
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function ExportData(Vtiger_Request $request) {
+	function ExportData(\Http\Request $request) {
 		$this->moduleCall = true;
 		$db = PearDatabase::getInstance();
 		$moduleName = $request->get('source_module');
@@ -67,10 +67,10 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 
 	/**
 	 * Function that generates Export Query based on the mode
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <String> export query
 	 */
-	function getExportQuery(Vtiger_Request $request) {
+	function getExportQuery(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$cvId = $request->get('viewname');
 		$moduleName = $request->get('source_module');
@@ -85,7 +85,7 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 		return $queryGenerator->getQuery();
 	}
 	
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
         $request->validateReadAccess();
     }
 }

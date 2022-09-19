@@ -23,7 +23,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$this->exposeMethod('deleteCharge');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -32,7 +32,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$this->saveTax($request);
 	}
 
-	public function saveTax(Vtiger_Request $request) {
+	public function saveTax(\Http\Request $request) {
 		$taxId = $request->get('taxid');
 		$type = $request->get('type');
 		if (empty($taxId)) {
@@ -101,7 +101,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function updateTaxStatus(Vtiger_Request $request) {
+	public function updateTaxStatus(\Http\Request $request) {
 		$taxId = $request->get('taxid');
 		$type = $request->get('type');
 
@@ -120,7 +120,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function saveTaxRegion(Vtiger_Request $request) {
+	public function saveTaxRegion(\Http\Request $request) {
 		$taxRegionId = $request->get('taxRegionId');
 		$taxRegionModel = Inventory_TaxRegion_Model::getRegionModel($taxRegionId);
 		$taxRegionModel->set('name', html_entity_decode($request->get('name')));
@@ -140,7 +140,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function deleteTaxRegion(Vtiger_Request $request) {
+	public function deleteTaxRegion(\Http\Request $request) {
 		$taxRegionId = $request->get('taxRegionId');
 		$response = new Vtiger_Response();
 		if ($taxRegionId) {
@@ -156,7 +156,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function saveCharge(Vtiger_Request $request) {
+	public function saveCharge(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$chargeId = $request->get('chargeid');
 		if (empty($chargeId)) {
@@ -236,7 +236,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function deleteCharge(Vtiger_Request $request) {
+	public function deleteCharge(\Http\Request $request) {
 		$chargeId = $request->get('chargeId');
 		$response = new Vtiger_Response();
 		if ($chargeId) {
@@ -252,7 +252,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function checkDuplicateTaxName(Vtiger_Request $request) {
+	public function checkDuplicateTaxName(\Http\Request $request) {
 		$exists = Inventory_TaxRecord_Model::checkDuplicate(trim($request->get('taxlabel')), $request->get('taxid'), $request->get('type'));
 		if (!$exists) {
 			$result = array('success' => false);
@@ -265,7 +265,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function checkDuplicateInventoryCharge(Vtiger_Request $request) {
+	public function checkDuplicateInventoryCharge(\Http\Request $request) {
 		$exists = Inventory_Charges_Model::checkDuplicateInventoryCharge(trim($request->get('name')), $request->get('chargeid'));
 		if (!$exists) {
 			$result = array('success' => false);
@@ -278,7 +278,7 @@ class Settings_Vtiger_TaxAjax_Action extends Settings_Vtiger_Basic_Action {
 		$response->emit();
 	}
 
-	public function checkDuplicateTaxRegion(Vtiger_Request $request) {
+	public function checkDuplicateTaxRegion(\Http\Request $request) {
 		$exists = Inventory_TaxRegion_Model::checkDuplicateTaxRegion(trim($request->get('taxRegionName')), $request->get('taxRegionId'));
 		if (!$exists) {
 			$result = array('success' => false);

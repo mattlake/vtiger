@@ -10,15 +10,15 @@
 
 class Users_UserSetup_View extends Vtiger_Index_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-    public function preProcess(Vtiger_Request $request, $display=true) {
+    public function preProcess(\Http\Request $request, $display=true) {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$userName = $request->get('user_name');
 		$viewer = $this->getViewer($request);
@@ -57,7 +57,7 @@ class Users_UserSetup_View extends Vtiger_Index_View {
 		}
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 

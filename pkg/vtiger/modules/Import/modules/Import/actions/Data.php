@@ -61,7 +61,7 @@ class Import_Data_Action extends Vtiger_Action_Controller {
 		$this->paging = $importInfo['paging'];
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		return;
 	}
 

@@ -16,22 +16,22 @@ class Vtiger_BasicAjax_View extends Vtiger_Basic_View {
 		$this->exposeMethod('showSearchResults');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		
 		return $permissions;
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -41,9 +41,9 @@ class Vtiger_BasicAjax_View extends Vtiger_Basic_View {
 
 	/**
 	 * Function to display the UI for advance search on any of the module
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function showAdvancedSearch(Vtiger_Request $request) {
+	function showAdvancedSearch(\Http\Request $request) {
 		//Modules for which search is excluded
 		$excludedModuleForSearch = array('Vtiger', 'Reports');
 
@@ -102,9 +102,9 @@ class Vtiger_BasicAjax_View extends Vtiger_Basic_View {
 
 	/**
 	 * Function to display the Search Results
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function showSearchResults(Vtiger_Request $request) {
+	function showSearchResults(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 
 		$viewer = $this->getViewer($request);

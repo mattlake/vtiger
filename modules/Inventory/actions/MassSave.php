@@ -10,7 +10,7 @@
 
 class Inventory_MassSave_Action extends Vtiger_MassSave_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			vglobal('VTIGER_TIMESTAMP_NO_CHANGE_MODE', $request->get('_timeStampNoChangeMode',false));

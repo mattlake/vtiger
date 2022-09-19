@@ -17,7 +17,7 @@ class RecycleBin_RecycleBinAjax_Action extends Vtiger_Mass_Action {
 		$this->exposeMethod('deleteRecords');
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
         if($request->get('mode') == 'emptyRecycleBin') {
             //Only admin user can empty the recycle bin, so this check is mandatory
             $currentUserModel = Users_Record_Model::getCurrentUserModel();
@@ -35,15 +35,15 @@ class RecycleBin_RecycleBinAjax_Action extends Vtiger_Mass_Action {
 		}
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		
 		if(!empty($mode)) {
@@ -57,7 +57,7 @@ class RecycleBin_RecycleBinAjax_Action extends Vtiger_Mass_Action {
 	 * @param type $sourceModule
 	 * @param type $recordIds
 	 */
-	public function restoreRecords(Vtiger_Request $request){
+	public function restoreRecords(\Http\Request $request){
 		$sourceModule = $request->get('sourceModule');
 		$recordIds = $this->getRecordsListFromRequest($request);
 		$recycleBinModule = new RecycleBin_Module_Model();
@@ -83,7 +83,7 @@ class RecycleBin_RecycleBinAjax_Action extends Vtiger_Mass_Action {
 	/**
 	 * Function to delete the records permanently in vitger CRM database
 	 */
-	public function emptyRecycleBin(Vtiger_Request $request){
+	public function emptyRecycleBin(\Http\Request $request){
 		$recycleBinModule = new RecycleBin_Module_Model();
 		
 		$status = $recycleBinModule->emptyRecycleBin();
@@ -99,7 +99,7 @@ class RecycleBin_RecycleBinAjax_Action extends Vtiger_Mass_Action {
 	 * Function to deleted the records permanently in CRM
 	 * @param type $reocrdIds
 	 */
-	public function deleteRecords(Vtiger_Request $request){
+	public function deleteRecords(\Http\Request $request){
 		$recordIds = $this->getRecordsListFromRequest($request);
 		$recycleBinModule = new RecycleBin_Module_Model();
  

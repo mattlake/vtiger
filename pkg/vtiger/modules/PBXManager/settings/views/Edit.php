@@ -14,11 +14,11 @@ Class Settings_PBXManager_Edit_View extends Vtiger_Edit_View {
         $this->exposeMethod('showPopup');
     }
 
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
             $this->showPopup($request);
     }
     
-    public function showPopup(Vtiger_Request $request) {
+    public function showPopup(\Http\Request $request) {
         $id = $request->get('id');
         $qualifiedModuleName = $request->getModule(false);
         $viewer = $this->getViewer($request);

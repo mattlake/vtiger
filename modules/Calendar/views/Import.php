@@ -26,9 +26,9 @@ class Calendar_Import_View extends Vtiger_Import_View {
 
 	/**
 	 * Function to show result of import
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function importResult(Vtiger_Request $request) {
+	public function importResult(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$userId = $currentUserModel->getId();
 		$moduleName = $request->getModule();
@@ -145,9 +145,9 @@ class Calendar_Import_View extends Vtiger_Import_View {
 
 	/**
 	 * Function to show result of undo import
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function undoIcalImport(Vtiger_Request $request) {
+	public function undoIcalImport(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$moduleName = $request->getModule();
 

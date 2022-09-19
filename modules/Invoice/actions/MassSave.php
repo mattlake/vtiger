@@ -10,7 +10,7 @@
 
 class Invoice_MassSave_Action extends Inventory_MassSave_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			vglobal('VTIGER_TIMESTAMP_NO_CHANGE_MODE', $request->get('_timeStampNoChangeMode',false));
@@ -36,10 +36,10 @@ class Invoice_MassSave_Action extends Inventory_MassSave_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	public function getRecordModelsFromRequest(Vtiger_Request $request) {
+	public function getRecordModelsFromRequest(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 

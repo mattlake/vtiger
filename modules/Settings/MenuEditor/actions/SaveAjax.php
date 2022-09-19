@@ -17,7 +17,7 @@ Class Settings_MenuEditor_SaveAjax_Action extends Settings_Vtiger_IndexAjax_View
 		$this->exposeMethod('saveSequence');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -25,7 +25,7 @@ Class Settings_MenuEditor_SaveAjax_Action extends Settings_Vtiger_IndexAjax_View
 		}
 	}
 
-	function removeModule(Vtiger_Request $request) {
+	function removeModule(\Http\Request $request) {
 		$sourceModule = $request->get('sourceModule');
 		$appName = $request->get('appname');
 		$db = PearDatabase::getInstance();
@@ -36,7 +36,7 @@ Class Settings_MenuEditor_SaveAjax_Action extends Settings_Vtiger_IndexAjax_View
 		$response->emit();
 	}
 
-	function addModule(Vtiger_Request $request) {
+	function addModule(\Http\Request $request) {
 		$sourceModules = array($request->get('sourceModule'));
 		if ($request->has('sourceModules')) {
 			$sourceModules = $request->get('sourceModules');
@@ -52,7 +52,7 @@ Class Settings_MenuEditor_SaveAjax_Action extends Settings_Vtiger_IndexAjax_View
 		$response->emit();
 	}
 
-	function saveSequence(Vtiger_Request $request) {
+	function saveSequence(\Http\Request $request) {
 		$moduleSequence = $request->get('sequence');
 		$appName = $request->get('appname');
 		$db = PearDatabase::getInstance();

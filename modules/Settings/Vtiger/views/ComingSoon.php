@@ -9,11 +9,11 @@
  ************************************************************************************/
 
 class Settings_Vtiger_ComingSoon_View extends Settings_Vtiger_Index_View {
-    protected function preProcessTplName(Vtiger_Request $request) {
+    protected function preProcessTplName(\Http\Request $request) {
         return 'ComingSoon.tpl';
 	}
 
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         
     }
 }

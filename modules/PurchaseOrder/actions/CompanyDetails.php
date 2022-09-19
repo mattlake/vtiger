@@ -16,7 +16,7 @@ class PurchaseOrder_CompanyDetails_Action extends Vtiger_Action_Controller {
         $this->exposeMethod('getAddressDetails');
     }
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {
@@ -34,7 +34,7 @@ class PurchaseOrder_CompanyDetails_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
      
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);

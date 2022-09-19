@@ -10,7 +10,7 @@
 
 class ProjectTask_SaveTask_Action extends Vtiger_Save_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		try {
 			$recordModel = $this->saveRecord($request);
@@ -25,7 +25,7 @@ class ProjectTask_SaveTask_Action extends Vtiger_Save_Action {
 
 	/**
 	 * Function to save record
-	 * @param <Vtiger_Request> $request - values of the record
+	 * @param <\Http\Request> $request - values of the record
 	 * @return <RecordModel> - record Model of saved record
 	 */
 	public function saveRecord($request) {

@@ -12,7 +12,7 @@ class Users_ForgotPassword_Handler {
 
 	public function changePassword($data){
 		global $site_URL;
-        $request = new Vtiger_Request($data);
+        $request = new \Http\Request($data);
         $viewer = Vtiger_Viewer::getInstance();
 		$companyModel = Vtiger_CompanyDetails_Model::getInstanceById();
         $companyName = $companyModel->get('organizationname');

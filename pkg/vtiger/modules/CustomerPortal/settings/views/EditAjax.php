@@ -10,7 +10,7 @@
 
 class Settings_CustomerPortal_EditAjax_View extends Settings_Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$sourceModule = $request->get('targetModule');
 		$viewer = $this->getViewer($request);
 		$qualifiedName = $request->getModule(false);

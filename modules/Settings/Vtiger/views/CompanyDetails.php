@@ -10,7 +10,7 @@
 
 class Settings_Vtiger_CompanyDetails_View extends Settings_Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$moduleModel = Settings_Vtiger_CompanyDetails_Model::getInstance();
 		
@@ -23,17 +23,17 @@ class Settings_Vtiger_CompanyDetails_View extends Settings_Vtiger_Index_View {
 	}
 	
 	
-	function getPageTitle(Vtiger_Request $request) {
+	function getPageTitle(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_COMPANY_DETAILS',$qualifiedModuleName);
 	}
 	
 		/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

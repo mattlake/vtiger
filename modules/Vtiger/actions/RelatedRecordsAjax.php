@@ -15,13 +15,13 @@ class Vtiger_RelatedRecordsAjax_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('getRelatedRecordsCount');
 	}
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'recordId');
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$parentModule = $request->get("module");
 		$parentModuleModel = Vtiger_Module_Model::getInstance($parentModule);
@@ -38,7 +38,7 @@ class Vtiger_RelatedRecordsAjax_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);

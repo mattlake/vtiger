@@ -10,7 +10,7 @@
 
 class ModComments_MassSaveAjax_Action extends Vtiger_Mass_Action {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
@@ -20,7 +20,7 @@ class ModComments_MassSaveAjax_Action extends Vtiger_Mass_Action {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordModels = $this->getRecordModelsFromRequest($request);
 		foreach($recordModels as $recordId => $recordModel) {
 			$recordModel->save();
@@ -29,10 +29,10 @@ class ModComments_MassSaveAjax_Action extends Vtiger_Mass_Action {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	private function getRecordModelsFromRequest(Vtiger_Request $request) {
+	private function getRecordModelsFromRequest(\Http\Request $request) {
 
 		$moduleName = $request->getModule();
 		$recordIds = $this->getRecordsListFromRequest($request);

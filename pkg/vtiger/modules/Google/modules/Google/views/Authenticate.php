@@ -10,11 +10,11 @@
 
 class Google_Authenticate_View extends Vtiger_Index_View {
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$recordPermission = Users_Privileges_Model::isPermitted($moduleName, 'index');
@@ -25,13 +25,13 @@ class Google_Authenticate_View extends Vtiger_Index_View {
 		return true;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$oauth2Connector = new Google_Oauth2_Connector($moduleName);
 		$oauth2Connector->authorize();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		/* Ignore check - as referer could be CRM or Google Accounts */
 	}
 }

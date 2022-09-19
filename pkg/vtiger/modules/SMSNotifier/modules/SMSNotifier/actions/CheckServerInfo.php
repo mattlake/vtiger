@@ -10,7 +10,7 @@
 
 class SMSNotifier_CheckServerInfo_Action extends Vtiger_Action_Controller {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
@@ -20,7 +20,7 @@ class SMSNotifier_CheckServerInfo_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 		$response = new Vtiger_Response();
 

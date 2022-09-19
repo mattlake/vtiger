@@ -10,12 +10,12 @@
 
 class Portal_MassDelete_Action extends Vtiger_MassDelete_Action {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $module = $request->getModule();
         
         Portal_Module_Model::deleteRecords($request);

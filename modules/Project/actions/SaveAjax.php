@@ -15,7 +15,7 @@ class Project_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$this->exposeMethod('saveColor');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -25,7 +25,7 @@ class Project_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		}
 	}
 
-	function saveColor(Vtiger_Request $request) {
+	function saveColor(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 		$color = $request->get('color');
 		$status = $request->get('status');

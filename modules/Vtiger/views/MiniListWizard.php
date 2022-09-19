@@ -10,7 +10,7 @@
 
 class Vtiger_MiniListWizard_View extends Vtiger_Index_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
@@ -22,7 +22,7 @@ class Vtiger_MiniListWizard_View extends Vtiger_Index_View {
 		return $permissions;
 	}
 	
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

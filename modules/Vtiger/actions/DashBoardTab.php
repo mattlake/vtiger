@@ -17,7 +17,7 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 		$this->exposeMethod('updateTabSequence');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
@@ -29,7 +29,7 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if ($mode) {
 			$this->invokeExposedMethod($mode, $request);
@@ -38,9 +38,9 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function to add Dashboard Tab
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function addTab(Vtiger_Request $request) {
+	function addTab(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$tabName = $request->getRaw('tabName');
 
@@ -63,9 +63,9 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function to delete Dashboard Tab
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function deleteTab(Vtiger_Request $request) {
+	function deleteTab(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$tabId = $request->get('tabid');
 		$dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
@@ -82,9 +82,9 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Funtion to rename Dashboard Tab
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function renameTab(Vtiger_Request $request) {
+	function renameTab(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$tabName = $request->get('tabname');
 		$tabId = $request->get('tabid');
@@ -100,7 +100,7 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 		$response->emit();
 	}
 
-	function updateTabSequence(Vtiger_Request $request) {
+	function updateTabSequence(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$sequence = $request->get("sequence");
 		$dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);

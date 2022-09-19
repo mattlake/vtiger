@@ -10,7 +10,7 @@
 
 class Documents_QuickCreateAjax_View extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'CreateView');
@@ -18,11 +18,11 @@ class Documents_QuickCreateAjax_View extends Vtiger_IndexAjax_View {
 	}
 
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		return parent::checkPermission($request);
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordModel = Vtiger_Record_Model::getCleanInstance($moduleName);
 		$moduleModel = $recordModel->getModule();
@@ -107,7 +107,7 @@ class Documents_QuickCreateAjax_View extends Vtiger_IndexAjax_View {
 		return $fields;
 	}
 
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$jsFileNames = array(
 			"modules.$moduleName.resources.Edit",

@@ -11,7 +11,7 @@
 
 class Users_ChangePassword_View extends Vtiger_Basic_View {
     
-    public function preProcess (Vtiger_Request $request, $display=true) {
+    public function preProcess (\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
         
 		$viewer = $this->getViewer($request);
@@ -39,9 +39,9 @@ class Users_ChangePassword_View extends Vtiger_Basic_View {
 	}
     
     
-    protected function preProcessDisplay(Vtiger_Request $request) {}
+    protected function preProcessDisplay(\Http\Request $request) {}
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$viewer->assign('UI5_URL', $this->getUI5EmbedURL($request));
 		$viewer->view('UI5EmbedView.tpl');

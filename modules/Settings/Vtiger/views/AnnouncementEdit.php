@@ -11,7 +11,7 @@
 
 class Settings_Vtiger_AnnouncementEdit_View extends Settings_Vtiger_Index_View {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $currentUser = Users_Record_Model::getCurrentUserModel();
         $annoucementModel = Settings_Vtiger_Announcement_Model::getInstanceByCreator($currentUser);
         
@@ -23,17 +23,17 @@ class Settings_Vtiger_AnnouncementEdit_View extends Settings_Vtiger_Index_View {
         $viewer->view('Announcement.tpl',$qualifiedModuleName);
     }
 	
-	function getPageTitle(Vtiger_Request $request) {
+	function getPageTitle(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_ANNOUNCEMENT',$qualifiedModuleName);
 	}
 	
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

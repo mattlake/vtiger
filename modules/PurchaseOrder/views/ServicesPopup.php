@@ -10,7 +10,7 @@
 
 class PurchaseOrder_ServicesPopup_View extends Inventory_ServicesPopup_View {
 
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		parent::initializeListViewContents($request, $viewer);
 		$viewer->assign('GETURL', 'getPurchaseOrderTaxesURL');
 	}

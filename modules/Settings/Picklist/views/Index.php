@@ -11,7 +11,7 @@
 
 class Settings_Picklist_Index_View extends Settings_Vtiger_Index_View {
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         
         $sourceModule = $request->get('source_module');
         $pickListSupportedModules = Settings_Picklist_Module_Model::getPicklistSupportedModules();
@@ -60,7 +60,7 @@ class Settings_Picklist_Index_View extends Settings_Vtiger_Index_View {
 		$viewer->view('Index.tpl',$qualifiedName);
     }
 	
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -74,7 +74,7 @@ class Settings_Picklist_Index_View extends Settings_Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
     
-    public function getHeaderCss(Vtiger_Request $request) {
+    public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 
 

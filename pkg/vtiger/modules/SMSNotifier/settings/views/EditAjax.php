@@ -10,7 +10,7 @@
 
 class Settings_SMSNotifier_EditAjax_View extends Settings_Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$providerName = $request->get('provider');
 		$qualifiedModuleName = $request->getModule(false);
 

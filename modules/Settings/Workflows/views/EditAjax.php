@@ -11,11 +11,11 @@
 
 class Settings_Workflows_EditAjax_View extends Settings_Workflows_Edit_View {
 
-   public function preProcess(Vtiger_Request $request, $display=true) {
+   public function preProcess(\Http\Request $request, $display=true) {
       return true;
    }
 
-   public function postProcess(Vtiger_Request $request) {
+   public function postProcess(\Http\Request $request) {
       return true;
    }
 
@@ -24,7 +24,7 @@ class Settings_Workflows_EditAjax_View extends Settings_Workflows_Edit_View {
       $this->exposeMethod('getWorkflowConditions');
    }
 
-   public function process(Vtiger_Request $request) {
+   public function process(\Http\Request $request) {
       $mode = $request->get('mode');
       if (!empty($mode)) {
          $this->invokeExposedMethod($mode, $request);
@@ -32,7 +32,7 @@ class Settings_Workflows_EditAjax_View extends Settings_Workflows_Edit_View {
       }
    }
 
-   function getWorkflowConditions(Vtiger_Request $request) {
+   function getWorkflowConditions(\Http\Request $request) {
       $viewer = $this->getViewer($request);
       $moduleName = $request->getModule();
       $qualifiedModuleName = $request->getModule(false);

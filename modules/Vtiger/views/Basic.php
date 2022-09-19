@@ -22,7 +22,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 		parent::__construct();
 	}
 
-	function preProcess (Vtiger_Request $request, $display=true) {
+	function preProcess (\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 
 		$viewer = $this->getViewer($request);
@@ -96,17 +96,17 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 		}
 	}
 
-	protected function preProcessTplName(Vtiger_Request $request) {
+	protected function preProcessTplName(\Http\Request $request) {
 		return 'BasicHeader.tpl';
 	}
 
 	//Note: To get the right hook for immediate parent in PHP,
 	// specially in case of deep hierarchy
-	/*function preProcessParentTplName(Vtiger_Request $request) {
+	/*function preProcessParentTplName(\Http\Request $request) {
 		return parent::preProcessTplName($request);
 	}*/
 
-	function postProcess(Vtiger_Request $request){
+	function postProcess(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		//$viewer->assign('GUIDERSJSON', Vtiger_Guider_Model::toJsonList($this->getGuiderModels($request)));
 		parent::postProcess($request);
@@ -114,10 +114,10 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -163,11 +163,11 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 		return $headerScriptInstances;
 	}
 
-	function getGuiderModels(Vtiger_Request $request) {
+	function getGuiderModels(\Http\Request $request) {
 		return array();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		//Removed validation check for specific views
 		$allowedViews = array("List", "Index", "Detail", "PreferenceDetail", "ExtensionStore", "CompanyDetails", "TaxIndex", "OutgoingServerDetail",
 								"TermsAndConditionsEdit", "AnnouncementEdit", "CustomRecordNumbering", "ConfigEditorDetail", "ChartDetail");

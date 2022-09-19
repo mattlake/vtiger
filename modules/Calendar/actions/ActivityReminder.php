@@ -15,7 +15,7 @@ class Calendar_ActivityReminder_Action extends Vtiger_Action_Controller{
 		$this->exposeMethod('postpone');
 	}
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 
         if (vtlib_isModuleActive($request->getModule())) {
@@ -39,7 +39,7 @@ class Calendar_ActivityReminder_Action extends Vtiger_Action_Controller{
         return $permissions;
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -48,7 +48,7 @@ class Calendar_ActivityReminder_Action extends Vtiger_Action_Controller{
 
 	}
 
-	function getReminders(Vtiger_Request $request) {
+	function getReminders(\Http\Request $request) {
 		$recordModels = Calendar_Module_Model::getCalendarReminder();
 		foreach($recordModels as $record) {
 			$records[] = $record->getDisplayableValues();
@@ -60,7 +60,7 @@ class Calendar_ActivityReminder_Action extends Vtiger_Action_Controller{
 		$response->emit();
 	}
 
-	function postpone(Vtiger_Request $request) {
+	function postpone(\Http\Request $request) {
 			$recordId = $request->get('record');
 			$module = $request->getModule();
 			$recordModel = Vtiger_Record_Model::getInstanceById($recordId, $module);

@@ -21,7 +21,7 @@ class Vtiger_ComposeEmail_View extends Vtiger_Footer_View {
 		$this->exposeMethod('emailReplyAll');
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
@@ -30,7 +30,7 @@ class Vtiger_ComposeEmail_View extends Vtiger_Footer_View {
 		return $permissions;
 	}
 
-	  function preProcess(Vtiger_Request $request, $display=true) {
+	  function preProcess(\Http\Request $request, $display=true) {
 		if($request->getMode() == 'previewPrint'){
 			return;
 		}
@@ -254,7 +254,7 @@ class Vtiger_ComposeEmail_View extends Vtiger_Footer_View {
 		$viewer->assign('PARENT_RECORD', $request->get('parentId'));
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -265,11 +265,11 @@ class Vtiger_ComposeEmail_View extends Vtiger_Footer_View {
 		echo $viewer->view('ComposeEmailForm.tpl', $moduleName, true);
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return;
 	}
 
-	public function getRecordsListFromRequest(Vtiger_Request $request) {
+	public function getRecordsListFromRequest(\Http\Request $request) {
 		$cvId = $request->get('viewname');
 		$selectedIds = $request->get('selected_ids');
 		$excludedIds = $request->get('excluded_ids');
@@ -331,10 +331,10 @@ class Vtiger_ComposeEmail_View extends Vtiger_Footer_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

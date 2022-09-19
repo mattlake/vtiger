@@ -10,14 +10,14 @@
 
 class Portal_List_View extends Vtiger_Index_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		
 		return $permissions;
 	}
 	
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request);
 
 		$viewer = $this->getViewer($request);
@@ -25,7 +25,7 @@ class Portal_List_View extends Vtiger_Index_View {
 		$viewer->view('ListViewHeader.tpl', $request->getModule(false));
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 
 		$viewer = $this->getViewer($request);
@@ -36,7 +36,7 @@ class Portal_List_View extends Vtiger_Index_View {
 		$viewer->view('ListViewContents.tpl', $moduleName);
 	}
 
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$pageNumber = $request->get('page');
 		$orderBy = $request->get('orderby');
@@ -127,7 +127,7 @@ class Portal_List_View extends Vtiger_Index_View {
 		$viewer->assign('NO_OF_ENTRIES', count($listviewEntries));
 	}
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -144,7 +144,7 @@ class Portal_List_View extends Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
 
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 		$listQuery = $this->getQuery();
 		$queryParts = explode('FROM', $listQuery);
@@ -154,7 +154,7 @@ class Portal_List_View extends Vtiger_Index_View {
 		return $db->query_result($result, 0, 'count');
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/css/perfect-scrollbar.css",

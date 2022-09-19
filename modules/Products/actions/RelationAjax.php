@@ -18,7 +18,7 @@ class Products_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		$this->exposeMethod('changeBundleCost');
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {
@@ -97,7 +97,7 @@ class Products_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		}
 	}
 
-	public function updateShowBundles(Vtiger_Request $request) {
+	public function updateShowBundles(\Http\Request $request) {
 		$sourceModule = $request->getModule();
 		$recordId = $request->get('record');
 		$relatedModule = $request->get('relatedModule');
@@ -112,7 +112,7 @@ class Products_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		}
 	}
 
-	public function updateQuantity(Vtiger_Request $request) {
+	public function updateQuantity(\Http\Request $request) {
 		$sourceModule = $request->getModule();
 		$sourceRecordId = $request->get('src_record');
 		$relatedModule =  $request->get('related_module');
@@ -127,7 +127,7 @@ class Products_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 		}
 	}
 
-	public function changeBundleCost(Vtiger_Request $request) {
+	public function changeBundleCost(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$relatedModule = $request->get('relatedModule');

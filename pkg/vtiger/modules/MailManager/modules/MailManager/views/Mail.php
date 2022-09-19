@@ -14,7 +14,7 @@ include_once 'vtlib/Vtiger/Version.php';
 
 class MailManager_Mail_View extends MailManager_Abstract_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$db = PearDatabase::getInstance();
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$moduleName = $request->getModule();
@@ -358,7 +358,7 @@ class MailManager_Mail_View extends MailManager_Abstract_View {
 		return $response;
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		return $request->validateReadAccess();
 	}
 }

@@ -10,7 +10,7 @@
 
 class Vtiger_ShowWidget_View extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		if($request->get('module') != 'Dashboard'){
 			$request->set('custom_module', 'Dashboard');
@@ -22,7 +22,7 @@ class Vtiger_ShowWidget_View extends Vtiger_IndexAjax_View {
 		return $permissions;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 
 		$moduleName = $request->getModule();
@@ -80,7 +80,7 @@ class Vtiger_ShowWidget_View extends Vtiger_IndexAjax_View {
 		$response->emit();
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

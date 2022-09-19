@@ -10,16 +10,16 @@
 
 class Users_Settings_View extends Vtiger_Basic_View {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
         return true;
 	}
     
-    public function preProcess (Vtiger_Request $request, $display=true) {
+    public function preProcess (\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 		$this->preProcessSettings($request,$display);
 	}
 
-	public function preProcessSettings (Vtiger_Request $request ,$display=true) {
+	public function preProcessSettings (\Http\Request $request ,$display=true) {
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
@@ -36,34 +36,34 @@ class Users_Settings_View extends Vtiger_Basic_View {
 		}
 	}
     
-    public function preProcessTplName(Vtiger_Request $request) {
+    public function preProcessTplName(\Http\Request $request) {
         return 'UsersSettingsMenuStart.tpl';
 	}
     
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         //Redirect to My Preference Page
         $userModel = Users_Record_Model::getCurrentUserModel();
         header('Location: ' . $userModel->getPreferenceDetailViewUrl());
     }
     
-    public function postProcessSettings (Vtiger_Request $request) {
+    public function postProcessSettings (\Http\Request $request) {
 
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule(false);
 		$viewer->view('UsersSettingsMenuEnd.tpl', $moduleName);
 	}
 
-	public function postProcess (Vtiger_Request $request) {
+	public function postProcess (\Http\Request $request) {
 		$this->postProcessSettings($request);
 		parent::postProcess($request);
 	}
     
     /**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

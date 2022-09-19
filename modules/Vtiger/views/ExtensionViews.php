@@ -17,18 +17,18 @@ class Vtiger_ExtensionViews_View extends Vtiger_Index_View {
 		$this->exposeMethod('showLogDetail');
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 	}
 	
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
 		$request->set('custom_module', 'WSAPP');
 		return $permissions;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -38,7 +38,7 @@ class Vtiger_ExtensionViews_View extends Vtiger_Index_View {
 		$this->showLogs($request);
 	}
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->get('extensionModule');
 		$jsFileNames = array(
 			'modules.'.$moduleName.'.resources.Index',
@@ -120,7 +120,7 @@ class Vtiger_ExtensionViews_View extends Vtiger_Index_View {
 		return true;
 	}
 
-	function showLogs(Vtiger_Request $request) {
+	function showLogs(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$sourceModule = $request->getModule();
 		$moduleName = $request->get('extensionModule');
@@ -184,7 +184,7 @@ class Vtiger_ExtensionViews_View extends Vtiger_Index_View {
 		}
 	}
 
-	function showLogDetail(Vtiger_Request $request) {
+	function showLogDetail(\Http\Request $request) {
 		$id = $request->get('logid');
 		$type = $request->get('logtype');
 		$moduleName = $request->get('module');

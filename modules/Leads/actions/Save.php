@@ -11,7 +11,7 @@
 
 class Leads_Save_Action extends Vtiger_Save_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 
 		//To stop saveing the value of salutation as '--None--'
 		$salutationType = $request->get('salutationtype');

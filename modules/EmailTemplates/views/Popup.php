@@ -10,7 +10,7 @@
 
 class EmailTemplates_Popup_View extends Vtiger_Popup_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 
@@ -25,7 +25,7 @@ class EmailTemplates_Popup_View extends Vtiger_Popup_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$pageNumber = $request->get('page');
@@ -125,9 +125,9 @@ class EmailTemplates_Popup_View extends Vtiger_Popup_View {
 
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request) {
+	function getListViewCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$searchKey = $request->get('search_key');
 		$searchValue = $request->get('search_value');

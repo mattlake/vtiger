@@ -10,7 +10,7 @@
 
 class Settings_MailConverter_EditRule_View extends Settings_Vtiger_IndexAjax_View {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$scannerId = $request->get('scannerId');
 
@@ -19,7 +19,7 @@ class Settings_MailConverter_EditRule_View extends Settings_Vtiger_IndexAjax_Vie
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$scannerId = $request->get('scannerId');
 		$qualifiedModuleName = $request->getModule(false);

@@ -16,7 +16,7 @@ class Settings_Workflows_ValidateExpression_Action extends Settings_Vtiger_Basic
 		$this->exposeMethod('ForWorkflowEdit');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -24,7 +24,7 @@ class Settings_Workflows_ValidateExpression_Action extends Settings_Vtiger_Basic
 		}
 	}
 
-	public function ForTaskEdit(Vtiger_Request $request) {
+	public function ForTaskEdit(\Http\Request $request) {
 		require_once 'modules/com_vtiger_workflow/expression_engine/include.inc';
 
 		$result = new Vtiger_Response();
@@ -48,7 +48,7 @@ class Settings_Workflows_ValidateExpression_Action extends Settings_Vtiger_Basic
 		$result->emit();
 	}
 
-	public function ForWorkflowEdit(Vtiger_Request $request) {
+	public function ForWorkflowEdit(\Http\Request $request) {
 		require_once 'modules/com_vtiger_workflow/expression_engine/include.inc';
 
 		$result = new Vtiger_Response();

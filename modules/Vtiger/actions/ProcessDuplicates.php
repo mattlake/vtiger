@@ -10,7 +10,7 @@
 
 class Vtiger_ProcessDuplicates_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'EditView');
@@ -18,7 +18,7 @@ class Vtiger_ProcessDuplicates_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$module = $request->getModule();
 		$records = $request->get('records');
@@ -33,7 +33,7 @@ class Vtiger_ProcessDuplicates_Action extends Vtiger_Action_Controller {
 		return true;
 	}
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		global $skipDuplicateCheck;
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -79,7 +79,7 @@ class Vtiger_ProcessDuplicates_Action extends Vtiger_Action_Controller {
 		$response->emit();
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 }

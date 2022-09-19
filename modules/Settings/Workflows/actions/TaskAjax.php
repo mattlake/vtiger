@@ -16,11 +16,11 @@ class Settings_Workflows_TaskAjax_Action extends Settings_Vtiger_IndexAjax_View 
 		$this->exposeMethod('ChangeStatus');
 		$this->exposeMethod('Save');
 	}
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateWriteAccess();
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -28,7 +28,7 @@ class Settings_Workflows_TaskAjax_Action extends Settings_Vtiger_IndexAjax_View 
 		}
 	}
 
-	public function Delete(Vtiger_Request $request){
+	public function Delete(\Http\Request $request){
 		$record = $request->get('task_id');
 		if(!empty($record)) {
 			$taskRecordModel = Settings_Workflows_TaskRecord_Model::getInstance($record);
@@ -39,7 +39,7 @@ class Settings_Workflows_TaskAjax_Action extends Settings_Vtiger_IndexAjax_View 
 		}
 	}
 
-	public function ChangeStatus(Vtiger_Request $request) {
+	public function ChangeStatus(\Http\Request $request) {
 		$record = $request->get('task_id');
 		if(!empty($record)) {
 			$taskRecordModel = Settings_Workflows_TaskRecord_Model::getInstance($record);
@@ -55,7 +55,7 @@ class Settings_Workflows_TaskAjax_Action extends Settings_Vtiger_IndexAjax_View 
 		}
 	}
 
-	public function Save(Vtiger_Request $request) {
+	public function Save(\Http\Request $request) {
 
 		$workflowId = $request->get('for_workflow');
 		if(!empty($workflowId)) {

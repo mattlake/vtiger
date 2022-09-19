@@ -15,11 +15,11 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 		$this->exposeMethod('calendarSettingsDetail');
 	}
 	
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
 
@@ -35,11 +35,11 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 	 * @param <type> $request
 	 * @return <String>
 	 */
-	public function preProcessTplName(Vtiger_Request $request) {
+	public function preProcessTplName(\Http\Request $request) {
 		return 'CalendarDetailViewPreProcess.tpl';
 	}
 
-	public function preProcess(Vtiger_Request $request, $display=true) {
+	public function preProcess(\Http\Request $request, $display=true) {
 		if($this->checkPermission($request)) {
 			$qualifiedModuleName = $request->getModule(false);
 			$currentUser = Users_Record_Model::getCurrentUserModel();
@@ -153,12 +153,12 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 		}
 	}
 
-	protected function preProcessDisplay(Vtiger_Request $request) {
+	protected function preProcessDisplay(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if($mode == 'Edit'){
 			$this->invokeExposedMethod('calendarSettingsEdit',$request);
@@ -167,7 +167,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 		}
 	}
 	
-	public function initializeView($viewer,Vtiger_Request $request){
+	public function initializeView($viewer,\Http\Request $request){
 		$recordId = $request->get('record');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$module = $request->getModule();
@@ -200,7 +200,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 	}
 	
 	
-	public function calendarSettingsEdit(Vtiger_Request $request){
+	public function calendarSettingsEdit(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		$this->initializeView($viewer,$request);
 		$viewer->view('CalendarSettingsEditView.tpl', $request->getModule());
@@ -208,13 +208,13 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 	
 	
 	
-	public function calendarSettingsDetail(Vtiger_Request $request){
+	public function calendarSettingsDetail(\Http\Request $request){
 		$viewer = $this->getViewer($request);
 		$this->initializeView($viewer,$request);
 		$viewer->view('CalendarSettingsDetailView.tpl', $request->getModule());
 	}
 
-    public function getHeaderScripts(Vtiger_Request $request) {
+    public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
         $moduleDetailFile = 'modules.'.$moduleName.'.resources.PreferenceDetail';
@@ -240,7 +240,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 	 * CRM Detail View URL option in Workflow Send Mail task.
 	 * But here http referer check is required.
 	 */
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateReadAccess();
 	}
 

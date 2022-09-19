@@ -13,26 +13,26 @@ class Users_ListAjax_Action extends Vtiger_BasicAjax_Action{
 		parent::__construct();
 	}
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		if(!$currentUser->isAdminUser()) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$mode = $request->get('mode');
 		if(!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);

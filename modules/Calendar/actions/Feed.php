@@ -12,7 +12,7 @@ vimport ('~~/include/Webservices/Query.php');
 
 class Calendar_Feed_Action extends Vtiger_BasicAjax_Action {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		if($request->get('mode') === 'batch') {
 			$feedsRequest = $request->get('feedsRequest',array());
 			$result = array();

@@ -11,7 +11,7 @@
 class PriceBooks_ListPriceUpdate_View extends Vtiger_View_Controller {
 
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView', 'record_parameter' => 'record');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'EditView', 'record_parameter' => 'record');
@@ -19,10 +19,10 @@ class PriceBooks_ListPriceUpdate_View extends Vtiger_View_Controller {
 		return $permissions;
 	}
 	
-	function preProcess(Vtiger_Request $request, $display = true) {
+	function preProcess(\Http\Request $request, $display = true) {
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$priceBookId = $request->get('record');
 		$relId = $request->get('relid');
@@ -37,7 +37,7 @@ class PriceBooks_ListPriceUpdate_View extends Vtiger_View_Controller {
 		$viewer->view('ListPriceUpdate.tpl', $moduleName);
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 	}
 }
 

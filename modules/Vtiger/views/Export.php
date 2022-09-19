@@ -10,14 +10,14 @@
 
 class Vtiger_Export_View extends Vtiger_Index_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'Export');
 		
 		return $permissions;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 
 		$source_module = $request->getModule();
@@ -57,7 +57,7 @@ class Vtiger_Export_View extends Vtiger_Index_View {
 		$viewer->view('Export.tpl', $source_module);
 	}
 
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$moduleName = $request->getModule();

@@ -10,7 +10,7 @@
 
 class Vtiger_MentionedUsers_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
@@ -19,7 +19,7 @@ class Vtiger_MentionedUsers_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-    public function process(Vtiger_Request $request) {
+    public function process(\Http\Request $request) {
         $mentionedUsers = [];
         $commentId = $request->get('crmid');
         $commentRecord = Vtiger_Record_Model::getInstanceById($commentId, Vtiger_Module_Model::getInstance('ModComments'));

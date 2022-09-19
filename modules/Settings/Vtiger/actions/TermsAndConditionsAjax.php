@@ -16,7 +16,7 @@ class Settings_Vtiger_TermsAndConditionsAjax_Action extends Settings_Vtiger_Basi
 		$this->exposeMethod('getModuleTermsAndConditions');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			echo $this->invokeExposedMethod($mode, $request);
@@ -24,7 +24,7 @@ class Settings_Vtiger_TermsAndConditionsAjax_Action extends Settings_Vtiger_Basi
 		}
 	}
 
-	public function save(Vtiger_Request $request) {
+	public function save(\Http\Request $request) {
 		$moduleName = $request->get('type');
 		$model = Settings_Vtiger_TermsAndConditions_Model::getInstance($moduleName);
 		$model->setText($request->get('tandc'));
@@ -34,7 +34,7 @@ class Settings_Vtiger_TermsAndConditionsAjax_Action extends Settings_Vtiger_Basi
 		$response->emit();
 	}
 
-	public function getModuleTermsAndConditions(Vtiger_Request $request) {
+	public function getModuleTermsAndConditions(\Http\Request $request) {
 		$moduleName = $request->get('type');
 		$model = Settings_Vtiger_TermsAndConditions_Model::getInstance($moduleName);
 		$conditionText = $model->getText();

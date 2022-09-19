@@ -10,7 +10,7 @@
 
 class Vtiger_Save_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$moduleParameter = $request->get('source_module');
 		if (!$moduleParameter) {
@@ -31,7 +31,7 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 
@@ -45,11 +45,11 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 		return parent::checkPermission($request);
 	}
 	
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		return $request->validateWriteAccess();
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		try {
 			$recordModel = $this->saveRecord($request);
 			if ($request->get('returntab_label')){
@@ -103,7 +103,7 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function to save record
-	 * @param <Vtiger_Request> $request - values of the record
+	 * @param <\Http\Request> $request - values of the record
 	 * @return <RecordModel> - record Model of saved record
 	 */
 	public function saveRecord($request) {
@@ -134,10 +134,10 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 
 	/**
 	 * Function to get the record model based on the request parameters
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return Vtiger_Record_Model or Module specific Record Model instance
 	 */
-	protected function getRecordModelFromRequest(Vtiger_Request $request) {
+	protected function getRecordModelFromRequest(\Http\Request $request) {
 
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');

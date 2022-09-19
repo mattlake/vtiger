@@ -18,10 +18,10 @@ class HelpDesk_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function to get activities
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <List of activity models>
 	 */
-	public function getActivities(Vtiger_Request $request) {
+	public function getActivities(\Http\Request $request) {
 		$moduleName = 'Calendar';
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 

@@ -16,7 +16,7 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller {
 
 	//Note : To get the right hook for immediate parent in PHP,
 	// specially in case of deep hierarchy
-	/*function preProcessParentTplName(Vtiger_Request $request) {
+	/*function preProcessParentTplName(\Http\Request $request) {
 		return parent::preProcessTplName($request);
 	}*/
 
@@ -155,10 +155,10 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
         $headerScriptInstances = parent::getHeaderScripts($request);
 		$headerScripts = Vtiger_Link_Model::getAllByType(Vtiger_Link::IGNORE_MODULE, array('HEADERSCRIPT'));
         $defaultLayout = Vtiger_Theme::getDefaultLayoutName();
@@ -180,10 +180,10 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller {
 
 	/**
 	 * Function to get the list of Css models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_CssScript_Model instances
 	 */
-	function getHeaderCss(Vtiger_Request $request) {
+	function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$headerCss = Vtiger_Link_Model::getAllByType(Vtiger_Link::IGNORE_MODULE, array('HEADERCSS'));
         $selectedThemeCssPath = Vtiger_Theme::getStylePath();

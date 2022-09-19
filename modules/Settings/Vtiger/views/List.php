@@ -16,7 +16,7 @@ class Settings_Vtiger_List_View extends Settings_Vtiger_Index_View {
 		parent::__construct();
 	}
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request, true);
 
 		$viewer = $this->getViewer($request);
@@ -26,7 +26,7 @@ class Settings_Vtiger_List_View extends Settings_Vtiger_Index_View {
 		$viewer->view('ListViewHeader.tpl', $request->getModule(false));
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$this->initializeListViewContents($request, $viewer);
 		$viewer->view('ListViewContents.tpl', $request->getModule(false));
@@ -35,7 +35,7 @@ class Settings_Vtiger_List_View extends Settings_Vtiger_Index_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
 		$pageNumber = $request->get('page');
@@ -137,7 +137,7 @@ class Settings_Vtiger_List_View extends Settings_Vtiger_Index_View {
 		}
 	}
     
-    public function postProcess(Vtiger_Request $request) {
+    public function postProcess(\Http\Request $request) {
         $viewer = $this->getViewer($request);
         $viewer->view('ListViewFooter.tpl', $request->getModule(false));
         parent::postProcess($request);
@@ -145,10 +145,10 @@ class Settings_Vtiger_List_View extends Settings_Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 

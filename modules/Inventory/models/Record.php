@@ -696,7 +696,7 @@ class Inventory_Record_Model extends Vtiger_Record_Model {
 		return array();
 	}
 
-	public function convertRequestToProducts(Vtiger_Request $request) {
+	public function convertRequestToProducts(\Http\Request $request) {
 		$requestData = $request->getAll();
 		$noOfDecimalPlaces = getCurrencyDecimalPlaces();
 		$totalProductsCount = $requestData['totalProductCount'];

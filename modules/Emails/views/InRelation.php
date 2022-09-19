@@ -9,7 +9,7 @@
  *************************************************************************************/
 
 class Emails_InRelation_View extends Vtiger_RelatedList_View {
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$relatedModuleName = $request->get('relatedModule');
 		$parentId = $request->get('record');

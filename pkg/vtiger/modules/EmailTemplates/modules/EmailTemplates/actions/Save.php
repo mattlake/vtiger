@@ -10,7 +10,7 @@
 
 class EmailTemplates_Save_Action extends Vtiger_Save_Action {
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
@@ -23,7 +23,7 @@ class EmailTemplates_Save_Action extends Vtiger_Save_Action {
         return true;
     }
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$site_URL = vglobal('site_URL');
 		$moduleName = $request->getModule();
 		$record = $request->get('record');

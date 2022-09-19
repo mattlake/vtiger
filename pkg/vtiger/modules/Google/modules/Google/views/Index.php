@@ -15,7 +15,7 @@ class Google_Index_View extends Vtiger_ExtensionViews_View {
 		$this->exposeMethod('settings');
 	}
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 
@@ -44,7 +44,7 @@ class Google_Index_View extends Vtiger_ExtensionViews_View {
 		return $isSyncReady;
 	}
 
-	function Settings(Vtiger_Request $request) {
+	function Settings(\Http\Request $request) {
 		$user = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->get('extensionModule');

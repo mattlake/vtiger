@@ -23,7 +23,7 @@ class EmailTemplates_ShowTemplateContent_Action extends Vtiger_Action_Controller
         return true;
     }
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -32,7 +32,7 @@ class EmailTemplates_ShowTemplateContent_Action extends Vtiger_Action_Controller
 		}
 	}
 
-	public function getContent(Vtiger_Request $request) {
+	public function getContent(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		$recordId = $request->get('record');
 		$recordModel = EmailTemplates_Record_Model::getInstanceById($recordId);

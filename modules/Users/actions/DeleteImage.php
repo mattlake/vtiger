@@ -10,7 +10,7 @@
 
 class Users_DeleteImage_Action extends Vtiger_Action_Controller {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('id');
 
@@ -19,7 +19,7 @@ class Users_DeleteImage_Action extends Vtiger_Action_Controller {
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$imageId = $request->get('imageid');

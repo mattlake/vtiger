@@ -14,7 +14,7 @@ class Reports_List_View extends Vtiger_Index_View {
 	protected $listViewEntries = false;
 	protected $listViewCount   = false;
 
-	function preProcess(Vtiger_Request $request, $display=true) {
+	function preProcess(\Http\Request $request, $display=true) {
 		parent::preProcess($request, false);
 
 		$viewer = $this->getViewer ($request);
@@ -37,10 +37,10 @@ class Reports_List_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcessTplName(Vtiger_Request $request) {
+	function preProcessTplName(\Http\Request $request) {
 		return 'ListViewPreProcess.tpl';
 	}
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -48,7 +48,7 @@ class Reports_List_View extends Vtiger_Index_View {
 		$viewer->view('ListViewContents.tpl', $moduleName);
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		$viewer = $this->getViewer ($request);
 		$moduleName = $request->getModule();
 
@@ -58,10 +58,10 @@ class Reports_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -97,7 +97,7 @@ class Reports_List_View extends Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
 
-	public function initializeListViewContents(Vtiger_Request $request) {
+	public function initializeListViewContents(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -238,9 +238,9 @@ class Reports_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function returns the number of records for the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$count = $this->getListViewCount($request);
@@ -258,9 +258,9 @@ class Reports_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request){
+	function getListViewCount(\Http\Request $request){
 		$folderId = $request->get('viewname');
 		if(empty($folderId)){
 			$folderId = 'All';
@@ -282,7 +282,7 @@ class Reports_List_View extends Vtiger_Index_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request){
+	function getPageCount(\Http\Request $request){
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();
@@ -299,7 +299,7 @@ class Reports_List_View extends Vtiger_Index_View {
 		$response->emit();
 	}
 
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/css/perfect-scrollbar.css",

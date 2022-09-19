@@ -14,15 +14,15 @@ class Settings_Vtiger_IndexAjax_View extends Settings_Vtiger_Index_View {
 		$this->exposeMethod('getSettingsShortCutBlock');
 	}
 	
-	public function preProcess (Vtiger_Request $request, $display=true) {
+	public function preProcess (\Http\Request $request, $display=true) {
 		return;
 	}
 
-	public function postProcess (Vtiger_Request $request) {
+	public function postProcess (\Http\Request $request) {
 		return;
 	}
 	
-	public function process (Vtiger_Request $request) {
+	public function process (\Http\Request $request) {
 		$mode = $request->getMode();
 
 		if($mode){
@@ -31,7 +31,7 @@ class Settings_Vtiger_IndexAjax_View extends Settings_Vtiger_Index_View {
 		}
 	}
 	
-	public function getSettingsShortCutBlock(Vtiger_Request $request) {
+	public function getSettingsShortCutBlock(\Http\Request $request) {
 		$fieldid = $request->get('fieldid');
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);

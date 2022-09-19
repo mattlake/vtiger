@@ -10,7 +10,7 @@
 
 class ProjectTask_MassActionAjax_View extends Project_MassActionAjax_View {
 
-	protected function getEmailFieldsInfo(Vtiger_Request $request) {
+	protected function getEmailFieldsInfo(\Http\Request $request) {
 		$sourceModule = $request->getModule();
 		$emailFieldsInfo = parent::getEmailFieldsInfo($request);
 		//get parent email fields and their reference email fields
@@ -190,7 +190,7 @@ class ProjectTask_MassActionAjax_View extends Project_MassActionAjax_View {
 		return $projectIds;
 	}
 
-	protected function isPreferencesNeedToBeUpdated(Vtiger_Request $request) {
+	protected function isPreferencesNeedToBeUpdated(\Http\Request $request) {
 		$parentStatus = parent::isPreferencesNeedToBeUpdated($request);
 		if (!$parentStatus) {
 			$recipientPrefModel = Vtiger_RecipientPreference_Model::getInstance($request->getModule());

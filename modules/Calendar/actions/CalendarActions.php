@@ -14,7 +14,7 @@ class Calendar_CalendarActions_Action extends Vtiger_BasicAjax_Action {
 		$this->exposeMethod('fetchAgendaViewEventDetails');
 	}
 	
-	public function requiresPermission(Vtiger_Request $request){
+	public function requiresPermission(\Http\Request $request){
 		$permissions = parent::requiresPermission($request);
 		$mode = $request->getMode();
 		if(!empty($mode)) {
@@ -29,7 +29,7 @@ class Calendar_CalendarActions_Action extends Vtiger_BasicAjax_Action {
 		return $permissions;
 	}
     
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$mode = $request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -37,7 +37,7 @@ class Calendar_CalendarActions_Action extends Vtiger_BasicAjax_Action {
 		}
 	}
 
-	public function fetchAgendaViewEventDetails(Vtiger_Request $request) {
+	public function fetchAgendaViewEventDetails(\Http\Request $request) {
 			$result = array();
 			$eventId = $request->get('id');
 			$moduleName = $request->getModule();

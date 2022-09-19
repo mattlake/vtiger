@@ -145,7 +145,7 @@ abstract class Vtiger_Action_Controller extends Vtiger_Controller
     }
 
     //TODO: need to revisit on this as we are not sure if this is helpful
-    /*function preProcessParentTplName(Vtiger_Request $request) {
+    /*function preProcessParentTplName(\Http\Request $request) {
         return false;
     }*/
 
@@ -269,7 +269,7 @@ abstract class Vtiger_View_Controller extends Vtiger_Action_Controller
     //Note : To get the right hook for immediate parent in PHP,
     // specially in case of deep hierarchy
     //TODO: Need to revisit this.
-    /*function preProcessParentTplName(Vtiger_Request $request) {
+    /*function preProcessParentTplName(\Http\Request $request) {
         return parent::preProcessTplName($request);
     }*/
 

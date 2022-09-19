@@ -10,14 +10,14 @@
 
 abstract class Vtiger_Mass_Action extends Vtiger_Action_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'EditView');
         return $permissions;
 	}
 	
-	protected function getRecordsListFromRequest(Vtiger_Request $request) {
+	protected function getRecordsListFromRequest(\Http\Request $request) {
 		$cvId = $request->get('viewname');
 		$module = $request->get('module');
 		if(!empty($cvId) && $cvId=="undefined"){
@@ -81,7 +81,7 @@ abstract class Vtiger_Mass_Action extends Vtiger_Action_Controller {
 		}
 	}
     
-    public function validateRequest(Vtiger_Request $request) {
+    public function validateRequest(\Http\Request $request) {
         $request->validateWriteAccess();
     }
 }

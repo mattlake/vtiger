@@ -19,7 +19,7 @@ class Import_Queue_Action extends Vtiger_Action_Controller {
 	public function  __construct() {
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		return;
 	}
 

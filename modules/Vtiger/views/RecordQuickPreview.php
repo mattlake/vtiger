@@ -16,7 +16,7 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 		parent::__construct();
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
@@ -111,7 +111,7 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 		$viewer->assign('NAVIGATION', true);
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		$request->validateReadAccess();
 	}
 

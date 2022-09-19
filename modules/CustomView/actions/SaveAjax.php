@@ -15,7 +15,7 @@ class CustomView_SaveAjax_Action extends CustomView_Save_Action {
 		$this->exposeMethod('updateColumns');
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$response = new Vtiger_Response();
 		$cvId = $request->get('record');
 		if (!$cvId) {
@@ -40,9 +40,9 @@ class CustomView_SaveAjax_Action extends CustomView_Save_Action {
 
 	/**
 	 * Function to updated selected Custom view columns
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	 public function updateColumns(Vtiger_Request $request) {
+	 public function updateColumns(\Http\Request $request) {
 		$cvid = $request->get('record');
 		$customViewModel = CustomView_Record_Model::getInstanceById($cvid);
 		$response = new Vtiger_Response();

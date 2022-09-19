@@ -10,11 +10,11 @@
 
 class Settings_Roles_IndexAjax_View extends Settings_Roles_Index_View {
 
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return;
 	}
 }

@@ -17,11 +17,11 @@ class Google_List_View extends Vtiger_PopupAjax_View {
 		$this->exposeMethod('Calendar');
 	}
     
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		switch ($request->get('operation')) {
 			case "sync" : $this->renderSyncUI($request);
 				break;
@@ -41,7 +41,7 @@ class Google_List_View extends Vtiger_PopupAjax_View {
 		}
 	}
 
-	function renderWidgetUI(Vtiger_Request $request) {
+	function renderWidgetUI(\Http\Request $request) {
 		$sourceModule = $request->get('sourcemodule');
 		$viewer = $this->getViewer($request);
 		$oauth2 = new Google_Oauth2_Connector($sourceModule);
@@ -57,7 +57,7 @@ class Google_List_View extends Vtiger_PopupAjax_View {
 		$viewer->view('Contents.tpl', $request->getModule());
 	}
 
-	function renderSyncUI(Vtiger_Request $request) {
+	function renderSyncUI(\Http\Request $request) {
 		$sourceModule = $request->get('sourcemodule');
 		$viewer = $this->getViewer($request);
 		$viewer->assign('SCRIPTS',$this->getHeaderScripts($request));
@@ -222,16 +222,16 @@ class Google_List_View extends Vtiger_PopupAjax_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		return $this->checkAndConvertJsScripts(array("~libraries/bootstrap/js/bootstrap-popover.js","modules.$moduleName.resources.List"));
 
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		//don't do validation because there is a redirection from google
 	}
 }

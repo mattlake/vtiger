@@ -11,21 +11,21 @@ require_once 'modules/WSAPP/WSAPPLogs.php';
 
 class Vtiger_ExportExtensionLog_View extends Vtiger_View_Controller {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'custom_module', 'action' => 'DetailView');
 		$request->set('custom_module', 'WSAPP');
 		return $permissions;
 	}
 	
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 	}
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return false;
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return false;
 	}
 
@@ -65,7 +65,7 @@ class Vtiger_ExportExtensionLog_View extends Vtiger_View_Controller {
 		return $data;
 	}
 
-	function process(Vtiger_request $request) {
+	function process(\Http\Request $request) {
 		$logId = $request->get('logid');
 		$type = $request->get('type');
 		$this->getCSV($logId, $type);

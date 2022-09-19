@@ -21,7 +21,7 @@ class HelpDesk_TicketsByStatus_Dashboard extends Vtiger_IndexAjax_View {
         return '&search_params='. json_encode($listSearchParams);
     }
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

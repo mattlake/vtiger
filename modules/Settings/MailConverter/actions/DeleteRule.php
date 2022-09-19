@@ -10,7 +10,7 @@
 
 class Settings_MailConverter_DeleteRule_Action extends Settings_Vtiger_Index_Action {
 
-	public function checkPermission(Vtiger_Request $request) {
+	public function checkPermission(\Http\Request $request) {
 		parent::checkPermission($request);
 		$recordId = $request->get('record');
 		$scannerId = $request->get('scannerId');
@@ -20,7 +20,7 @@ class Settings_MailConverter_DeleteRule_Action extends Settings_Vtiger_Index_Act
 		}
 	}
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$recordId = $request->get('record');
 		$qualifiedModuleName = $request->getModule(false);
 
@@ -37,7 +37,7 @@ class Settings_MailConverter_DeleteRule_Action extends Settings_Vtiger_Index_Act
 		$response->emit();
 	}
         
-        public function validateRequest(Vtiger_Request $request) { 
+        public function validateRequest(\Http\Request $request) { 
             $request->validateWriteAccess(); 
         } 
 }

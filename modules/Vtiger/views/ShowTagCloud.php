@@ -15,7 +15,7 @@ class Vtiger_ShowTagCloud_View extends Vtiger_IndexAjax_View {
 		$this->exposeMethod('showTags');
 	}
 
-	function showTags(Vtiger_Request $request) {
+	function showTags(\Http\Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
 		if($record) {

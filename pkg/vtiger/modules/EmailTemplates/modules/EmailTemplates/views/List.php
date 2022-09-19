@@ -14,7 +14,7 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 		parent::__construct();
 	}
 
-    public function requiresPermission(\Vtiger_Request $request) {
+    public function requiresPermission(\Http\Request $request) {
 		return array();
 	}
     
@@ -27,7 +27,7 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
         return true;
     }
     
-	function preProcess(Vtiger_Request $request, $display = true) {
+	function preProcess(\Http\Request $request, $display = true) {
 		parent::preProcess($request, false);
 
 		$viewer = $this->getViewer($request);
@@ -47,11 +47,11 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 		}
 	}
 
-	function preProcessTplName(Vtiger_Request $request) {
+	function preProcessTplName(\Http\Request $request) {
 		return 'ListViewPreProcess.tpl';
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
@@ -71,7 +71,7 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 		}
 	}
 
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
@@ -82,7 +82,7 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
-	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+	public function initializeListViewContents(\Http\Request $request, Vtiger_Viewer $viewer) {
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$viewType = $request->get('viewType');
@@ -224,9 +224,9 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function returns the number of records for the current filter
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getRecordsCount(Vtiger_Request $request) {
+	function getRecordsCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$count = $this->getListViewCount($request);
 
@@ -242,9 +242,9 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get listView count
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	function getListViewCount(Vtiger_Request $request) {
+	function getListViewCount(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$searchKey = $request->get('search_key');
 		$searchValue = $request->get('search_value');
@@ -263,7 +263,7 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 	 * Function to get the page count for list
 	 * @return total number of pages
 	 */
-	function getPageCount(Vtiger_Request $request) {
+	function getPageCount(\Http\Request $request) {
 		$listViewCount = $this->getListViewCount($request);
 		$pagingModel = new Vtiger_Paging_Model();
 		$pageLimit = $pagingModel->getPageLimit();
@@ -279,10 +279,10 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
@@ -301,7 +301,7 @@ class EmailTemplates_List_View extends Vtiger_Index_View {
 		return $headerScriptInstances;
 	}
 
-		 public function getHeaderCss(Vtiger_Request $request) {
+		 public function getHeaderCss(\Http\Request $request) {
 			$headerCssInstances = parent::getHeaderCss($request);
 
 			$cssFileNames = array(

@@ -10,11 +10,11 @@
 
 class Users_Logout_Action extends Vtiger_Action_Controller {
 	
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		return true;
 	}
 
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		//Redirect into the referer page
 		$logoutURL = $this->getLogoutURL();
         session_regenerate_id(true);

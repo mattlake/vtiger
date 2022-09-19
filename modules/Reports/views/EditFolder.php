@@ -10,13 +10,13 @@
 
 class Reports_EditFolder_View extends Vtiger_IndexAjax_View {
 
-	public function requiresPermission(\Vtiger_Request $request) {
+	public function requiresPermission(\Http\Request $request) {
 		$permissions = parent::requiresPermission($request);
 		$permissions[] = array('module_parameter' => 'module', 'action' => 'DetailView');
 		return $permissions;
 	}
 	
-	public function process (Vtiger_Request $request) {
+	public function process (\Http\Request $request) {
 		
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();

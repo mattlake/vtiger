@@ -15,7 +15,7 @@ class Import_Main_View extends Vtiger_View_Controller{
 	var $user;
 	var $numberOfRecords;
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		return;
 	}
 
@@ -99,7 +99,7 @@ class Import_Main_View extends Vtiger_View_Controller{
 		$importId = $importInfo['id'];
 
 		$params = array('module' => $moduleName);
-		$request = new Vtiger_Request($params);
+		$request = new \Http\Request($params);
 		$indexViewer = new Vtiger_Index_View();
 		$viewer = $indexViewer->getViewer($request);  
 

@@ -10,7 +10,7 @@
 
 class Services_ServicesPopupAjax_View extends Inventory_ServicesPopupAjax_View {
 
-	function process (Vtiger_Request $request) {
+	function process (\Http\Request $request) {
 		parent::process($request);
 	}
 }

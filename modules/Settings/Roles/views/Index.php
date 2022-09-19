@@ -10,7 +10,7 @@
 
 class Settings_Roles_Index_View extends Settings_Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		$qualifiedModuleName = $request->getModule(false);
 		$rootRole = Settings_Roles_Record_Model::getBaseRole();
@@ -24,10 +24,10 @@ class Settings_Roles_Index_View extends Settings_Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Script models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
+	function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$moduleName = $request->getModule();
 
@@ -46,10 +46,10 @@ class Settings_Roles_Index_View extends Settings_Vtiger_Index_View {
 
 	/**
 	 * Function to get the list of Css models to be included
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <Array> - List of Vtiger_CssScript_Model instances
 	 */
-	function getHeaderCss(Vtiger_Request $request) {
+	function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$moduleName = $request->getModule();
 

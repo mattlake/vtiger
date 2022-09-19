@@ -44,10 +44,10 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 	 * @global Users Instance $currentUserModel
 	 * @global PearDataBase Instance $adb
 	 * @global String $currentModule
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return boolean
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$response = new MailManager_Response(true);
 		$viewer = $this->getViewer($request);
@@ -618,7 +618,7 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 		return $results;
 	}
 
-	public function validateRequest(Vtiger_Request $request) {
+	public function validateRequest(\Http\Request $request) {
 		return $request->validateWriteAccess();
 	}
 }

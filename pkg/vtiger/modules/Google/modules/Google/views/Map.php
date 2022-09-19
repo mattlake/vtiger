@@ -11,7 +11,7 @@
 
 class Google_Map_View extends Vtiger_Detail_View {
 
-	function checkPermission(Vtiger_Request $request) {
+	function checkPermission(\Http\Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 
@@ -25,19 +25,19 @@ class Google_Map_View extends Vtiger_Detail_View {
 
 	/**
 	 * must be overriden
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return boolean 
 	 */
-	function preProcess(Vtiger_Request $request) {
+	function preProcess(\Http\Request $request) {
 		return true;
 	}
 
 	/**
 	 * must be overriden
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return boolean 
 	 */
-	function postProcess(Vtiger_Request $request) {
+	function postProcess(\Http\Request $request) {
 		return true;
 	}
 
@@ -45,9 +45,9 @@ class Google_Map_View extends Vtiger_Detail_View {
 	 * called when the request is recieved.
 	 * if viewtype : detail then show location
 	 * TODO : if viewtype : list then show the optimal route.
-	 * @param Vtiger_Request $request 
+	 * @param \Http\Request $request
 	 */
-	function process(Vtiger_Request $request) {
+	function process(\Http\Request $request) {
 		switch ($request->get('viewtype')) {
 			case 'detail':$this->showLocation($request);
 				break;
@@ -57,9 +57,9 @@ class Google_Map_View extends Vtiger_Detail_View {
 
 	/**
 	 * display the template.
-	 * @param Vtiger_Request $request 
+	 * @param \Http\Request $request
 	 */
-	function showLocation(Vtiger_Request $request) {
+	function showLocation(\Http\Request $request) {
 		$viewer = $this->getViewer($request);
 		// record and source_module values to be passed to populate the values in the template,
 		// required to get the respective records address based on the module type.

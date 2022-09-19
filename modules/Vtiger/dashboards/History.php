@@ -10,7 +10,7 @@
 
 class Vtiger_History_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$LIMIT = 10;
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);

@@ -10,7 +10,7 @@
 
 class Settings_Vtiger_UI5Embed_View extends Settings_Vtiger_Index_View {
 	
-	public function process(Vtiger_Request $request) {
+	public function process(\Http\Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		
 		$viewer = $this->getViewer($request);

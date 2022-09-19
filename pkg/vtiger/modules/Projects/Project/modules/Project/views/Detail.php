@@ -36,10 +36,10 @@ class Project_Detail_View extends Vtiger_Detail_View {
 	
 	/**
 	 * Function returns related records based on related moduleName
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 * @return <type>
 	 */
-	function showRelatedRecords(Vtiger_Request $request) {
+	function showRelatedRecords(\Http\Request $request) {
 		$parentId = $request->get('record');
 		$pageNumber = $request->get('page');
 		$limit = $request->get('limit');
@@ -108,9 +108,9 @@ class Project_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function to show Gantt chart
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function showChart(Vtiger_Request $request) {
+	public function showChart(\Http\Request $request) {
 		$parentId = $request->get('record');
 		$projectTasks = array();
 		$moduleName = $request->getModule();
@@ -137,9 +137,9 @@ class Project_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function get gantt specific headerscript
-	 * @param Vtiger_Request $request
+	 * @param \Http\Request $request
 	 */
-	public function getHeaderScripts(Vtiger_Request $request) {
+	public function getHeaderScripts(\Http\Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		$jsFileNames = array(
 			'~/libraries/jquery/gantt/libs/jquery.livequery.min.js',
@@ -165,9 +165,9 @@ class Project_Detail_View extends Vtiger_Detail_View {
 
 	/**
 	 * Function to get the css styles for gantt chart
-	 * @param  Vtiger_Request $request
+	 * @param  \Http\Request $request
 	 */
-	public function getHeaderCss(Vtiger_Request $request) {
+	public function getHeaderCss(\Http\Request $request) {
 		$headerCssInstances = parent::getHeaderCss($request);
 		$cssFileNames = array(
 			'~/libraries/jquery/gantt/platform.css',
